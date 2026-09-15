@@ -68385,6 +68385,8 @@ MonoBehaviour:
   enemyType: 1
   animatorEnemy: {fileID: 1355731426}
   sleepingBagController: {fileID: 508832716}
+  playerTransform: {fileID: 641581672497925792}
+  playerMovement: {fileID: 5971955446751597394}
 --- !u!95 &1355731426
 Animator:
   serializedVersion: 7
@@ -130245,6 +130247,9 @@ MonoBehaviour:
   MovePlayer: {x: 0, y: 0, z: 0}
   inputKeyboard: {x: 0, y: 0, z: 0}
   IsKeyPressLeftShift: 0
+  isHasKeyboardInput: 0
+  isHasWalking: 0
+  isHasRunning: 0
 --- !u!222 &5976695722251704992
 CanvasRenderer:
   m_ObjectHideFlags: 0

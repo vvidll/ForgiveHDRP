@@ -27,8 +27,14 @@ namespace _Project.Scripts.PlayerScripts
         [HideInInspector]
         public bool IsKeyPressLeftShift = false;
 
-        bool isHasWalking = false;
-        bool isHasRunning = false;
+        [HideInInspector]
+        public bool isHasKeyboardInput = false; 
+        
+        [HideInInspector]
+        public bool isHasWalking = false;
+        
+        [HideInInspector]
+        public bool isHasRunning = false;
 
         private void Awake()
         {
@@ -79,9 +85,11 @@ namespace _Project.Scripts.PlayerScripts
             }
         }
 
-        void InputKeyboard() => 
+        void InputKeyboard()
+        {
+            isHasKeyboardInput = true;
             inputKeyboard = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")).normalized;
-
+        }
 
         public void Walk()
         {

@@ -35,7 +35,7 @@ namespace _Project.Scripts.PlayerScripts
             if(countPressKeyC == 1 && crouchActive == true) // dont touch this
                 Crouch();
             
-            if (Input.GetKeyDown(KeyCode.C))
+            if (Input.GetKeyDown(KeyCode.LeftControl))
             {
                 switch (countPressKeyC)
                 {

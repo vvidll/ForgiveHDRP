@@ -86,5 +86,7 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetFloat("x", 0f);
 
         staminaSliderController.IncreasedStaminaIdle();
+        
+        playerMovement.isHasKeyboardInput = false;
     }
 }
