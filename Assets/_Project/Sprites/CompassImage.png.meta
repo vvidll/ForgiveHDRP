@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9ce542cec386fa542b9f8591e0320c66
+guid: 41a9f3d74b1a65c4f9f44b63e10abe1a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3675877697168193441
-    second: COMPASS_0
+      213: 586433356044912686
+    second: COMPASS 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -98,43 +98,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: COMPASS_0
+      name: COMPASS 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1930
-        height: 215
+        width: 1929
+        height: 85
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,8 +117,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1a7bd793a47530330800000000000000
-      internalID: 3675877697168193441
+      spriteID: e284f7fb70e632800800000000000000
+      internalID: 586433356044912686
       vertices: []
       indices: 
       edges: []
