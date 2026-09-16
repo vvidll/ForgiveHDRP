@@ -1,5 +1,5 @@
-using _Project.Scripts.AudioScripts;
 using _Project.Scripts.InterfaceScripts;
+using _Project.Scripts.AudioScripts;
 using UnityEngine;
 
 namespace _Project.Scripts.PlayerScripts
@@ -64,7 +64,7 @@ namespace _Project.Scripts.PlayerScripts
                 {
                     isHasWalking = false;
 
-                    audioManager.StopAudioForGrassWalk();
+                    //audioManager.StopAudioForGrassWalk();
 
                     IsKeyPressLeftShift = true;
                     Run();
@@ -105,7 +105,7 @@ namespace _Project.Scripts.PlayerScripts
 
             staminaSliderController.IncreasedStaminaWalk();
 
-            audioManager.PlayAudioForGrassWalk();
+            //audioManager.PlayAudioForGrassWalk();
         }
 
         public void Run()
@@ -120,9 +120,8 @@ namespace _Project.Scripts.PlayerScripts
 
             staminaSliderController.DecreasedStamina();
 
-            audioManager.PlayAudioForGrassRun();
+            //audioManager.PlayAudioForGrassRun();
         }
-        
 
     }
 

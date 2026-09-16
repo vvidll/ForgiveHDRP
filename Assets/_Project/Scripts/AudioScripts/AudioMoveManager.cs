@@ -19,14 +19,14 @@ namespace _Project.Scripts.AudioScripts
 
         public void PlayAudioForGrassWalk()
         {
-            if (audioRandomContainerGrassWalk.isPlaying) return;
-            audioRandomContainerGrassWalk.PlayDelayed(0.15f);
+            if (audioRandomContainerGrassRun.isPlaying) return;
+            audioRandomContainerGrassWalk.PlayDelayed(0.01f);
         }
 
         public void PlayAudioForGravelWalk()
         {
             if (audioRandomContainerGravelWalk.isPlaying) return;
-            audioRandomContainerGravelWalk.PlayDelayed(0.15f);
+            audioRandomContainerGravelWalk.PlayDelayed(0.01f);
         }
 
         public void StopAudioForGrassWalk() => audioRandomContainerGrassWalk.Stop();
@@ -37,7 +37,7 @@ namespace _Project.Scripts.AudioScripts
         public void PlayAudioForGrassRun()
         {
             if (audioRandomContainerGrassRun.isPlaying) return;
-            audioRandomContainerGrassRun.PlayDelayed(0.05f);
+            audioRandomContainerGrassRun.PlayDelayed(0.01f);
         }
 
         public void PlayAudioForGravelRun()
