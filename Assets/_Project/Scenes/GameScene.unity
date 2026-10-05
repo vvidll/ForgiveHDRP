@@ -4760,7 +4760,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &157207113
 Light:
   m_ObjectHideFlags: 0
@@ -27421,7 +27421,6 @@ GameObject:
   m_Component:
   - component: {fileID: 221523056}
   - component: {fileID: 221523057}
-  - component: {fileID: 221523061}
   - component: {fileID: 221523064}
   - component: {fileID: 221523065}
   - component: {fileID: 221523067}
@@ -27460,39 +27459,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f75fe732b57fc5241983bee733627dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &221523061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 221523054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbec031bbaf1d374286aec5c919b7b52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShowMissions
-  drivingPlayer: {fileID: 4682043514986208510}
-  checkCompleteTasksNotepad: {fileID: 8124028324042888989}
-  dialogueWithSaler: {fileID: 5866666020548906985}
-  teleportCar: {fileID: 8319460612882433219}
-  buildingManagerTent: {fileID: 13730375}
-  windowMissionBuyItemsForSurvival: {fileID: 1910891679}
-  windowMissionSitInCar: {fileID: 1569624397}
-  imageHintMissionSitInCar: {fileID: 685028600}
-  windowMissionFindSuitableLocation: {fileID: 1079632626}
-  windowMissionSetUpBonfire: {fileID: 150087860}
-  btnSetUpBonfire: {fileID: 964563001}
-  windowMissionPlaceTent: {fileID: 262096989}
-  btnPlaceTent: {fileID: 893869147}
-  windowMissionPrepareFood: {fileID: 1966566425}
-  cannedFoodItem: {fileID: 2138810621}
-  canOpenerItem: {fileID: 1964260233628028047}
-  windowMissionPutSleepingBag: {fileID: 1226067358}
-  btnPutSleepingBag: {fileID: 1145879983}
-  windowMissionGoSleep: {fileID: 434108941}
-  panelMissions: {fileID: 1437664403}
-  isHasPrepareFood: 0
 --- !u!114 &221523064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45938,8 +45904,9 @@ MonoBehaviour:
   currentObject: {fileID: 508832710}
   textInteraction: {fileID: 81262074}
   buildingManager: {fileID: 508832712}
+  audioCarController: {fileID: 8319460612882433220}
   transitionsController: {fileID: 251476493}
-  showMissionsManager: {fileID: 221523061}
+  showMissionsManager: {fileID: 1437664407}
   isChangeTimeDay: 0
 --- !u!1 &510115515
 GameObject:
@@ -51446,6 +51413,135 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7775293743770472852, guid: c8677cf7e588aad4b8eb3b1969639352, type: 3}
   m_PrefabInstance: {fileID: 692171594}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &692659216
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 692659217}
+  - component: {fileID: 692659218}
+  m_Layer: 0
+  m_Name: Signaling
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &692659217
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692659216}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5176741175812619101}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &692659218
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692659216}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 1d6648d32f42dd54ca27f17fa80d553e, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 50
+  MaxDistance: 3500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &697123463
 GameObject:
   m_ObjectHideFlags: 0
@@ -60951,10 +61047,6 @@ MonoBehaviour:
   audioRandomContainerGrassRun: {fileID: 358270420}
   audioRandomContainerGrassJump: {fileID: 1311542268}
   audioRandomContainerGrassStartJump: {fileID: 259809971}
-  audioRandomContainerGravelWalk: {fileID: 1986809112}
-  audioRandomContainerGravelRun: {fileID: 957859934}
-  audioRandomContainerGravelJump: {fileID: 1005424033}
-  audioRandomContainerGravelStartJump: {fileID: 147299164}
 --- !u!1 &1050326995
 GameObject:
   m_ObjectHideFlags: 0
@@ -62660,7 +62752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 439e32ec28c580944a2ad69ddcfc56d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TriggerSuitableLocation
-  showMissions: {fileID: 221523061}
+  showMissions: {fileID: 1437664407}
   buildingPlaceCollisions:
   - {fileID: 1273689536}
   - {fileID: 401036230}
@@ -69600,7 +69692,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1394423255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76466,13 +76558,14 @@ GameObject:
   - component: {fileID: 1437664404}
   - component: {fileID: 1437664406}
   - component: {fileID: 1437664405}
+  - component: {fileID: 1437664407}
   m_Layer: 5
   m_Name: Panel (Missions)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1437664404
 RectTransform:
   m_ObjectHideFlags: 0
@@ -76542,6 +76635,40 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1437664403}
   m_CullTransparentMesh: 1
+--- !u!114 &1437664407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437664403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbec031bbaf1d374286aec5c919b7b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShowMissions
+  drivingPlayer: {fileID: 4682043514986208510}
+  checkCompleteTasksNotepad: {fileID: 8124028324042888989}
+  dialogueWithSaler: {fileID: 5866666020548906985}
+  teleportCar: {fileID: 8319460612882433219}
+  buildingManagerTent: {fileID: 13730375}
+  windowMissionBuyItemsForSurvival: {fileID: 1910891679}
+  windowMissionSitInCar: {fileID: 1569624397}
+  imageHintMissionSitInCar: {fileID: 685028600}
+  windowMissionFindSuitableLocation: {fileID: 1079632626}
+  windowMissionSetUpBonfire: {fileID: 150087860}
+  btnSetUpBonfire: {fileID: 964563001}
+  windowMissionPlaceTent: {fileID: 262096989}
+  btnPlaceTent: {fileID: 893869147}
+  windowMissionPrepareFood: {fileID: 1966566425}
+  cannedFoodItem: {fileID: 2138810621}
+  canOpenerItem: {fileID: 1964260233628028047}
+  windowMissionPutSleepingBag: {fileID: 1226067358}
+  btnPutSleepingBag: {fileID: 1145879983}
+  windowMissionGoSleep: {fileID: 434108941}
+  windowMissionCheckCar: {fileID: 1389865943}
+  panelMissions: {fileID: 1437664403}
+  isHasPrepareFood: 0
 --- !u!1 &1463343691
 GameObject:
   m_ObjectHideFlags: 0
@@ -100251,8 +100378,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3655956167540923143}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.99982446, z: -0, w: 0.018737346}
-  m_LocalPosition: {x: -907.65, y: 30.74, z: 362.17}
+  m_LocalRotation: {x: -0, y: 0.99999106, z: -0, w: -0.004230943}
+  m_LocalPosition: {x: -905.302, y: 31.524, z: 368.244}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -100272,7 +100399,7 @@ Transform:
   - {fileID: 8955223065081325493}
   - {fileID: 7349125340750451203}
   m_Father: {fileID: 278922707}
-  m_LocalEulerAnglesHint: {x: 0, y: 89.104, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180.485, z: 0}
 --- !u!114 &651179701807070426 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4336151223857009393, guid: 8dab4ac683c93504ea4fb2f41c6ed687, type: 3}
@@ -107989,9 +108116,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1206784237496267721}
-  - component: {fileID: 2765909199242198127}
-  - component: {fileID: 2765909199242198128}
-  - component: {fileID: 2765909199242198129}
   m_Layer: 0
   m_Name: mixamorig:RightToe_End
   m_TagString: Untagged
@@ -107999,72 +108123,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &2765909199242198127
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2765909199242198126}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.15205762, y: 0.39439985, z: 0.1206609}
-  m_Center: {x: -0.009364798, y: -0.16312061, z: 0.023562474}
---- !u!114 &2765909199242198128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2765909199242198126}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0db34587c61bb3240bfc5288fb0e9360, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CheckLegsGround
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  audioManager: {fileID: 1046053548}
-  playerMovement: {fileID: 5971955446751597394}
-  boxCollider: {fileID: 2765909199242198127}
---- !u!54 &2765909199242198129
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2765909199242198126}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!4 &2768160479938005599
 Transform:
   m_ObjectHideFlags: 0
@@ -120266,11 +120324,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5760172792297465260}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.70184857, z: -0, w: 0.71232617}
-  m_LocalPosition: {x: 99.23, y: 18.98, z: 178.06}
+  m_LocalRotation: {x: -0, y: 0.9975983, z: -0, w: 0.069266155}
+  m_LocalPosition: {x: -597.84, y: 31.029, z: -132.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 692659217}
   - {fileID: 2049848301}
   - {fileID: 7856925998946019129}
   - {fileID: 4333487639498620166}
@@ -120298,7 +120357,7 @@ Transform:
   - {fileID: 7579314833541685234}
   - {fileID: 9093685535368271683}
   m_Father: {fileID: 278922707}
-  m_LocalEulerAnglesHint: {x: 0, y: 99, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 172.056, z: 0}
 --- !u!4 &5184984346716031337
 Transform:
   m_ObjectHideFlags: 0
@@ -129369,6 +129428,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5176741175812619101}
+  - component: {fileID: 8319460612882433220}
   - component: {fileID: 8212316623283393621}
   - component: {fileID: 2378007270830405276}
   - component: {fileID: 8319460612882433216}
@@ -130503,7 +130563,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crouchController: {fileID: 2312135464395040992}
   staminaSliderController: {fileID: 256439156}
-  audioManager: {fileID: 1046053548}
   drivingPlayer: {fileID: 4682043514986208510}
   playerAnimation: {fileID: 9073766142481002324}
   characterController: {fileID: 9073766142481002325}
@@ -130513,8 +130572,6 @@ MonoBehaviour:
   inputKeyboard: {x: 0, y: 0, z: 0}
   IsKeyPressLeftShift: 0
   isHasKeyboardInput: 0
-  isHasWalking: 0
-  isHasRunning: 0
 --- !u!222 &5976695722251704992
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -139567,9 +139624,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8463415387508314206}
-  - component: {fileID: 8463415387508314207}
-  - component: {fileID: 8463415387508314208}
-  - component: {fileID: 8463415387508314209}
   m_Layer: 0
   m_Name: mixamorig:LeftToe_End
   m_TagString: Untagged
@@ -142256,6 +142310,19 @@ MonoBehaviour:
   firstLocation: {fileID: 1147494166}
   secondLocation: {fileID: 213487251}
   isHasNewLocation: 0
+--- !u!114 &8319460612882433220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5760172792297465260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6df95e5f3f1dd144b88c734597462fa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioCarController
+  audioCarSignaling: {fileID: 692659218}
 --- !u!4 &8325022945379152772
 Transform:
   m_ObjectHideFlags: 0
@@ -142934,72 +143001,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6548504940762784863}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8463415387508314207
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7723104118169038764}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.13872604, y: 0.36503547, z: 0.101408966}
-  m_Center: {x: 0.011570395, y: -0.16323651, z: -0.004385048}
---- !u!114 &8463415387508314208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7723104118169038764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0db34587c61bb3240bfc5288fb0e9360, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CheckLegsGround
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  audioManager: {fileID: 1046053548}
-  playerMovement: {fileID: 5971955446751597394}
-  boxCollider: {fileID: 8463415387508314207}
---- !u!54 &8463415387508314209
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7723104118169038764}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!4 &8464925033817224151
 Transform:
   m_ObjectHideFlags: 0
@@ -145904,6 +145905,7 @@ MonoBehaviour:
   staminaSliderController: {fileID: 256439156}
   cameraController: {fileID: 9001046709722635715}
   playerMovement: {fileID: 5971955446751597394}
+  audioManager: {fileID: 1046053548}
 --- !u!143 &9073766142481002325
 CharacterController:
   m_ObjectHideFlags: 0
@@ -145953,7 +145955,7 @@ MonoBehaviour:
   triggerTeleportCarNextLocation: {fileID: 450444135}
   buildingManagerBonfire: {fileID: 762210732}
   buildingManagerSleepingBag: {fileID: 508832712}
-  showMissionsManager: {fileID: 221523061}
+  showMissionsManager: {fileID: 1437664407}
 --- !u!114 &9073766142481002328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145982,7 +145984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ec47e8416f31b4bb1c66f948fd9ffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrepareFoodController
-  missionManager: {fileID: 221523061}
+  missionManager: {fileID: 1437664407}
 --- !u!4 &9076532713854959631
 Transform:
   m_ObjectHideFlags: 0

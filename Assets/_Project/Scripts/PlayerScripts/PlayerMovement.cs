@@ -10,7 +10,6 @@ namespace _Project.Scripts.PlayerScripts
         [SerializeField] CrouchController crouchController;
         [SerializeField] StaminaSliderController staminaSliderController;
         //[SerializeField] TerrainLayersController terrainLayersController;
-        [SerializeField] AudioMoveManager audioManager;
         [SerializeField] DrivingPlayer drivingPlayer;
         [SerializeField] PlayerAnimation playerAnimation;
 
@@ -30,12 +29,6 @@ namespace _Project.Scripts.PlayerScripts
         [HideInInspector]
         public bool isHasKeyboardInput = false; 
         
-        [HideInInspector]
-        public bool isHasWalking = false;
-        
-        [HideInInspector]
-        public bool isHasRunning = false;
-
         private void Awake()
         {
             characterController = GetComponent<CharacterController>();
@@ -49,7 +42,9 @@ namespace _Project.Scripts.PlayerScripts
 
         public void CheckMovementWalkAndRun()
         {
-            if(crouchController.countPressKeyC == 0 && crouchController.crouchActive == false) // dont touch this
+            InputKeyboard();
+
+            if (crouchController.countPressKeyC == 0 && crouchController.crouchActive == false) // dont touch this
                 Walk();
                 
             IsKeyPressLeftShift = false;
@@ -59,28 +54,23 @@ namespace _Project.Scripts.PlayerScripts
                 if (Input.GetKey(KeyCode.LeftShift) 
                     && IsKeyPressLeftShift == false 
                     && crouchController.crouchActive == false 
-                    && staminaSliderController.endStamina == false
-                    && isHasWalking == true)
+                    && staminaSliderController.endStamina == false)
                 {
-                    isHasWalking = false;
-
-                    //audioManager.StopAudioForGrassWalk();
-
                     IsKeyPressLeftShift = true;
                     Run();
                 }
 
-                if (staminaSliderController.endStamina == true 
-                    && isHasRunning == true)
+                if (staminaSliderController.endStamina == true)
                 {
-                    isHasRunning = false;
-
                     Walk();
                 }
 
 
-                if (Input.GetKeyUp(KeyCode.LeftShift)) // is working!!!
+                if (Input.GetKeyUp(KeyCode.LeftShift)) // is working!!!                                                
+                {
                     IsKeyPressLeftShift = false; // Stop running
+                }
+
  
             }
         }
@@ -93,9 +83,6 @@ namespace _Project.Scripts.PlayerScripts
 
         public void Walk()
         {
-            isHasWalking = true;
-
-            InputKeyboard();
 
             MovePlayer = transform.TransformDirection(inputKeyboard.x, 0f, inputKeyboard.z);
 
@@ -104,14 +91,10 @@ namespace _Project.Scripts.PlayerScripts
             playerAnimation.ChangeAnimationWalk(inputKeyboard.z, inputKeyboard.x);
 
             staminaSliderController.IncreasedStaminaWalk();
-
-            //audioManager.PlayAudioForGrassWalk();
         }
 
         public void Run()
         {
-            isHasRunning = true;
-
             MovePlayer = transform.TransformDirection(inputKeyboard.x, 0f, inputKeyboard.z);
 
             characterController.Move(MovePlayer * speedRun * Time.deltaTime);
@@ -120,7 +103,6 @@ namespace _Project.Scripts.PlayerScripts
 
             staminaSliderController.DecreasedStamina();
 
-            //audioManager.PlayAudioForGrassRun();
         }
 
     }

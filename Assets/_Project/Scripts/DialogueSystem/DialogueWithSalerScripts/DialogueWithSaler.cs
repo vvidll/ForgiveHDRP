@@ -117,7 +117,7 @@ namespace _Project.Scripts.DialogueSystem.DialogueWithSalerScripts
             currentDialogueIndex = 3;
 
             CurrentDialogue(choiseAnswers, currentDialogueIndex, typingText, "SELLER: ",
-                namePerson, "хотя знаешь я могу тебе рассказать почему я тут до сих пор работаю",
+                namePerson, "хотя знаешь я могу тебе рассказать почему я тут еще работаю",
                 dialogueText);
 
             StartCoroutine(ThirdDialogueStageThird());

@@ -11,8 +11,9 @@ public class AudioNightManager : MonoBehaviour
         // если наступила ночь
         if (sleepingBagController.isChangeTimeDay == true) 
         {
-            if(audioSourceHorrorMusic.isPlaying) return;
-            audioSourceHorrorMusic.Play();
+            // временно отключил
+            //if(audioSourceHorrorMusic.isPlaying) return;
+            //audioSourceHorrorMusic.Play();
         }
     }
 }

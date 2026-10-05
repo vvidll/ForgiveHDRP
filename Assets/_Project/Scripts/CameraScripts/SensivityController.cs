@@ -23,7 +23,7 @@ namespace _Project.Scripts.CameraScripts
                 sliderSensivity.value = PlayerPrefs.GetFloat(SensivitySliderValueKey);
                 currentSensivity = PlayerPrefs.GetFloat(SensivitySettingsKey);
 
-                Debug.Log("Загрузка сынсы мыши");
+                //Debug.Log("Загрузка сынсы мыши");
             }
         }
         private void Start()
@@ -40,7 +40,7 @@ namespace _Project.Scripts.CameraScripts
             PlayerPrefs.SetFloat(SensivitySliderValueKey, sliderSensivity.value);
             PlayerPrefs.SetFloat(SensivitySettingsKey, currentSensivity);
 
-            Debug.Log("Сохранение сынсы мыши");
+            //Debug.Log("Сохранение сынсы мыши");
         }
 
         [ContextMenu("Delete Key Sensivity (Польз.)")]

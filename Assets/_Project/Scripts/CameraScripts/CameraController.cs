@@ -1,3 +1,4 @@
+using _Project.Scripts.AudioScripts;
 using _Project.Scripts.PlayerScripts;
 using UnityEngine;
 
@@ -11,7 +12,6 @@ namespace _Project.Scripts.CameraScripts
         [SerializeField] SensivityController sensitivityController;
         [SerializeField] DrivingPlayer drivingPlayer;
         [SerializeField] PlayerAnimation playerAnimation;
-
         float _yRotation = 0f;
         float _xRotation = 0f;
 
@@ -51,6 +51,7 @@ namespace _Project.Scripts.CameraScripts
                 }*/
 
                 _bodyPlayer.Rotate(Vector3.up * mouseX);
+
                 //AnimationRotateBody();
             }
 

@@ -34,7 +34,7 @@ namespace _Project.Scripts.OdinSerializerSavesAndLoads
 
         private void Start()
         {
-            Debug.Log(Application.persistentDataPath);
+            //Debug.Log(Application.persistentDataPath);
         }
 
         public void SaveData(SaveDataPlayer saveDataPlayer)

@@ -1,7 +1,8 @@
-using _Project.Scripts.InterfaceScripts;
+using _Project.Scripts.AudioScripts;
 using _Project.Scripts.CameraScripts;
-using UnityEngine;
+using _Project.Scripts.InterfaceScripts;
 using _Project.Scripts.PlayerScripts;
+using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimation : MonoBehaviour
@@ -11,6 +12,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] StaminaSliderController staminaSliderController;
     [SerializeField] CameraController cameraController;
     [SerializeField] PlayerMovement playerMovement;
+    [SerializeField] AudioMoveManager audioManager;
 
     float smoothTime = 0.15f;
 
@@ -24,17 +26,22 @@ public class PlayerAnimation : MonoBehaviour
         if(verticalDirection == 0 && horizontalDirection == 0)
             CallIdleAnimation();
 
+        audioManager.PlayAudioForGrassWalk();
+
         if (verticalDirection != 0)
         {
             if (verticalDirection > 0)
-                animator.SetFloat("y", verticalDirection = 1f, smoothTime, Time.deltaTime); 
+                animator.SetFloat("y", verticalDirection = 1f, smoothTime, Time.deltaTime);
 
             else
                 animator.SetFloat("y", verticalDirection = -1f, smoothTime, Time.deltaTime);
         }
 
-        else
+        else 
+        {
             animator.SetFloat("y", 0f, smoothTime, Time.deltaTime);
+        }
+           
 
         if (horizontalDirection != 0)
         {
@@ -45,18 +52,29 @@ public class PlayerAnimation : MonoBehaviour
                 animator.SetFloat("x", horizontalDirection = -1f, smoothTime, Time.deltaTime);
         }
 
-        else
+        else 
+        {
             animator.SetFloat("x", 0f, smoothTime, Time.deltaTime);
+        }
+
     }
 
     public void ChangeAnimationRun(float verticalDirection)
     {
-        if(verticalDirection > 0 && Input.GetKey(KeyCode.LeftShift))
+        if (verticalDirection > 0 && Input.GetKey(KeyCode.LeftShift)) 
+        {
             animator.SetFloat("y", 1.5f, smoothTime, Time.deltaTime);
+
+            audioManager.PlayAudioForGrassRun();
+            audioManager.StopAudioForGrassWalk();
+        }
+
     }
 
     public void ChangeTurnAnimation()
     {
+        audioManager.PlayAudioForGrassWalk();
+
         if (cameraController.mouseX != 0 && 
             playerMovement.inputKeyboard.x == 0 && 
             playerMovement.inputKeyboard.z == 0)
@@ -76,6 +94,7 @@ public class PlayerAnimation : MonoBehaviour
 
         else
         {
+
             animator.SetBool("isTurn", false);
         }
     }
@@ -86,7 +105,9 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetFloat("x", 0f);
 
         staminaSliderController.IncreasedStaminaIdle();
-        
+
+        audioManager.StopAudioForGrassWalk();
+
         playerMovement.isHasKeyboardInput = false;
     }
 }

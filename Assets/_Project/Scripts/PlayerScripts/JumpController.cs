@@ -56,7 +56,7 @@ namespace _Project.Scripts.PlayerScripts
             if (_isJumping == 1)
                 animator.SetBool("isJumping", false);
 
-            audioManager.PlayAudioForGrassJump();
+            audioManager.PlayAudioForGrassEndJump();
         }
     }
 }

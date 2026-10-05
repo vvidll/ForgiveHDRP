@@ -5,6 +5,8 @@ namespace _Project.Scripts.PlacedItemsScripts
 {
     public class SleepingBagController : PlacedInteractionItemsManager, IInteractableBuildings
     {
+        [SerializeField] AudioCarController audioCarController;
+
         [SerializeField] TransitionsController transitionsController;
         [SerializeField] ShowMissionsManager showMissionsManager;
 
@@ -13,7 +15,7 @@ namespace _Project.Scripts.PlacedItemsScripts
 
         private void Update()
         {
-            if (buildingManager.nameItemForBuilding == "SleepingBag" && buildingManager.isHasPlacedItem == true)
+            if (buildingManager.nameItemForBuilding == "SleepingBag" && buildingManager.isHasPlacedItem == true && isChangeTimeDay == false)
             {
                 showMissionsManager.ShowMissionGoSleep();
             }
@@ -25,6 +27,9 @@ namespace _Project.Scripts.PlacedItemsScripts
             playerInteraction.isShowDescription = false;
 
             isChangeTimeDay = true;
+
+            audioCarController.ActivateAudio();
+            showMissionsManager.ShowMissionCheckCar();
 
             if (playerInteraction.isShowDescription == false)
                 DisableLayer();

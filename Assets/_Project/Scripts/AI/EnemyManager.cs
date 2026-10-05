@@ -9,8 +9,9 @@ public class EnemyManager : MonoBehaviour
         if (enemyWatcher.enemyType == EnemyType.WatcherEnemy && enemyWatcher.sleepingBagController.isChangeTimeDay == true
             && enemyWatcher.isActiveEnemy == false) 
         {
-            enemyWatcher.gameObject.SetActive(true);
-            enemyWatcher.isActiveEnemy = true;
+            // временно отключил
+            //enemyWatcher.gameObject.SetActive(true);
+            //enemyWatcher.isActiveEnemy = true;
         }
             
         

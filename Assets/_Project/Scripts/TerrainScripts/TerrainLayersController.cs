@@ -42,13 +42,13 @@ public class TerrainLayersController : MonoBehaviour
         {
             switch (terrainLayers[i].name)
             {
-                case "Grass_A":
+                /*case "Grass_A":
                     audioManager.PlayAudioForGrassWalk();
                     break;
-
-                case "Black_Sand_A":
+                */
+                /*case "Black_Sand_A":
                     audioManager.PlayAudioForGravelWalk(); 
-                    break;
+                    break;*/
             }
         }
     }
@@ -59,13 +59,13 @@ public class TerrainLayersController : MonoBehaviour
         {
             switch (terrainLayers[i].name)
             {
-                case "Grass_A":
+                /*case "Grass_A":
                     audioManager.PlayAudioForGrassRun();
                     break;
-
-                case "Black_Sand_A":
+                */
+                /*case "Black_Sand_A":
                     audioManager.PlayAudioForGravelRun();
-                    break;
+                    break;*/
             }
         }
     }

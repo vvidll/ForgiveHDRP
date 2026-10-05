@@ -32,7 +32,7 @@ namespace _Project.Scripts.MissionsScripts
         // --------------------------------
 
         // -- Mission Find Suitable Location --
-        [Header("Window Mission Find Suitable Locatio")]
+        [Header("Window Mission Find Suitable Location")]
         [SerializeField] GameObject windowMissionFindSuitableLocation;
 
         // --------------------------------
@@ -75,6 +75,9 @@ namespace _Project.Scripts.MissionsScripts
         // -- Mission Go Sleep --
         [Header("Window Mission Go Sleep")]
         [SerializeField] GameObject windowMissionGoSleep;
+
+        [Header("Window Mission Check the Car")]
+        [SerializeField] GameObject windowMissionCheckCar;
 
         // --------------------------------
 
@@ -172,6 +175,13 @@ namespace _Project.Scripts.MissionsScripts
             btnPutSleepingBag.gameObject.SetActive(false);
 
             windowMissionGoSleep.SetActive(true);
+        }
+
+        public void ShowMissionCheckCar() 
+        {
+            windowMissionGoSleep.SetActive(false);
+
+            windowMissionCheckCar.SetActive(true);
         }
     }
 }
