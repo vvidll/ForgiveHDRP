@@ -11,6 +11,7 @@ namespace _Project.Scripts.DialogueSystem.DialogueWithSalerScripts
     public class DialogueWithSaler : CommonDialogueWithSaler
     {
         [SerializeField] AudioSource[] audiosDialogueSource;
+        [SerializeField] AudioSource audioLeaveFromDialogue;
 
         [Header("References")]
         [SerializeField] DisableAndEnableMovementAndCursorController disableAndEnableMovementAndCursorController;
@@ -219,7 +220,7 @@ namespace _Project.Scripts.DialogueSystem.DialogueWithSalerScripts
             namePerson.text = "SELLER:";
             dialogueText.text = "Уже уходишь? ну ладно...";
 
-            audiosDialogueSource[9].Play();
+            audioLeaveFromDialogue.Play();
 
             typingText.UpdateText();
 

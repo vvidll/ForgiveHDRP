@@ -8,6 +8,9 @@ namespace _Project.Scripts.DialogueSystem.DialogueWithSalerScripts
     // скрипт отвечающий за общую работу всех выборов ответов
     public class ChoiseAnswersController : ChoiseAnswerContollerCommon
     {
+        [SerializeField] AudioSource[] audiosAnswerSource;
+        [SerializeField] AudioSource audioLeaveFromDialogueAnswer;
+
         [SerializeField] DialogueWithSaler dialogue;
         [SerializeField] DisableAndEnableMovementAndCursorController disableAndEnableMovementAndCursorController;
         [SerializeField] TypingText typingText;
@@ -17,26 +20,97 @@ namespace _Project.Scripts.DialogueSystem.DialogueWithSalerScripts
         [SerializeField] public Button[] answersButtons;
         [SerializeField] public Button answerForExitDialogueBtn;
 
-        public void FirstAnswerClickButton() => dialogue.SecondDialogue();
-        
-        public void SecondAnswerClickButton() => dialogue.ThirdDialogueStageFirst();
+        float timeTalkPlayer = 6f;
 
-        public void ThirdAnswerClickButton() => dialogue.FourthDialogue();
+        public void FirstAnswerClickButton() 
+        {
+            audiosAnswerSource[0].Play();
+            StartCoroutine(WaitFirstTalkPlayerCoroutine());
+        }
 
-        public void FourthAnswerClickButton() => dialogue.FifthDialogue();
+        IEnumerator WaitFirstTalkPlayerCoroutine() 
+        {
+            yield return new WaitForSeconds(2);
+            dialogue.SecondDialogue();
+        }
 
-        public void FifthAnswerClickButton() => dialogue.SixthDialogue();
+        public void SecondAnswerClickButton()
+        {
+            audiosAnswerSource[1].Play();
+            StartCoroutine(WaitSecondTalkPlayerCoroutine());
+        }
 
-        public void SixthAnswerClickButton() => dialogue.SeventhDialogue();
-        
+        IEnumerator WaitSecondTalkPlayerCoroutine()
+        {
+            yield return new WaitForSeconds(5);
+            dialogue.ThirdDialogueStageFirst();
+        }
+
+        public void ThirdAnswerClickButton()
+        {
+            audiosAnswerSource[2].Play();
+            StartCoroutine(WaitThirdTalkPlayerCoroutine());
+        }
+
+        IEnumerator WaitThirdTalkPlayerCoroutine()
+        {
+            yield return new WaitForSeconds(2);
+            dialogue.FourthDialogue();
+        }
+
+
+        public void FourthAnswerClickButton()
+        {
+            audiosAnswerSource[3].Play();
+            StartCoroutine(WaitFourthTalkPlayerCoroutine());
+        }
+
+        IEnumerator WaitFourthTalkPlayerCoroutine()
+        {
+            yield return new WaitForSeconds(4);
+            dialogue.FifthDialogue();
+        }
+
+        public void FifthAnswerClickButton()
+        {
+            audiosAnswerSource[4].Play();
+            StartCoroutine(WaitFifthTalkPlayerCoroutine());
+        }
+
+        IEnumerator WaitFifthTalkPlayerCoroutine()
+        {
+            yield return new WaitForSeconds(4);
+            dialogue.SixthDialogue();
+        }
+
+        public void SixthAnswerClickButton()
+        {
+            audiosAnswerSource[5].Play();
+            StartCoroutine(WaitSixthTalkPlayerCoroutine());
+        }
+
+        IEnumerator WaitSixthTalkPlayerCoroutine()
+        {
+            yield return new WaitForSeconds(3);
+            dialogue.SeventhDialogue();
+        }
+
         public void ExitFromCurrentDialogueClickButton()
         {
-            StartCoroutine(dialogue.StopDialogueCoroutine());
+            audioLeaveFromDialogueAnswer.Play();
+
+            StartCoroutine(WaitTalkPlayerExitDialogueCoroutine());
 
             disableAndEnableMovementAndCursorController.isDialogueWithSalerActive = false;
             disableAndEnableMovementAndCursorController.DisableMovementAndShowCursor();
         }
-        
+
+        IEnumerator WaitTalkPlayerExitDialogueCoroutine()
+        {
+            yield return new WaitForSeconds(4);
+            StartCoroutine(dialogue.StopDialogueCoroutine());
+        }
+
         public IEnumerator ChoiseFirstAnswerCoroutine()
         {
             yield return new WaitForSeconds(5);
