@@ -33,7 +33,8 @@ namespace _Project.Scripts.InterfaceScripts
 
         public void CheckStaminaSlider()
         {
-            if (sliderStamina.value < maxValueSlider && playerMovement.IsKeyPressLeftShift == false) // is working!!!
+            if (sliderStamina.value < maxValueSlider 
+                && playerMovement.IsKeyPressLeftShift == false) // is working!!!
                 IncreasedStaminaWalk(); // if player walking
 
             if (sliderStamina.value == 0) // if stamina the end
@@ -49,7 +50,7 @@ namespace _Project.Scripts.InterfaceScripts
         public void DecreasedStamina()
         {
             sliderStamina.gameObject.SetActive(true);
-            sliderStamina.value -= speedDecreasedStaminaSlider;
+            sliderStamina.value -= speedDecreasedStaminaSlider * 2;
         }
 
         public void IncreasedStaminaIdle()

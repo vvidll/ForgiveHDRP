@@ -86,6 +86,8 @@ namespace _Project.Scripts.MissionsScripts
 
         [HideInInspector]
         public bool isHasPrepareFood = false;
+        [HideInInspector]
+        public bool isNeedCarCheck = false;
 
         public override void OnTick()
         {
@@ -182,6 +184,8 @@ namespace _Project.Scripts.MissionsScripts
             windowMissionGoSleep.SetActive(false);
 
             windowMissionCheckCar.SetActive(true);
+
+            isNeedCarCheck = true;
         }
     }
 }

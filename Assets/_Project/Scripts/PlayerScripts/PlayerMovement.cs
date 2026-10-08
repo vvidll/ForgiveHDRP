@@ -14,8 +14,11 @@ namespace _Project.Scripts.PlayerScripts
         [SerializeField] PlayerAnimation playerAnimation;
 
         [SerializeField] CharacterController characterController;
-        [SerializeField] float speedWalk = 2f;
-        [SerializeField] float speedRun = 3f;
+        //[SerializeField] float speedWalk = 2f;
+        //[SerializeField] float speedRun = 5f;
+
+        public float minSpeed = 2f, maxSpeed = 5f;
+        public float currentSpeed = 0;
 
         [HideInInspector]
         public Vector3 MovePlayer;
@@ -51,27 +54,37 @@ namespace _Project.Scripts.PlayerScripts
 
             if (Input.GetKey(KeyCode.W)) // here all working!!!
             {
-                if (Input.GetKey(KeyCode.LeftShift) 
-                    && IsKeyPressLeftShift == false 
+                if (Input.GetKey(KeyCode.LeftShift)
+                    && IsKeyPressLeftShift == true
+                    && crouchController.crouchActive == false
+                    && staminaSliderController.endStamina == true)
+                {
+                    maxSpeed = minSpeed;
+                    currentSpeed = maxSpeed;
+
+                    IsKeyPressLeftShift = false;
+                    Walk();
+                }
+
+                else if (Input.GetKey(KeyCode.LeftShift) 
+                    && IsKeyPressLeftShift == false
                     && crouchController.crouchActive == false 
                     && staminaSliderController.endStamina == false)
                 {
+                    maxSpeed = 5f;
+                    currentSpeed = maxSpeed;
+
                     IsKeyPressLeftShift = true;
                     Run();
                 }
 
-                if (staminaSliderController.endStamina == true)
-                {
-                    Walk();
-                }
 
+            }
 
-                if (Input.GetKeyUp(KeyCode.LeftShift)) // is working!!!                                                
-                {
-                    IsKeyPressLeftShift = false; // Stop running
-                }
-
- 
+            if (Input.GetKeyUp(KeyCode.LeftShift)) // is working!!!                                                
+            {
+                IsKeyPressLeftShift = false; // Stop running
+                Walk();
             }
         }
 
@@ -83,10 +96,11 @@ namespace _Project.Scripts.PlayerScripts
 
         public void Walk()
         {
+            currentSpeed = minSpeed;
 
             MovePlayer = transform.TransformDirection(inputKeyboard.x, 0f, inputKeyboard.z);
 
-            characterController.Move(MovePlayer * speedWalk * Time.deltaTime);
+            characterController.Move(MovePlayer * currentSpeed * Time.deltaTime);
 
             playerAnimation.ChangeAnimationWalk(inputKeyboard.z, inputKeyboard.x);
 
@@ -95,9 +109,11 @@ namespace _Project.Scripts.PlayerScripts
 
         public void Run()
         {
+            currentSpeed = maxSpeed;
+
             MovePlayer = transform.TransformDirection(inputKeyboard.x, 0f, inputKeyboard.z);
 
-            characterController.Move(MovePlayer * speedRun * Time.deltaTime);
+            characterController.Move(MovePlayer * currentSpeed * Time.deltaTime);
 
             playerAnimation.ChangeAnimationRun(inputKeyboard.z);
 

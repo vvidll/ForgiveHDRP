@@ -61,7 +61,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void ChangeAnimationRun(float verticalDirection)
     {
-        if (verticalDirection > 0 && Input.GetKey(KeyCode.LeftShift)) 
+        if (verticalDirection > 0 && Input.GetKey(KeyCode.LeftShift) && staminaSliderController.endStamina == false) 
         {
             animator.SetFloat("y", 1.5f, smoothTime, Time.deltaTime);
 
