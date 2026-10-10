@@ -1,8 +1,9 @@
-using UnityEngine;
-using DG.Tweening;
-using UnityEngine.UI;
 using System.Collections;
 using _Project.Scripts.CarScripts;
+using _Project.Scripts.MissionsScripts;
+using DG.Tweening;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace _Project.Scripts
 {
@@ -14,6 +15,8 @@ namespace _Project.Scripts
         [Header("References From Other Classes")]
         [SerializeField] TeleportCar teleportCar;
         [SerializeField] SunController sunController;
+        [SerializeField] ShowMissionsManager showMissionsManager;
+
 
         float timeBeforeOnWindowTransition = 3f;
         float timeBeforeChangeAlphaValueForBeginWindow = 2f;
@@ -42,6 +45,8 @@ namespace _Project.Scripts
             beginTransitionWindow.gameObject.SetActive(true);
 
             teleportCar.TeleportToPointOldLocation();
+
+            showMissionsManager.ShowMissionFindSuitableLocation();
 
             yield return new WaitForSeconds(timeBeforeChangeAlphaValueForBeginWindow);
             ChangeAlphaValueForBeginWindowToWhite();

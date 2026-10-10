@@ -1,5 +1,6 @@
 using System.Collections;
 using _Project.Scripts.InteractScripts.CarInteractScripts;
+using _Project.Scripts.PlayerScripts;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
@@ -8,6 +9,8 @@ namespace _Project.Scripts.CarScripts
     // скрипт отвечающий за телепорт машины в нужные локации и места
     public class TeleportCar : MonoBehaviour
     {
+        [SerializeField] DrivingPlayer drivingPlayer;
+
         [Header("Transform Point For Teleport (Old First Location)")]
         [SerializeField] Transform pointTeleportCarForDriveToNextLocation;
         [SerializeField] Transform pointTeleportPlayerInCar;
@@ -45,9 +48,6 @@ namespace _Project.Scripts.CarScripts
         [Header("New(Second) Location")]
         [SerializeField] GameObject secondLocation;
 
-        [HideInInspector]
-        public bool isHasNewLocation = false;
-
         Quaternion playerRotationInCar = new Quaternion(0f, 180f, 0f, 0f);
 
         public void TeleportToPointOldLocation()
@@ -63,7 +63,7 @@ namespace _Project.Scripts.CarScripts
             playerTransform.position = pointTeleportPlayerInCar.position;
             playerTransform.rotation = playerRotationInCar;
 
-            playerAnimator.SetBool("isDriving", true);
+            playerAnimator.SetTrigger("isDriving");
 
             for (int i = 1; i < rigBuilder.layers.Count && i != 5; i++)
             {
@@ -88,8 +88,6 @@ namespace _Project.Scripts.CarScripts
 
             childPlayerObject.SetParent(parentCarObject);
 
-            isHasNewLocation = true;
-
             StartCoroutine(EnableNewLocationCarAnimationDrivingCoroutine());
         }
 
@@ -99,8 +97,7 @@ namespace _Project.Scripts.CarScripts
             yield return new WaitForSeconds(1f);
 
             carAnimator.enabled = true;
-            carAnimator.SetBool("isDrivingToNewLocation", true);
-
+            carAnimator.SetTrigger("isDrivingToNewLocation");
         }
 
         // во второй локе
@@ -109,7 +106,7 @@ namespace _Project.Scripts.CarScripts
             yield return new WaitForSeconds(1f);
 
             carAnimator.enabled = true;
-            carAnimator.SetBool("isDrivingToDirtRoad", true);
+            carAnimator.SetTrigger("isDrivingToDirtRoad");
 
         }
     }

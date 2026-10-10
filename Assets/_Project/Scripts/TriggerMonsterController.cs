@@ -1,3 +1,4 @@
+using _Project.Scripts.MissionsScripts;
 using UnityEngine;
 
 public class TriggerMonsterController : MonoBehaviour
@@ -6,9 +7,11 @@ public class TriggerMonsterController : MonoBehaviour
 
     [SerializeField] GameObject enemyWatcher;
 
+    [SerializeField] ShowMissionsManager showMissionsManager;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player") 
+        if (other.tag == "Player" && showMissionsManager.isNeedCarCheck == true) 
         {
             enemyWatcher.SetActive(true);
             treeStand.SetActive(false);

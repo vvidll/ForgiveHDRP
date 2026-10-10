@@ -13,6 +13,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] CameraController cameraController;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] AudioMoveManager audioManager;
+    [SerializeField] DrivingPlayer drivingPlayer;
 
     float smoothTime = 0.15f;
 
@@ -26,7 +27,8 @@ public class PlayerAnimation : MonoBehaviour
         if(verticalDirection == 0 && horizontalDirection == 0)
             CallIdleAnimation();
 
-        audioManager.PlayAudioForGrassWalk();
+        if(drivingPlayer.isInCar == false)
+            audioManager.PlayAudioForGrassWalk();
 
         if (verticalDirection != 0)
         {
@@ -61,19 +63,39 @@ public class PlayerAnimation : MonoBehaviour
 
     public void ChangeAnimationRun(float verticalDirection)
     {
-        if (verticalDirection > 0 && Input.GetKey(KeyCode.LeftShift) && staminaSliderController.endStamina == false) 
+        if (verticalDirection > 0 && Input.GetKey(KeyCode.LeftShift) && staminaSliderController.endStamina == false)
         {
             animator.SetFloat("y", 1.5f, smoothTime, Time.deltaTime);
 
-            audioManager.PlayAudioForGrassRun();
+            if (drivingPlayer.isInCar == false)
+            {
+                audioManager.PlayAudioForGrassRun();
+                audioManager.StopAudioForGrassWalk();
+            }
+        }
+    }
+
+    public void ChangeAnimationCrouch(float verticalDirection, float horizontalDirection, bool crouchActive)
+    {
+        if (verticalDirection != 0 || horizontalDirection != 0 && Input.GetKeyDown(KeyCode.LeftControl)) // activate crouch, when player walking
+            animator.SetFloat("xCrouch", 0f, smoothTime, Time.deltaTime);
+
+        if (verticalDirection == 0 || horizontalDirection == 0 && crouchActive == true) // activate crouch "idle" animation, when player stay
+                                                                                        // on the place, but button LeftControl is press
+        {
+            animator.SetFloat("xCrouch", 0f, smoothTime, Time.deltaTime);
             audioManager.StopAudioForGrassWalk();
         }
 
+        if (verticalDirection != 0 || horizontalDirection != 0 && crouchActive == true) // activate crouch walk
+        {
+            animator.SetFloat("xCrouch", 1f, smoothTime, Time.deltaTime);
+        }
     }
-
     public void ChangeTurnAnimation()
     {
-        audioManager.PlayAudioForGrassWalk();
+        if (drivingPlayer.isInCar == false)
+            audioManager.PlayAudioForGrassWalk();
 
         if (cameraController.mouseX != 0 && 
             playerMovement.inputKeyboard.x == 0 && 
@@ -106,7 +128,8 @@ public class PlayerAnimation : MonoBehaviour
 
         staminaSliderController.IncreasedStaminaIdle();
 
-        audioManager.StopAudioForGrassWalk();
+        if (drivingPlayer.isInCar == false)
+            audioManager.StopAudioForGrassWalk();
 
         playerMovement.isHasKeyboardInput = false;
     }

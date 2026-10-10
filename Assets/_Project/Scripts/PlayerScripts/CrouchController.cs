@@ -7,15 +7,14 @@ namespace _Project.Scripts.PlayerScripts
     public class CrouchController : MonoBehaviour
     {
         [SerializeField] Animator animator;
-        //[SerializeField] PlayerMovement playerMovement;
+        [SerializeField] PlayerAnimation playerAnimation;
+        [SerializeField] PlayerMovement playerMovement;
         [SerializeField] CharacterController characterController;
         [SerializeField] DrivingPlayer drivingPlayer;
         [SerializeField] float speedCrouch = 0.5f;
 
         public int countPressKeyC = 0;
         
-        [SerializeField] float smoothTimeForCrouchWalking = 0.15f;
-
         public bool crouchActive = false;
         private Vector3 moveCrouch;
 
@@ -57,6 +56,8 @@ namespace _Project.Scripts.PlayerScripts
         {
             animator.SetBool("isCrouching", true);
             crouchActive = true;
+
+            Crouch();
         }
 
         public void CrouchDeactivate()
@@ -64,29 +65,15 @@ namespace _Project.Scripts.PlayerScripts
             animator.SetBool("isCrouching", false);
             crouchActive = false;
         }
-
-        public void Crouch() 
-        {
-            float horizontalCrouch = Input.GetAxisRaw("Horizontal");
-            float verticalCrouch = Input.GetAxisRaw("Vertical");
-            
-            moveCrouch = transform.TransformDirection(horizontalCrouch, 0f, verticalCrouch);
-            
-            if (verticalCrouch != 0 || horizontalCrouch != 0 && Input.GetKeyDown(KeyCode.C)) // activate crouch, when player walking
-                animator.SetFloat("xCrouch", 0f, smoothTimeForCrouchWalking,  Time.deltaTime);
-
-            if (verticalCrouch == 0 || horizontalCrouch == 0 && crouchActive == true) // activate crouch "idle" animation, when player stay
-                                                                                                        // on the place, but button C is press
-                animator.SetFloat("xCrouch", 0f, smoothTimeForCrouchWalking,  Time.deltaTime);
-
-            if (verticalCrouch != 0 || horizontalCrouch != 0 && crouchActive == true) // activate crouch walk 
-                CrouchWalk();
-        }
         
-        public void CrouchWalk()
+        public void Crouch()
         {
-            characterController.Move(moveCrouch * speedCrouch * Time.deltaTime);   
-            animator.SetFloat("xCrouch", 1f, smoothTimeForCrouchWalking,  Time.deltaTime);
+            moveCrouch = transform.TransformDirection(playerMovement.inputKeyboard.x, 0f, playerMovement.inputKeyboard.z);
+
+            playerAnimation.ChangeAnimationCrouch(playerMovement.inputKeyboard.z, playerMovement.inputKeyboard.x, crouchActive);
+
+            characterController.Move(moveCrouch * speedCrouch * Time.deltaTime);
+
         }
 
     }

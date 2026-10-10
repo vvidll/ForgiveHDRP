@@ -16,35 +16,51 @@ namespace _Project.Scripts.PlayerScripts
 
         int _isJumping = 0; // 1 - run without jump, 2 - run with jump
 
+        int countPressSpace = 0;
+
         private void Update()
         {
             if (drivingPlayer.isInCar == false) 
             {
                 CheckJumping();
-                CheckGravity();
             }
 
         }
 
         public void CheckJumping()
         {
+            CheckGravity();
+
             if (IsGrounded == true && staminaSliderController.sliderStamina.value > 50)
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    _isJumping = 1; // 1 - run without jump
-                    animator.SetBool("isJumping", true);
+                    switch (countPressSpace) 
+                    {
+                        case 0:
+                            countPressSpace = 1;
+                            _isJumping = 1; // 1 - run without jump
+                            animator.SetBool("isJumping", true);
 
-                    audioManager.PlayAudioForGrassStartJump();
+                            audioManager.PlayAudioForGrassStartJump();
 
-                    Jump();
+                            Jump();
+                            break;
+
+                        case 1:
+                            countPressSpace = 2; // fix two-jump, when player quickly press to space key
+                            break;
+                    }
+
                 }
             }
         }
 
         public void Jump()
         {
+
             Velocity.y += Mathf.Sqrt(jumpForce * -2f * Gravity);
+
             staminaSliderController.DecreasedStaminaFromJump();
             StartCoroutine(StopAnimateJumping());
         }
@@ -57,6 +73,8 @@ namespace _Project.Scripts.PlayerScripts
                 animator.SetBool("isJumping", false);
 
             audioManager.PlayAudioForGrassEndJump();
+
+            countPressSpace = 0;
         }
     }
 }

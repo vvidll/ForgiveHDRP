@@ -1,10 +1,9 @@
 using _Project.Scripts.DialogueSystem.DialogueWithSalerScripts;
 using _Project.Scripts.InventoryScripts;
+using _Project.Scripts.MissionsScripts;
 using _Project.Scripts.PlayerScripts;
-using EasyRoads3Dv3;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace _Project.Scripts.InteractScripts.CarInteractScripts
 {
@@ -15,7 +14,7 @@ namespace _Project.Scripts.InteractScripts.CarInteractScripts
 
         [Header("Animator")]
         [SerializeField] Animator playerAnimator;
-        [SerializeField] Animator carAnimator;
+        [SerializeField] Animator carDoorAnimator;
 
         [Header("References From Other Classes")]
         [SerializeField] TransitionsController transitionsController;
@@ -23,30 +22,32 @@ namespace _Project.Scripts.InteractScripts.CarInteractScripts
         [SerializeField] DialogueWithSaler dialogueWithSaler;
         [SerializeField] DrivingPlayer drivingPlayer;
 
+        [Header("Parent Object")]
+        [SerializeField] Transform carParentObject; 
+
+        [Header("Child Object")]
+        [SerializeField] Transform player;
+
         public void Interact()
         {
-            /*if (checkCompleteTasksNotepad.completeMissionItemsForSurvival == true && dialogueWithSaler.hasBoughtItemsInShop == true) 
+            if (checkCompleteTasksNotepad.completeMissionItemsForSurvival == true 
+                && dialogueWithSaler.hasBoughtItemsInShop == true 
+                && drivingPlayer.isHoldKeyF == 1) 
             {
+                drivingPlayer.isHoldKeyF = 0;
+
                 drivingPlayer.isInCar = true;
 
-                playerAnimator.SetBool("isEnteringCar", true);
+                playerAnimator.SetTrigger("isEnteringCar");
 
-                carAnimator.SetBool("isOpenDoor", true);
+                player.SetParent(carParentObject); // set car how parent object
+
+                carDoorAnimator.SetBool("isOpenAndCloseDoor", true);
 
                 transitionsController.TransitionTeleportCar();
-            }*/
+            }
 
-            drivingPlayer.isInCar = true;
 
-            playerAnimator.SetBool("isEnteringCar", true);
-
-            playerAnimator.SetBool("isExitingCar", false); // off transition to animation clip
-
-            carAnimator.SetBool("isOpenDoor", true);
-
-            Debug.LogWarning("isEnteringCar = true");
-
-            transitionsController.TransitionTeleportCar();
         }
 
         public void Description()
@@ -54,6 +55,10 @@ namespace _Project.Scripts.InteractScripts.CarInteractScripts
             textInteractionDoorCar.text = "sit in the car";
             //return textInteractionDoorCar.text;
         }
+
+        public void CloseDoor() =>
+            carDoorAnimator.SetBool("isOpenAndCloseDoor", false);
+        
     }
 
 

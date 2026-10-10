@@ -13,7 +13,7 @@ namespace _Project.Scripts.PlayerScripts
         public const string RigBuilderListCountKey = "rig_builder_list_count";
 
         [SerializeField] Animator playerAnimator;
-        [SerializeField] Animator carAnimator;
+        [SerializeField] Animator carDoorAnimator;
         [SerializeField] AnimationClip playerAnimationClip;
 
         [SerializeField] Transform playerTransform;
@@ -27,6 +27,12 @@ namespace _Project.Scripts.PlayerScripts
         [SerializeField] SphereCollider sphereColliderLeftDoor;
 
 
+        [Header("Parent Object")]
+        [SerializeField] Transform parentObject;
+
+        [Header("Child Object")]
+        [SerializeField] Transform player;
+
         //[HideInInspector]
         public bool isInCar = false;
 
@@ -36,14 +42,12 @@ namespace _Project.Scripts.PlayerScripts
         [Header("References From Other Classes")]
         [SerializeField] InteractionDoorCar interactionDoorCar;
 
-        private void Awake()
+        private void Start()
         {
             imageInteractHold.gameObject.SetActive(false);
 
-            if (isInCar == true)
-            {
-                playerAnimator.SetBool("isDriving", true);
-            }
+            // start the game
+            playerAnimator.SetTrigger("isDrivingStartGame");
         }
 
         private void Update()
@@ -83,8 +87,12 @@ namespace _Project.Scripts.PlayerScripts
                 rigBuilder.layers[i].active = false;
             }
 
-            carAnimator.SetBool("isOpenDoor", true);
-            playerAnimator.SetBool("isExitingCar", true);
+            carDoorAnimator.SetBool("isOpenAndCloseDoor", true);
+
+            playerAnimator.SetTrigger("isExitingCar");
+
+            player.SetParent(parentObject);
+
             StartCoroutine(EndPlayAnimationExitingCarCoroutine());
 
         }
@@ -93,12 +101,14 @@ namespace _Project.Scripts.PlayerScripts
         {
             yield return new WaitForSeconds(7);
 
-            playerAnimator.SetBool("isIdle", true);
-            playerAnimator.SetBool("isDriving", false);
+            playerAnimator.SetTrigger("isIdle");
 
-            carAnimator.SetBool("isOpenDoor", false);
+            imageInteractHold.fillAmount = 0;
 
             isInCar = false;
+
+            carDoorAnimator.SetBool("isOpenAndCloseDoor", false);
+
         }
 
         [ContextMenu("Reset Key Driver (Польз.)")]

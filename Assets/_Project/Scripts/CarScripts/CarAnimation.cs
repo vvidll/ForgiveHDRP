@@ -10,5 +10,7 @@ namespace _Project.Scripts.CarScripts
         [SerializeField] DrivingPlayer drivingPlayer;
 
         public void ExitFromCar() => drivingPlayer.imageInteractHold.gameObject.SetActive(true);
+       
+
     }
 }

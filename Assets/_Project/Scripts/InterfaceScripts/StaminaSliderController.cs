@@ -16,7 +16,7 @@ namespace _Project.Scripts.InterfaceScripts
         float multiplier = 2f;
 
         internal bool endStamina = false;
-        int mediumCountStaminaForJumping = 10;
+        int mediumCountStaminaForJumping = 100;
 
         int maxValueSlider = 750;
 
@@ -50,7 +50,7 @@ namespace _Project.Scripts.InterfaceScripts
         public void DecreasedStamina()
         {
             sliderStamina.gameObject.SetActive(true);
-            sliderStamina.value -= speedDecreasedStaminaSlider * 2;
+            sliderStamina.value -= speedDecreasedStaminaSlider;
         }
 
         public void IncreasedStaminaIdle()

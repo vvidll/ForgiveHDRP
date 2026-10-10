@@ -16,7 +16,7 @@ namespace _Project.Scripts.CarScripts
 
         private void Update()
         {
-            if (drivingPlayer.isInCar == false)
+            if (drivingPlayer.isInCar == false && drivingPlayer.isHoldKeyF == 1)
                 player.SetParent(parentObject);
         }
 

@@ -34,6 +34,7 @@ namespace _Project.Scripts.MissionsScripts
         // -- Mission Find Suitable Location --
         [Header("Window Mission Find Suitable Location")]
         [SerializeField] GameObject windowMissionFindSuitableLocation;
+        [SerializeField] GameObject markerSuitableLocationOnCompass;
 
         // --------------------------------
 
@@ -76,8 +77,13 @@ namespace _Project.Scripts.MissionsScripts
         [Header("Window Mission Go Sleep")]
         [SerializeField] GameObject windowMissionGoSleep;
 
+        // --------------------------------
+
+        // -- Mission Check the Car --
         [Header("Window Mission Check the Car")]
         [SerializeField] GameObject windowMissionCheckCar;
+        [SerializeField] GameObject markerCarOnCompass;
+        [SerializeField] GameObject triggerCarCheck;
 
         // --------------------------------
 
@@ -88,19 +94,18 @@ namespace _Project.Scripts.MissionsScripts
         public bool isHasPrepareFood = false;
         [HideInInspector]
         public bool isNeedCarCheck = false;
+        [HideInInspector]
+        public bool isFindSuitableLocation = false;
+
 
         public override void OnTick()
         {
-            if (drivingPlayer.isInCar == false) 
-                ShowMissionBuyItemsShopForSurvival(); 
+            if (drivingPlayer.isInCar == false && isFindSuitableLocation == false) 
+                ShowMissionBuyItemsShopForSurvival();
 
-            if (checkCompleteTasksNotepad.completeMissionItemsForSurvival == true && 
-                dialogueWithSaler.hasBoughtItemsInShop == true) 
+            if (checkCompleteTasksNotepad.completeMissionItemsForSurvival == true &&
+                dialogueWithSaler.hasBoughtItemsInShop == true && isFindSuitableLocation == false) 
                 ShowMissionSitInCar();
-
-
-            if (teleportCar.isHasNewLocation == true && drivingPlayer.isInCar == false)
-                ShowMissionFindSuitableLocation();
 
             if (buildingManagerTent.isHasPlacedItem == true && isHasPrepareFood == false)
                 ShowMissionPrepareFood();
@@ -112,7 +117,7 @@ namespace _Project.Scripts.MissionsScripts
         public void ShowMissionBuyItemsShopForSurvival() 
         {
             panelMissions.SetActive(true);
-            //windowMissionBuyItemsForSurvival.SetActive(true); включить когда начинается игра
+            windowMissionBuyItemsForSurvival.SetActive(true); // включить когда начинается игра
         }
 
         public void ShowMissionSitInCar() 
@@ -125,16 +130,21 @@ namespace _Project.Scripts.MissionsScripts
 
         public void ShowMissionFindSuitableLocation() 
         {
+            isFindSuitableLocation = true;
+
             windowMissionSitInCar.SetActive(false);
             imageHintMissionSitInCar.gameObject.SetActive(false);
 
             windowMissionFindSuitableLocation.SetActive(true);
+
+            markerSuitableLocationOnCompass.SetActive(true);
 
         }
 
         public void ShowMissionSetUpBonfire() 
         {
             windowMissionFindSuitableLocation.SetActive(false);
+            markerSuitableLocationOnCompass.SetActive(false);
 
             windowMissionSetUpBonfire.SetActive(true);
             btnSetUpBonfire.gameObject.SetActive(true);
@@ -184,6 +194,9 @@ namespace _Project.Scripts.MissionsScripts
             windowMissionGoSleep.SetActive(false);
 
             windowMissionCheckCar.SetActive(true);
+            markerCarOnCompass.SetActive(true);
+
+            triggerCarCheck.SetActive(true); 
 
             isNeedCarCheck = true;
         }

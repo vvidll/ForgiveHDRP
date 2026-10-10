@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Marker : MonoBehaviour
+public class Marker : MonoCache
 {
     [SerializeField] RectTransform markerImage;
     [SerializeField] Transform playerTransform;
@@ -15,7 +14,7 @@ public class Marker : MonoBehaviour
     float normalized; // расчетный угол
     float xPos; // позиция метки относительно X-координате
     
-    void Update()
+    public override void OnTick()
     {
         Vector3 toTarget = objectTransform.position - playerTransform.position;
         
