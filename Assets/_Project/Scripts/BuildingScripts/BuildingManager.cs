@@ -23,21 +23,7 @@ public class BuildingManager : MonoBehaviour
         ChangeRotateModelY();
         ChangePositionModelZ();
 
-        /*for (int i = 0; i < buildingPointsCollisions.Length; i++)
-        {
-            if (buildingPointsCollisions[i].isGrounded == true && Input.GetMouseButtonDown(0))
-            {
-                currentObject.SetParent(parentObjectTerrain);
-                buildingPlace.SetActive(false);
-
-                for (int j = 0; j < buildingPoints.Length; j++)
-                {
-                    buildingPoints[j].SetActive(false);
-                }
-            }
-        }*/
-
-        if (buildingPlaceCollisions.isGrounded == true && Input.GetMouseButtonDown(0))
+        if (buildingPlaceCollisions.isGroundedForPlaceBuildings == true && Input.GetMouseButtonDown(0))
         {
             currentObject.SetParent(parentObjectTerrain);
             buildingPlace.SetActive(false);

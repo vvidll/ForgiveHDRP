@@ -1,4 +1,5 @@
 using System.Collections;
+using _Project.Scripts.CameraScripts;
 using _Project.Scripts.InteractScripts.CarInteractScripts;
 using DG.Tweening;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace _Project.Scripts.PlayerScripts
         public const string HoldKeyF = "hold_key_f";
         public const string RigBuilderListCountKey = "rig_builder_list_count";
 
+        [SerializeField] BoxCollider carCollider;
+
         [SerializeField] Animator playerAnimator;
         [SerializeField] Animator carDoorAnimator;
         [SerializeField] AnimationClip playerAnimationClip;
@@ -24,6 +27,9 @@ namespace _Project.Scripts.PlayerScripts
 
         [SerializeField] RigBuilder rigBuilder;
 
+        int RigDoorHandleTriggerForExitingCar = 5;
+        int RigDoorHandleTriggerForEnteringCar = 6;
+
         [SerializeField] SphereCollider sphereColliderLeftDoor;
 
 
@@ -35,6 +41,7 @@ namespace _Project.Scripts.PlayerScripts
 
         //[HideInInspector]
         public bool isInCar = false;
+        public bool isHasExitCar = false;
 
         public int isHoldKeyF = 0; // false
         public int rigBuilderCount = 0;
@@ -82,10 +89,20 @@ namespace _Project.Scripts.PlayerScripts
 
         public void ExitingCar()
         {
+            carCollider.enabled = false;
+
             for (int i = 1; i < rigBuilder.layers.Count; i++)
             {
                 rigBuilder.layers[i].active = false;
             }
+
+            // RigBuilder IK
+
+            // временно отключил IK
+            //rigBuilder.layers[RigDoorHandleTriggerForExitingCar].active = true;
+            //rigBuilder.layers[RigDoorHandleTriggerForEnteringCar].active = false;
+
+            //--------------
 
             carDoorAnimator.SetBool("isOpenAndCloseDoor", true);
 
@@ -100,6 +117,10 @@ namespace _Project.Scripts.PlayerScripts
         IEnumerator EndPlayAnimationExitingCarCoroutine()
         {
             yield return new WaitForSeconds(7);
+
+            isHasExitCar = true;
+
+            carCollider.enabled = true;
 
             playerAnimator.SetTrigger("isIdle");
 

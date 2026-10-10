@@ -16,7 +16,7 @@ namespace _Project.Scripts.PlayerScripts
 
         int _isJumping = 0; // 1 - run without jump, 2 - run with jump
 
-        int countPressSpace = 0;
+        public int countPressSpace = 0;
 
         private void Update()
         {
@@ -58,7 +58,6 @@ namespace _Project.Scripts.PlayerScripts
 
         public void Jump()
         {
-
             Velocity.y += Mathf.Sqrt(jumpForce * -2f * Gravity);
 
             staminaSliderController.DecreasedStaminaFromJump();

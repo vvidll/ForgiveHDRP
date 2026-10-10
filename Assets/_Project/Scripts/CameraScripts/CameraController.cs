@@ -26,9 +26,20 @@ namespace _Project.Scripts.CameraScripts
         [HideInInspector]
         public float mouseY;
 
+        Vector3 basePosition = new Vector3(0f, 0.035f, 0.286f);
+        Quaternion baseRotation = new Quaternion(0f, 0f, 0f, 0f);
+
         public override void OnTick()
         {
             PlayerRotateCamera();
+
+            if (drivingPlayer.isHasExitCar == true) 
+            {
+                _mainCamera.transform.localPosition = basePosition;
+                _mainCamera.transform.localRotation = baseRotation;
+
+                drivingPlayer.isHasExitCar = false;
+            }
         }
 
         public void PlayerRotateCamera() 

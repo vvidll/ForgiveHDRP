@@ -12,13 +12,13 @@ public class BuildingPlaceCollision : MonoBehaviour
     [SerializeField] Color colorRed;
 
     //[HideInInspector]
-    public bool isGrounded = false;
+    public bool isGroundedForPlaceBuildings = false;
 
     private void Update()
     {
-        isGrounded = Physics.Raycast(transform.position, -Vector3.up, .1f, groundLayerMask);
+        isGroundedForPlaceBuildings = Physics.Raycast(transform.position, -Vector3.up, .1f, groundLayerMask);
 
-        if (isGrounded)
+        if (isGroundedForPlaceBuildings)
         {
             Debug.Log("collision enter!");
             placeMaterial.color = colorGreen;
