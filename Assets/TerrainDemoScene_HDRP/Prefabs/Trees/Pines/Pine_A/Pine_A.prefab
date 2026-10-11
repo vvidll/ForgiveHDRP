@@ -90,12 +90,8 @@ LODGroup:
   - screenRelativeHeight: 0.2
     fadeTransitionWidth: 0
     renderers:
-    - renderer: {fileID: 4355044319688019953}
-  - screenRelativeHeight: 0.1
-    fadeTransitionWidth: 0
-    renderers:
     - renderer: {fileID: 4116794191508068702}
-  - screenRelativeHeight: 0.05
+  - screenRelativeHeight: 0.15
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 2343456729541041366}
@@ -120,8 +116,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 5.8340855, z: 1}
-  m_Center: {x: 0, y: 2.4170427, z: 0}
+  m_Size: {x: 1.0000001, y: 22.522442, z: 1}
+  m_Center: {x: -0.000004049962, y: 10.761198, z: 0.000009597969}
 --- !u!1 &3923590717123692241
 GameObject:
   m_ObjectHideFlags: 0

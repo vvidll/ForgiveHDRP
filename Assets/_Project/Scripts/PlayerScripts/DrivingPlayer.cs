@@ -1,7 +1,7 @@
 using System.Collections;
-using _Project.Scripts.CameraScripts;
 using _Project.Scripts.InteractScripts.CarInteractScripts;
 using DG.Tweening;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.UI;
@@ -13,23 +13,31 @@ namespace _Project.Scripts.PlayerScripts
         public const string HoldKeyF = "hold_key_f";
         public const string RigBuilderListCountKey = "rig_builder_list_count";
 
+        [SerializeField] CharacterController characterController;
+
+        [Header("Cinemachine")]
+        [SerializeField] GameObject cinemachineCamera;
+
+        [Header("Colliders")]
         [SerializeField] BoxCollider carCollider;
 
+        [Header("Animator")]
         [SerializeField] Animator playerAnimator;
         [SerializeField] Animator carDoorAnimator;
-        [SerializeField] AnimationClip playerAnimationClip;
 
+        [Header("Player Transform")]
         [SerializeField] Transform playerTransform;
 
-        //[SerializeField] CharacterController characterController;
-
+        [Header("Image Interact 'Hold'")]
         public Image imageInteractHold;
 
+        [Header("RigBuilder <<IK>> ")]
         [SerializeField] RigBuilder rigBuilder;
 
         int RigDoorHandleTriggerForExitingCar = 5;
         int RigDoorHandleTriggerForEnteringCar = 6;
 
+        [Header("Collider Left Door Car")]
         [SerializeField] SphereCollider sphereColliderLeftDoor;
 
 
@@ -41,13 +49,21 @@ namespace _Project.Scripts.PlayerScripts
 
         //[HideInInspector]
         public bool isInCar = false;
-        public bool isHasExitCar = false;
-
+        [HideInInspector]
         public int isHoldKeyF = 0; // false
+        [HideInInspector]
         public int rigBuilderCount = 0;
+
+        [HideInInspector]
+        public int rigHeadIndex = 0;
 
         [Header("References From Other Classes")]
         [SerializeField] InteractionDoorCar interactionDoorCar;
+
+        Vector3 newRotationPlayer = new Vector3(0f, 90f, 0f);
+
+        bool isMovePlayerForEventAnimation = false;
+        bool isStopPlayerForEventAnimation = false;
 
         private void Start()
         {
@@ -59,7 +75,12 @@ namespace _Project.Scripts.PlayerScripts
 
         private void Update()
         {
-            sphereColliderLeftDoor.enabled = !isInCar; // off interaction UI icon
+            if (isMovePlayerForEventAnimation == true
+                && isStopPlayerForEventAnimation == false)
+            {
+                characterController.Move(-Vector3.left * .3f * Time.deltaTime);
+
+            }
 
             if (Input.GetKey(KeyCode.F) && imageInteractHold.fillAmount < 1 && imageInteractHold.gameObject.activeSelf == true
             && isHoldKeyF == 0)
@@ -89,9 +110,11 @@ namespace _Project.Scripts.PlayerScripts
 
         public void ExitingCar()
         {
-            carCollider.enabled = false;
+            carCollider.isTrigger = true;
 
-            for (int i = 1; i < rigBuilder.layers.Count; i++)
+            cinemachineCamera.SetActive(false);
+
+            for (int i = 0; i < rigBuilder.layers.Count; i++)
             {
                 rigBuilder.layers[i].active = false;
             }
@@ -103,6 +126,8 @@ namespace _Project.Scripts.PlayerScripts
             //rigBuilder.layers[RigDoorHandleTriggerForEnteringCar].active = false;
 
             //--------------
+
+            isInCar = false;
 
             carDoorAnimator.SetBool("isOpenAndCloseDoor", true);
 
@@ -118,18 +143,20 @@ namespace _Project.Scripts.PlayerScripts
         {
             yield return new WaitForSeconds(7);
 
-            isHasExitCar = true;
-
-            carCollider.enabled = true;
+            this.transform.localEulerAngles = newRotationPlayer; // for right rotate player after the end animation "exit from car"
 
             playerAnimator.SetTrigger("isIdle");
 
             imageInteractHold.fillAmount = 0;
 
-            isInCar = false;
-
             carDoorAnimator.SetBool("isOpenAndCloseDoor", false);
 
+            cinemachineCamera.SetActive(true);
+
+            rigBuilder.layers[rigHeadIndex].active = true;
+
+            yield return new WaitForSeconds(2);
+            carCollider.isTrigger = false;
         }
 
         [ContextMenu("Reset Key Driver (Польз.)")]
@@ -139,6 +166,20 @@ namespace _Project.Scripts.PlayerScripts
             PlayerPrefs.DeleteKey(RigBuilderListCountKey);
 
             Debug.Log("Удаление ключей Водителя");
+        }
+
+        public void MovePlayerEvent()
+        {
+            isMovePlayerForEventAnimation = true;
+
+            isStopPlayerForEventAnimation = false;
+        }
+
+        public void StopPlayerEvent() 
+        {
+            isMovePlayerForEventAnimation = false;
+
+            isStopPlayerForEventAnimation = true;
         }
 
     }

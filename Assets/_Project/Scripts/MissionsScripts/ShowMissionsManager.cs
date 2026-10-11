@@ -97,6 +97,9 @@ namespace _Project.Scripts.MissionsScripts
         [HideInInspector]
         public bool isFindSuitableLocation = false;
 
+        [Header("Layer Mask Object")]
+        [SerializeField] GameObject leftDoorObject;
+
 
         public override void OnTick()
         {
@@ -122,6 +125,9 @@ namespace _Project.Scripts.MissionsScripts
 
         public void ShowMissionSitInCar() 
         {
+            if (leftDoorObject.layer == LayerMask.NameToLayer("Default"))
+                leftDoorObject.layer = LayerMask.NameToLayer("Interaction");
+
             windowMissionBuyItemsForSurvival.SetActive(false);
 
             windowMissionSitInCar.SetActive(true);

@@ -13,6 +13,13 @@ namespace _Project.Scripts.InteractScripts.CarInteractScripts
     {
         [SerializeField] TMP_Text textInteractionDoorCar;
 
+        [Header("Layer Mask Object")]
+        [SerializeField] GameObject leftDoorObject;
+
+        [Header("Cinemachine")]
+        [SerializeField] GameObject cinemachineCamera;
+
+        [Header("RigBuilder")]
         [SerializeField] RigBuilder rigBuilder;
 
         [Header("Animator")]
@@ -34,6 +41,13 @@ namespace _Project.Scripts.InteractScripts.CarInteractScripts
         int RigDoorHandleTriggerForExitingCar = 5;
         int RigDoorHandleTriggerForEnteringCar = 6;
 
+        private void Update()
+        {
+            if (drivingPlayer.isInCar == true && leftDoorObject.layer == LayerMask.NameToLayer("Interaction"))
+                leftDoorObject.layer = LayerMask.NameToLayer("Default");
+
+        }
+
         public void Interact()
         {
             if (checkCompleteTasksNotepad.completeMissionItemsForSurvival == true 
@@ -45,6 +59,9 @@ namespace _Project.Scripts.InteractScripts.CarInteractScripts
                 drivingPlayer.isInCar = true;
 
                 playerAnimator.SetTrigger("isEnteringCar");
+
+                cinemachineCamera.SetActive(false);
+                rigBuilder.layers[drivingPlayer.rigHeadIndex].active = false;
 
                 // RigBuilder IK
 
