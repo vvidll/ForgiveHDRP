@@ -2,6 +2,7 @@ using _Project.Scripts.AudioScripts;
 using _Project.Scripts.CameraScripts;
 using _Project.Scripts.InterfaceScripts;
 using _Project.Scripts.PlayerScripts;
+using Unity.Cinemachine;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -14,6 +15,10 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] AudioMoveManager audioManager;
     [SerializeField] DrivingPlayer drivingPlayer;
+
+    [SerializeField] CinemachineCamera cinemachineCamera;
+
+    public bool isReturnToBaseRotationCamera = false;
 
     float smoothTime = 0.15f;
 

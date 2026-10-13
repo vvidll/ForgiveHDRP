@@ -1,7 +1,7 @@
 using System.Collections;
+using _Project.Scripts.CameraScripts;
 using _Project.Scripts.InteractScripts.CarInteractScripts;
 using DG.Tweening;
-using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.UI;
@@ -13,6 +13,10 @@ namespace _Project.Scripts.PlayerScripts
         public const string HoldKeyF = "hold_key_f";
         public const string RigBuilderListCountKey = "rig_builder_list_count";
 
+        [Header("Camera")]
+        [SerializeField] Camera mainCamera;
+
+        [Header("Character Controller")]
         [SerializeField] CharacterController characterController;
 
         [Header("Cinemachine")]
@@ -59,18 +63,19 @@ namespace _Project.Scripts.PlayerScripts
 
         [Header("References From Other Classes")]
         [SerializeField] InteractionDoorCar interactionDoorCar;
+        [SerializeField] CameraController cameraController;
 
         Vector3 newRotationPlayer = new Vector3(0f, 90f, 0f);
+
+        Quaternion rotationZero = new Quaternion(0f, 0f, 0f, 0f);
 
         bool isMovePlayerForEventAnimation = false;
         bool isStopPlayerForEventAnimation = false;
 
+
         private void Start()
         {
             imageInteractHold.gameObject.SetActive(false);
-
-            // start the game
-            playerAnimator.SetTrigger("isDrivingStartGame");
         }
 
         private void Update()
@@ -78,7 +83,9 @@ namespace _Project.Scripts.PlayerScripts
             if (isMovePlayerForEventAnimation == true
                 && isStopPlayerForEventAnimation == false)
             {
-                characterController.Move(-Vector3.left * .3f * Time.deltaTime);
+                // проблема во второй локации в том что игрок начинает движение по глобальным координатам,
+                // А должен по локальным!!!
+                characterController.Move(Vector3.right * .3f * Time.deltaTime);
 
             }
 
@@ -93,9 +100,11 @@ namespace _Project.Scripts.PlayerScripts
                 if (imageInteractHold.fillAmount == 1)
                 {
                     imageInteractHold.gameObject.SetActive(false);
+
                     ExitingCar();
 
                     isHoldKeyF = 1; // hold key end
+
                 }
 
             }
@@ -112,12 +121,16 @@ namespace _Project.Scripts.PlayerScripts
         {
             carCollider.isTrigger = true;
 
+            mainCamera.transform.localRotation = rotationZero;
+
             cinemachineCamera.SetActive(false);
 
             for (int i = 0; i < rigBuilder.layers.Count; i++)
             {
                 rigBuilder.layers[i].active = false;
             }
+
+
 
             // RigBuilder IK
 
@@ -128,6 +141,8 @@ namespace _Project.Scripts.PlayerScripts
             //--------------
 
             isInCar = false;
+
+            cameraController.ResetCameraRotation();
 
             carDoorAnimator.SetBool("isOpenAndCloseDoor", true);
 
@@ -151,9 +166,9 @@ namespace _Project.Scripts.PlayerScripts
 
             carDoorAnimator.SetBool("isOpenAndCloseDoor", false);
 
-            cinemachineCamera.SetActive(true);
-
             rigBuilder.layers[rigHeadIndex].active = true;
+
+            cinemachineCamera.SetActive(true);
 
             yield return new WaitForSeconds(2);
             carCollider.isTrigger = false;

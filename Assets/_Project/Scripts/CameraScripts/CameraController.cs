@@ -1,3 +1,4 @@
+using System.Collections;
 using _Project.Scripts.AudioScripts;
 using _Project.Scripts.PlayerScripts;
 using UnityEngine;
@@ -58,7 +59,6 @@ namespace _Project.Scripts.CameraScripts
             CreateRayForHeadRotate();
 
             playerAnimation.ChangeTurnAnimation();
-
         }
 
         public void CreateRayForHeadRotate()
@@ -89,7 +89,13 @@ namespace _Project.Scripts.CameraScripts
             _xRotation = Mathf.Clamp(_xRotation, limitLeftX, limitRightX);
         }
 
+        public void ResetCameraRotation() 
+        {
+            _xRotation = 0;
+            _yRotation = 0;
 
+            transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+        }
     }
 }
 
