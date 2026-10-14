@@ -1,14 +1,24 @@
 using System.Collections;
 using _Project.Scripts.CarScripts;
 using _Project.Scripts.MissionsScripts;
+using _Project.Scripts.PlayerScripts;
 using DG.Tweening;
+using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using UnityEngine.UI;
 
 namespace _Project.Scripts
 {
     public class TransitionsController : MonoBehaviour
     {
+        [Header("Cinemachine")]
+        [SerializeField] GameObject cinemachineCamera;
+
+        [Header("RigBuilder")]
+        [SerializeField] RigBuilder rigBuilder;
+
+        [Header("UI")]
         [SerializeField] Image beginTransitionWindow;
         [SerializeField] Image sleepTransitionWindow;
 
@@ -16,6 +26,7 @@ namespace _Project.Scripts
         [SerializeField] TeleportCar teleportCar;
         [SerializeField] SunController sunController;
         [SerializeField] ShowMissionsManager showMissionsManager;
+        [SerializeField] DrivingPlayer drivingPlayer;
 
 
         float timeBeforeOnWindowTransition = 3f;
@@ -43,6 +54,9 @@ namespace _Project.Scripts
         {
             yield return new WaitForSeconds(timeBeforeOnWindowTransition);
             beginTransitionWindow.gameObject.SetActive(true);
+
+            cinemachineCamera.SetActive(true);
+            rigBuilder.layers[drivingPlayer.rigHeadIndex].active = true;
 
             teleportCar.TeleportToPointOldLocation();
 

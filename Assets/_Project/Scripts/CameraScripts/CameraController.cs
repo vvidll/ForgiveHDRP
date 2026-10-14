@@ -1,3 +1,4 @@
+using System.Collections;
 using _Project.Scripts.AudioScripts;
 using _Project.Scripts.PlayerScripts;
 using UnityEngine;
@@ -58,17 +59,18 @@ namespace _Project.Scripts.CameraScripts
             CreateRayForHeadRotate();
 
             playerAnimation.ChangeTurnAnimation();
-
         }
 
         public void CreateRayForHeadRotate()
         {
             Ray ray = _mainCamera.ScreenPointToRay(new Vector2(Screen.width / 2f, Screen.height / 2f));
             Vector3 positionTarget = ray.origin + ray.direction;
+
             _headTarget.position = positionTarget;
 
             transform.localRotation = Quaternion.Euler(_yRotation, _xRotation, 0f);
             //headPlayer.Rotate(positionTarget);
+
         }
 
         public void InputMouse() 
@@ -89,7 +91,13 @@ namespace _Project.Scripts.CameraScripts
             _xRotation = Mathf.Clamp(_xRotation, limitLeftX, limitRightX);
         }
 
+        public void ResetCameraRotation() 
+        {
+            _xRotation = 0;
+            _yRotation = 0;
 
+            transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+        }
     }
 }
 

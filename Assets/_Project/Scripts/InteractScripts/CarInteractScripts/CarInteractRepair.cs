@@ -72,9 +72,10 @@ namespace _Project.Scripts.InteractScripts.CarInteractScripts
         {
             // !!! ON when need repair of the car !!!
 
-            if (showMissionsManager.isNeedCarCheck == true)  
+            if (showMissionsManager.isNeedCarCheck == true)
+            {
                 interactWithCarText.text = "Start analysis for repair a car";
-            
+            }
         }
 
         IEnumerator ShowTextForAnalysisSuccessful()

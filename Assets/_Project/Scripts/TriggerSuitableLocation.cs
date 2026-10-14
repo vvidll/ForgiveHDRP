@@ -18,7 +18,7 @@ public class TriggerSuitableLocation : MonoBehaviour
         for (int i = 0; i < buildingPlaceCollisions.Length; i++)
         {
             if (other.CompareTag("PlacedObjects"))
-                buildingPlaceCollisions[i].isGrounded = false;
+                buildingPlaceCollisions[i].isGroundedForPlaceBuildings = false;
         }
     }
 }

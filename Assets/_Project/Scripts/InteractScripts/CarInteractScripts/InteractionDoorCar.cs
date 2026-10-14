@@ -4,6 +4,7 @@ using _Project.Scripts.MissionsScripts;
 using _Project.Scripts.PlayerScripts;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 namespace _Project.Scripts.InteractScripts.CarInteractScripts
 {
@@ -11,6 +12,15 @@ namespace _Project.Scripts.InteractScripts.CarInteractScripts
     public class InteractionDoorCar : MonoBehaviour, IInteractable
     {
         [SerializeField] TMP_Text textInteractionDoorCar;
+
+        [Header("Layer Mask Object")]
+        [SerializeField] GameObject leftDoorObject;
+
+        [Header("Cinemachine")]
+        [SerializeField] GameObject cinemachineCamera;
+
+        [Header("RigBuilder")]
+        [SerializeField] RigBuilder rigBuilder;
 
         [Header("Animator")]
         [SerializeField] Animator playerAnimator;
@@ -21,12 +31,25 @@ namespace _Project.Scripts.InteractScripts.CarInteractScripts
         [SerializeField] CheckCompleteTasksNotepad checkCompleteTasksNotepad;
         [SerializeField] DialogueWithSaler dialogueWithSaler;
         [SerializeField] DrivingPlayer drivingPlayer;
+        [SerializeField] ShowMissionsManager showMissionsManager;
 
         [Header("Parent Object")]
         [SerializeField] Transform carParentObject; 
 
         [Header("Child Object")]
         [SerializeField] Transform player;
+
+        int RigDoorHandleTriggerForExitingCar = 5;
+        int RigDoorHandleTriggerForEnteringCar = 6;
+
+        private void Update()
+        {
+            if (drivingPlayer.isInCar == true 
+                && showMissionsManager.isNeedCarCheck == false 
+                && leftDoorObject.layer == LayerMask.NameToLayer("Interaction"))
+                leftDoorObject.layer = LayerMask.NameToLayer("Default");
+
+        }
 
         public void Interact()
         {
@@ -39,6 +62,17 @@ namespace _Project.Scripts.InteractScripts.CarInteractScripts
                 drivingPlayer.isInCar = true;
 
                 playerAnimator.SetTrigger("isEnteringCar");
+
+                cinemachineCamera.SetActive(false);
+                rigBuilder.layers[drivingPlayer.rigHeadIndex].active = false;
+
+                // RigBuilder IK
+
+                // временно отключил IK
+                //rigBuilder.layers[RigDoorHandleTriggerForExitingCar].active = false;
+                //rigBuilder.layers[RigDoorHandleTriggerForEnteringCar].active = true;
+
+                //--------------
 
                 player.SetParent(carParentObject); // set car how parent object
 

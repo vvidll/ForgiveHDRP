@@ -13,7 +13,7 @@ namespace _Project.Scripts.PlayerScripts
 
         protected float Gravity = -9.81f;
 
-        protected bool IsGrounded;
+        public bool IsGrounded;
         protected Vector3 Velocity;
 
         private void Awake()
@@ -25,7 +25,7 @@ namespace _Project.Scripts.PlayerScripts
         {
             IsGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-            if (IsGrounded && Velocity.y < 0)
+            if (IsGrounded == true && Velocity.y < 0)
                 Velocity.y = -2f;
 
             Velocity.y += Gravity * Time.deltaTime;

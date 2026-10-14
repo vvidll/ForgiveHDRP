@@ -9,6 +9,9 @@ namespace _Project.Scripts.MissionsScripts
 {
     public class ShowMissionsManager : MonoCache
     {
+        [Header("Settings Menu")]
+        [SerializeField] ChoiseMissionSettings choiseMissionSettings;
+
         [Header("References From Other Classes")]
         [SerializeField] DrivingPlayer drivingPlayer;
         [SerializeField] CheckCompleteTasksNotepad checkCompleteTasksNotepad;
@@ -87,20 +90,21 @@ namespace _Project.Scripts.MissionsScripts
 
         // --------------------------------
 
-        [Header("Main Window Missions")]
-        [SerializeField] GameObject panelMissions;
-
         [HideInInspector]
         public bool isHasPrepareFood = false;
-        [HideInInspector]
+
         public bool isNeedCarCheck = false;
         [HideInInspector]
         public bool isFindSuitableLocation = false;
 
+        [Header("Layer Mask Object")]
+        [SerializeField] GameObject leftDoorObject;
+
 
         public override void OnTick()
         {
-            if (drivingPlayer.isInCar == false && isFindSuitableLocation == false) 
+            if (drivingPlayer.isInCar == false && isFindSuitableLocation == false 
+                && choiseMissionSettings.isCurrentFirstMissionActive == false) 
                 ShowMissionBuyItemsShopForSurvival();
 
             if (checkCompleteTasksNotepad.completeMissionItemsForSurvival == true &&
@@ -116,12 +120,14 @@ namespace _Project.Scripts.MissionsScripts
 
         public void ShowMissionBuyItemsShopForSurvival() 
         {
-            panelMissions.SetActive(true);
-            windowMissionBuyItemsForSurvival.SetActive(true); // включить когда начинается игра
+            windowMissionBuyItemsForSurvival.SetActive(true);
         }
 
         public void ShowMissionSitInCar() 
         {
+            if (leftDoorObject.layer == LayerMask.NameToLayer("Default"))
+                leftDoorObject.layer = LayerMask.NameToLayer("Interaction");
+
             windowMissionBuyItemsForSurvival.SetActive(false);
 
             windowMissionSitInCar.SetActive(true);
