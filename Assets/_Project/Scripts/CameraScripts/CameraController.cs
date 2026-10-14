@@ -65,10 +65,12 @@ namespace _Project.Scripts.CameraScripts
         {
             Ray ray = _mainCamera.ScreenPointToRay(new Vector2(Screen.width / 2f, Screen.height / 2f));
             Vector3 positionTarget = ray.origin + ray.direction;
+
             _headTarget.position = positionTarget;
 
             transform.localRotation = Quaternion.Euler(_yRotation, _xRotation, 0f);
             //headPlayer.Rotate(positionTarget);
+
         }
 
         public void InputMouse() 

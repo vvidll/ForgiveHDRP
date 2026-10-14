@@ -1,4 +1,4 @@
-using System;
+using _Project.Scripts.CameraScripts;
 using _Project.Scripts.PlacedItemsScripts;
 using _Project.Scripts.PlayerScripts;
 using UnityEngine;
@@ -9,6 +9,10 @@ public class EnemyWatcherController : Enemy
 
     [SerializeField] Transform playerTransform;
     [SerializeField] PlayerMovement playerMovement;
+
+    [SerializeField] CameraController cameraController;
+
+    public bool isActiveEnemyWatcher = false;
 
     private void Update()
     {
@@ -26,6 +30,16 @@ public class EnemyWatcherController : Enemy
         else
         {
             animatorEnemy.SetBool("isWalking", false);
+        }
+    }
+
+    public void DisableEnemy() 
+    {
+        if (sleepingBagController.isChangeTimeDay == true
+            && isActiveEnemyWatcher == true) 
+        {
+            this.gameObject.SetActive(false);
+            isActiveEnemyWatcher = false;
         }
     }
 }

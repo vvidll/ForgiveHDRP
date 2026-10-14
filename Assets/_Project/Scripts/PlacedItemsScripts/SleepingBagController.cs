@@ -15,7 +15,8 @@ namespace _Project.Scripts.PlacedItemsScripts
 
         private void Update()
         {
-            if (buildingManager.nameItemForBuilding == "SleepingBag" && buildingManager.isHasPlacedItem == true && isChangeTimeDay == false)
+            if (buildingManager.nameItemForBuilding == "SleepingBag" && buildingManager.isHasPlacedItem == true 
+                && isChangeTimeDay == false)
             {
                 showMissionsManager.ShowMissionGoSleep();
             }
@@ -29,6 +30,7 @@ namespace _Project.Scripts.PlacedItemsScripts
             isChangeTimeDay = true;
 
             audioCarController.ActivateAudio();
+
             showMissionsManager.ShowMissionCheckCar();
 
             if (playerInteraction.isShowDescription == false)

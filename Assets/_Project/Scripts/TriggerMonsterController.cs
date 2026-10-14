@@ -5,17 +5,23 @@ public class TriggerMonsterController : MonoBehaviour
 {
     [SerializeField] GameObject treeFall, treeStand;
 
-    [SerializeField] GameObject enemyWatcher;
+    [SerializeField] EnemyWatcherController enemyWatcher;
 
     [SerializeField] ShowMissionsManager showMissionsManager;
 
+    bool isActiveTrigger = false;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" && showMissionsManager.isNeedCarCheck == true) 
+        if (other.tag == "Player" && showMissionsManager.isNeedCarCheck == true && isActiveTrigger == false) 
         {
-            enemyWatcher.SetActive(true);
+            enemyWatcher.gameObject.SetActive(true);
+            enemyWatcher.isActiveEnemyWatcher = true;
+
             treeStand.SetActive(false);
             treeFall.SetActive(true);
+
+            isActiveTrigger = true;
         }
     }
 }

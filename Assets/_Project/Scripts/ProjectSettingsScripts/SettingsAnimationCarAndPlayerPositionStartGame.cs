@@ -4,9 +4,12 @@ using UnityEngine.Animations.Rigging;
 
 public class SettingsAnimationCarAndPlayerPositionStartGame : MonoBehaviour
 {
-    [Header("Before change position and rotation player\nYOU NEED SAVE DATA In <ContextMenu> -> three points")]
+    [Header("Before change position and rotation player\n" +
+        "YOU NEED SAVE DATA In <ContextMenu> -> three points")]
 
-    [Header("Through <ContextMenu> -> three points on this script\nON/OFF Start Animation and Player position before Start Game")]
+    [Header("Through <ContextMenu> -> three points on this script\n " +
+        "< ON > Start Animation and Player position enable in Play Mode\n " +
+        "< OFF > Start Animation and Player position before Start Game")]
 
     [Header("Animator")]
     [SerializeField] Animator playerAnimator;
@@ -31,6 +34,9 @@ public class SettingsAnimationCarAndPlayerPositionStartGame : MonoBehaviour
     Vector3 currentPositionPlayer;
     Quaternion currentRotationPlayer;
 
+    Vector3 currentPositionCar;
+    Quaternion currentRotationCar;
+
     int isSaveRotationAndPosition = 0;
 
     const string SaveRotationAndPositionKey = "Save_Rotation_And_Position";
@@ -41,7 +47,7 @@ public class SettingsAnimationCarAndPlayerPositionStartGame : MonoBehaviour
             Debug.LogError("SAVE THE DATA IN Script: --GAME_MANAGER-- In Hierarchy -> 'SettingsAnimationCarAndPlayerPositionStartGame' -> 'three points ON the script' -> 'SAVE Player position and Rotation' ");
     }
 
-    [ContextMenu("LOAD Player position and Rotation")]
+    [ContextMenu("LOAD Player/Car position and Rotation")]
     void LoadPositionAndRotationPlayer() 
     {
         if (PlayerPrefs.HasKey(SaveRotationAndPositionKey)) 
@@ -51,22 +57,28 @@ public class SettingsAnimationCarAndPlayerPositionStartGame : MonoBehaviour
             player.position = currentPositionPlayer;
             player.rotation = currentRotationPlayer;
 
+            parentCar.position = currentPositionCar;
+            parentCar.rotation = currentRotationCar;
+
             isSaveRotationAndPosition = 0;
         }
     }
 
-    [ContextMenu("SAVE Player position and Rotation")]
+    [ContextMenu("SAVE Player/Car position and Rotation")]
     void SavePositionAndRotationPlayer() 
     {
         currentPositionPlayer = player.position;
         currentRotationPlayer = player.rotation;
+
+        currentPositionCar = parentCar.position;
+        currentRotationCar = parentCar.rotation;
 
         isSaveRotationAndPosition = 1;
 
         PlayerPrefs.SetInt(SaveRotationAndPositionKey, isSaveRotationAndPosition);
     }
 
-    [ContextMenu("ON Start Animation and Player position")]
+    [ContextMenu("ON Start Animation Car and Player position")]
     void OnAnimation() 
     {
         // start the game -> on in play mode for animation work
@@ -86,7 +98,7 @@ public class SettingsAnimationCarAndPlayerPositionStartGame : MonoBehaviour
         carAnimator.SetTrigger("isStartAnimation");
     }
 
-    [ContextMenu("OFF Start Animation and Player position")]
+    [ContextMenu("OFF Start Animation Car and Player position")]
     void OffAnimtion() 
     {
         drivingPlayer.isInCar = false;

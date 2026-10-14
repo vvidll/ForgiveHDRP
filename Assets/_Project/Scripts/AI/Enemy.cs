@@ -12,7 +12,4 @@ public class Enemy : MonoBehaviour
     [SerializeField] internal EnemyType enemyType = EnemyType.Default;
 
     [SerializeField] protected Animator animatorEnemy;
-
-    [HideInInspector]
-    public bool isActiveEnemy = false;
 }

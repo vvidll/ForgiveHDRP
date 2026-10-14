@@ -923,7 +923,7 @@ MonoBehaviour:
     m_Value: 1
   planetRadius:
     m_OverrideState: 1
-    m_Value: 1000
+    m_Value: 999
   renderingSpace:
     m_OverrideState: 1
     m_Value: 0

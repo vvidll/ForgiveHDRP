@@ -65,13 +65,15 @@ namespace _Project.Scripts.PlayerScripts
         [SerializeField] InteractionDoorCar interactionDoorCar;
         [SerializeField] CameraController cameraController;
 
+        [Header("Main Window Missions")]
+        [SerializeField] GameObject panelMissions;
+
         Vector3 newRotationPlayer = new Vector3(0f, 90f, 0f);
 
         Quaternion rotationZero = new Quaternion(0f, 0f, 0f, 0f);
 
         bool isMovePlayerForEventAnimation = false;
         bool isStopPlayerForEventAnimation = false;
-
 
         private void Start()
         {
@@ -169,6 +171,8 @@ namespace _Project.Scripts.PlayerScripts
             rigBuilder.layers[rigHeadIndex].active = true;
 
             cinemachineCamera.SetActive(true);
+
+            panelMissions.SetActive(true);
 
             yield return new WaitForSeconds(2);
             carCollider.isTrigger = false;

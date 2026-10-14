@@ -31,6 +31,7 @@ namespace _Project.Scripts.InteractScripts.CarInteractScripts
         [SerializeField] CheckCompleteTasksNotepad checkCompleteTasksNotepad;
         [SerializeField] DialogueWithSaler dialogueWithSaler;
         [SerializeField] DrivingPlayer drivingPlayer;
+        [SerializeField] ShowMissionsManager showMissionsManager;
 
         [Header("Parent Object")]
         [SerializeField] Transform carParentObject; 
@@ -43,7 +44,9 @@ namespace _Project.Scripts.InteractScripts.CarInteractScripts
 
         private void Update()
         {
-            if (drivingPlayer.isInCar == true && leftDoorObject.layer == LayerMask.NameToLayer("Interaction"))
+            if (drivingPlayer.isInCar == true 
+                && showMissionsManager.isNeedCarCheck == false 
+                && leftDoorObject.layer == LayerMask.NameToLayer("Interaction"))
                 leftDoorObject.layer = LayerMask.NameToLayer("Default");
 
         }
