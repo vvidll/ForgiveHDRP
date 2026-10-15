@@ -19,7 +19,8 @@ public class Marker : MonoCache
         Vector3 toTarget = objectTransform.position - playerTransform.position;
         
         // угол направления на объект от 0 градусов до 360
-        targetAngle = Mathf.Atan2(toTarget.x, toTarget.z) * Mathf.Rad2Deg;
+        targetAngle = Mathf.Atan2(toTarget.x, toTarget.z) * Mathf.Rad2Deg; // переводя в радианы мы переводим это в градусы
+        // если метка на компасе достигла его границы то мы просто перекидываем на 360 градусов к другой стороне границы
         if (targetAngle < 0f) targetAngle += 360f;
         
         // угол поворота игрока от 0 градусов до 360

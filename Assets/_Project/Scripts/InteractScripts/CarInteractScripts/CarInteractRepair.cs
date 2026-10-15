@@ -88,6 +88,8 @@ namespace _Project.Scripts.InteractScripts.CarInteractScripts
 
             yield return new WaitForSeconds(2);
             textForSuccessfulAnalysis.gameObject.SetActive(false);
+
+            showMissionsManager.ShowMissionFindItemsForCarRepair();
         }
 
         IEnumerator IncreasedProgressAnalysisCororutineStepFirst()
