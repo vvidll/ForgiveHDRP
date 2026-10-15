@@ -7,9 +7,6 @@ namespace _Project.Scripts.NotepadScripts
         [Header("Player Animation")]
         [SerializeField] PlayerAnimation playerAnimation;
 
-        [SerializeField] private GameObject itemsForCarRepair;
-        [SerializeField] private GameObject itemsForSurvivalInNight;
-
         [SerializeField] Animator animator;
         int keyPress = 0;
 
@@ -26,26 +23,22 @@ namespace _Project.Scripts.NotepadScripts
                 {
                     case 0:
                         keyPress = 1;
-                        animator.SetBool("isOpenNotepad", true);
+                        animator.SetTrigger("isOpenNotepad");
 
                         DisableScripts();
                         ShowCursor();
 
                         playerAnimation.CallIdleAnimation();
-
-                        itemsForCarRepair.SetActive(false);
-                        itemsForSurvivalInNight.SetActive(true);
                         break;
 
                     case 1:
                         keyPress = 0;
-                        animator.SetBool("isOpenNotepad", false);
+                        animator.SetTrigger("isCloseNotepad");
 
                         EnableScripts();
                         HideCursor();
 
                         playerAnimation.CallIdleAnimation();
-
                         break;
                 }
             }
