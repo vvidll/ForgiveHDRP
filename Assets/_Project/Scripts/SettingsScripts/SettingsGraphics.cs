@@ -135,7 +135,9 @@ public class SettingsGraphics : MonoBehaviour
 
     public void DLSS(int dlssIndex) 
     {
-        switch (dlssIndex) 
+        Debug.Log("Enable DLSS On PC");
+
+     /*   switch (dlssIndex) 
         {
             case 0:
                 hdAdditionalCameraData.allowDeepLearningSuperSampling = false;
@@ -172,7 +174,7 @@ public class SettingsGraphics : MonoBehaviour
                 hdAdditionalCameraData.deepLearningSuperSamplingQuality = (uint)DLSSQuality.DLAA;
                 ChangeDLSS();
                 break;
-        }
+        }*/
     }
 
     public void ChangeDLSS() 
