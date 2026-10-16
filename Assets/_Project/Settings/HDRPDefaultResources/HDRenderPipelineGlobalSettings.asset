@@ -198,7 +198,7 @@ MonoBehaviour:
       - rid: 6158886314166714368
       - rid: 6158886314166714369
       - rid: 7381303138682404864
-      - rid: 5782476052964311326
+      - rid: 5782476053309292636
     m_RuntimeSettings:
       m_List: []
   renderingLayerNames:
@@ -244,7 +244,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 5782476052964311326
+    - rid: 5782476053309292636
       type: {class: MipGenRenderPipelineRuntimeResources, ns: UnityEngine.Rendering, asm: Unity.RenderPipelines.Universal.Runtime}
       data:
         m_ColorPyramidPS: {fileID: 4800000, guid: 63b92baba208e314c8fdebe52ca0cc34, type: 3}
