@@ -851,7 +851,7 @@ PlayerSettings:
   webEnableSubmoduleStrippingCompatibility: 0
   webProgressiveAssetLoading: 0
   scriptingDefineSymbols:
-    Android: DOTWEEN;SORTIFY
+    Android: DOTWEEN;SORTIFY;APP_UI_EDITOR_ONLY;SENTIS_ANALYTICS_ENABLED
     EmbeddedLinux: DOTWEEN;SORTIFY
     GameCoreScarlett: DOTWEEN;SORTIFY
     GameCoreXboxOne: DOTWEEN;SORTIFY
