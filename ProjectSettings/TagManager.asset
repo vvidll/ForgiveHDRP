@@ -16,6 +16,7 @@ TagManager:
   - PlacedObjects
   - CameraRadius
   - EnemyWatcher
+  - CloseZone
   layers:
   - Default
   - TransparentFX
