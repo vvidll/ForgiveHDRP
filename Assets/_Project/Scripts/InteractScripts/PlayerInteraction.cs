@@ -74,6 +74,7 @@ namespace _Project.Scripts.InteractScripts
 
                         // iteration items in notepad for check complete mission
                         CounterAddItemsController.CounterAddSurvivalItems(hit);
+                        CounterAddItemsController.CounterAddRepairCarItems(hit);
                     }
                 }
 

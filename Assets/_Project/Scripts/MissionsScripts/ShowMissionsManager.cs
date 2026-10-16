@@ -19,14 +19,19 @@ namespace _Project.Scripts.MissionsScripts
         [SerializeField] TeleportCar teleportCar;
         [SerializeField] BuildingManager buildingManagerTent;
 
+        [Header("Notepad")]
+        [SerializeField] GameObject itemsForCarRepair;
+        [SerializeField] GameObject itemsForSurvivalInNight;
+
+
         // -- Mission For Buy Items For Survival --
-        [Header("Window Mission For Buy Items For Survival")]
+        [Header("Window Mission For Buy Items For Survival----------------------------------")]
         [SerializeField] GameObject windowMissionBuyItemsForSurvival;
 
         // --------------------------------
 
         // -- Mission Set In The Car --
-        [Header("Window Mission Sit In The Car")]
+        [Header("Window Mission Sit In The Car----------------------------------")]
         [SerializeField] GameObject windowMissionSitInCar;
 
         [Header("Hint Sit In The Car")]
@@ -35,14 +40,14 @@ namespace _Project.Scripts.MissionsScripts
         // --------------------------------
 
         // -- Mission Find Suitable Location --
-        [Header("Window Mission Find Suitable Location")]
+        [Header("Window Mission Find Suitable Location----------------------------------")]
         [SerializeField] GameObject windowMissionFindSuitableLocation;
         [SerializeField] GameObject markerSuitableLocationOnCompass;
 
         // --------------------------------
 
         // -- Mission Set Up a Bonfire --
-        [Header("Window Mission Set Up Bonfire")]
+        [Header("Window Mission Set Up Bonfire----------------------------------")]
         [SerializeField] GameObject windowMissionSetUpBonfire;
 
         [Header("Button 'Use' Set Up Bonfire ")]
@@ -51,7 +56,7 @@ namespace _Project.Scripts.MissionsScripts
         // --------------------------------
 
         // -- Mission Place a Tent --
-        [Header("Window Mission Place a Tent")]
+        [Header("Window Mission Place a Tent----------------------------------")]
         [SerializeField] GameObject windowMissionPlaceTent;
 
         [Header("Button 'Use' Place a Tent ")]
@@ -60,7 +65,7 @@ namespace _Project.Scripts.MissionsScripts
         // --------------------------------
 
         // -- Mission Prepare Food --
-        [Header("Window Mission Prepare Food")]
+        [Header("Window Mission Prepare Food----------------------------------")]
         [SerializeField] GameObject windowMissionPrepareFood;
 
         [SerializeField] GameObject cannedFoodItem, canOpenerItem;
@@ -68,7 +73,7 @@ namespace _Project.Scripts.MissionsScripts
         // --------------------------------
 
         // -- Mission Put a Sleeping Bag --
-        [Header("Window Mission Put a Sleeping Bag")]
+        [Header("Window Mission Put a Sleeping Bag----------------------------------")]
         [SerializeField] GameObject windowMissionPutSleepingBag;
 
         [Header("Button 'Use' Put a Sleeping Bag ")]
@@ -77,22 +82,31 @@ namespace _Project.Scripts.MissionsScripts
         // --------------------------------
 
         // -- Mission Go Sleep --
-        [Header("Window Mission Go Sleep")]
+        [Header("Window Mission Go Sleep----------------------------------")]
         [SerializeField] GameObject windowMissionGoSleep;
 
         // --------------------------------
 
         // -- Mission Check the Car --
-        [Header("Window Mission Check the Car")]
+        [Header("Window Mission Check the Car----------------------------------")]
         [SerializeField] GameObject windowMissionCheckCar;
         [SerializeField] GameObject markerCarOnCompass;
         [SerializeField] GameObject triggerCarCheck;
 
         // --------------------------------
 
+        // -- Mission Find Items For Repair Car --
+
+        [Header("Window Find Items For Repair Car----------------------------------")]
+        [SerializeField] GameObject windowMissionFindItemsRepairCar;
+
+        [SerializeField] GameObject[] markersItemsForRepairCar;
+
+        // --------------------------------
+
         [HideInInspector]
         public bool isHasPrepareFood = false;
-
+        [HideInInspector]
         public bool isNeedCarCheck = false;
         [HideInInspector]
         public bool isFindSuitableLocation = false;
@@ -121,6 +135,9 @@ namespace _Project.Scripts.MissionsScripts
         public void ShowMissionBuyItemsShopForSurvival() 
         {
             windowMissionBuyItemsForSurvival.SetActive(true);
+
+            itemsForCarRepair.SetActive(false);
+            itemsForSurvivalInNight.SetActive(true);
         }
 
         public void ShowMissionSitInCar() 
@@ -205,6 +222,24 @@ namespace _Project.Scripts.MissionsScripts
             triggerCarCheck.SetActive(true); 
 
             isNeedCarCheck = true;
+        }
+
+        public void ShowMissionFindItemsForCarRepair() 
+        {
+            windowMissionCheckCar.SetActive(false);
+            markerCarOnCompass.SetActive(false);
+
+            triggerCarCheck.SetActive(false);
+
+            isNeedCarCheck = false;
+
+            windowMissionFindItemsRepairCar.SetActive(true);
+
+            foreach (GameObject markers in markersItemsForRepairCar)
+                markers.SetActive(true);
+
+            itemsForCarRepair.SetActive(true);
+            itemsForSurvivalInNight.SetActive(false);
         }
     }
 }

@@ -8,10 +8,13 @@ namespace _Project.Scripts.InventoryScripts
     {
         [SerializeField] Toggle[] toggleItemsForSurvival;
 
+        [SerializeField] Toggle[] toggleItemsForCarRepair;
+
         [HideInInspector]
-        public bool completeMissionItemsForSurvival = false;
+        public bool completeMissionItemsForSurvival = false, completeMissionItemsForRepairCar = false;
 
         int maxAddItemsSurvival = 6;
+        int maxAddItemsRepairCar = 3;
 
         public override void OnTick()
         {
@@ -22,6 +25,9 @@ namespace _Project.Scripts.InventoryScripts
         {
             if (CounterAddItemsController.countAddSurvivalItems == maxAddItemsSurvival)
                 completeMissionItemsForSurvival = true;
+
+            if (CounterAddItemsController.countAddRepairCarItems == maxAddItemsRepairCar)
+                completeMissionItemsForRepairCar = true;
             
         }
     }

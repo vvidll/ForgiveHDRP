@@ -107,6 +107,10 @@ public class ChoiseMissionSettings : MonoBehaviour
                 transitionsController.StartCoroutine(transitionsController.ChangeTimeDayToNightCoroutine());
                 showMissionsManager.ShowMissionCheckCar();
                 break;
+
+            case 9:
+                showMissionsManager.ShowMissionFindItemsForCarRepair();
+                break;
         }
     }
 
