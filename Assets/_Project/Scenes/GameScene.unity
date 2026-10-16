@@ -5891,7 +5891,7 @@ Terrain:
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: 22ff8771d87ef27429e670136399094b, type: 2}
+  m_MaterialTemplate: {fileID: 2100000, guid: fa2db521158f9c14789ab1cea50cc3b9, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -6926,7 +6926,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce106f5a312b94e4898b81f4615327ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TransitionsController
-  choiseMissionSettings: {fileID: 221523069}
   cinemachineCamera: {fileID: 3584803669997272535}
   rigBuilder: {fileID: 8513904251422565104}
   beginTransitionWindow: {fileID: 987210402}
@@ -14105,7 +14104,6 @@ MonoBehaviour:
   currentObject: {fileID: 508832710}
   textInteraction: {fileID: 81262074}
   buildingManager: {fileID: 508832712}
-  choiseMissionSettings: {fileID: 221523069}
   audioCarController: {fileID: 0}
   transitionsController: {fileID: 251476493}
   showMissionsManager: {fileID: 223652263}
@@ -30270,7 +30268,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 439e32ec28c580944a2ad69ddcfc56d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TriggerSuitableLocation
-  choiseMissionSettings: {fileID: 221523069}
   showMissions: {fileID: 223652263}
   buildingPlaceCollisions:
   - {fileID: 1273689536}
@@ -154099,7 +154096,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d4776118665334c89546d982c5066d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
-  choiseMissionSettings: {fileID: 221523069}
   interactionDistance: 3
   mainCamera: {fileID: 8843733459168429163}
   interactionUI: {fileID: 1892844699}
@@ -154141,7 +154137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ec47e8416f31b4bb1c66f948fd9ffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrepareFoodController
-  choiseMissionSettings: {fileID: 221523069}
   missionManager: {fileID: 223652263}
 --- !u!114 &9073766142481002330
 MonoBehaviour:
