@@ -198,7 +198,10 @@ MonoBehaviour:
       - rid: 6158886314166714368
       - rid: 6158886314166714369
       - rid: 7381303138682404864
+<<<<<<< HEAD
       - rid: 5782476053309292636
+=======
+>>>>>>> parent of 68a7bb0 (add oculusVR OpenXR)
     m_RuntimeSettings:
       m_List: []
   renderingLayerNames:
@@ -244,12 +247,15 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+<<<<<<< HEAD
     - rid: 5782476053309292636
       type: {class: MipGenRenderPipelineRuntimeResources, ns: UnityEngine.Rendering, asm: Unity.RenderPipelines.Universal.Runtime}
       data:
         m_ColorPyramidPS: {fileID: 4800000, guid: 63b92baba208e314c8fdebe52ca0cc34, type: 3}
         m_ColorPyramidCS: {fileID: 7200000, guid: 28969cfddd9ef3f4e94b971690146a4f, type: 3}
         m_DepthPyramidCS: {fileID: 7200000, guid: 90a204702cd44e54cac7ed4fc6e5d86b, type: 3}
+=======
+>>>>>>> parent of 68a7bb0 (add oculusVR OpenXR)
     - rid: 6158886041493962752
       type: {class: RenderingPathFrameSettings, ns: UnityEngine.Rendering.HighDefinition, asm: Unity.RenderPipelines.HighDefinition.Runtime}
       data:
