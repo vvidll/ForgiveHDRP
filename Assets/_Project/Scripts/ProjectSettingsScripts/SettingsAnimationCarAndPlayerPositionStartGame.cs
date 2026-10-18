@@ -22,6 +22,9 @@ public class SettingsAnimationCarAndPlayerPositionStartGame : MonoBehaviour
     [SerializeField] Transform parent;
     [SerializeField] Transform parentCar;
 
+    [Header("Start Point")]
+    [SerializeField] Transform pointStartGame;
+
     [Header("Teleport Player In Car")]
     [SerializeField] Transform pointTeleportPlayerInCar;
 
@@ -84,9 +87,18 @@ public class SettingsAnimationCarAndPlayerPositionStartGame : MonoBehaviour
         // start the game -> on in play mode for animation work
         playerAnimator.SetTrigger("isDrivingStartGame");
 
-        player.position = pointTeleportPlayerInCar.position;
-        player.rotation = new Quaternion(0f, 180f, 0f, 0f);
+        parentCar.gameObject.SetActive(true);
+
+        parentCar.position = pointStartGame.position;
+
+        parentCar.position = pointStartGame.position;
+        parentCar.rotation = new Quaternion(0f, 0f, 0f, 1f);
+
         player.SetParent(parentCar);
+
+        player.position = pointTeleportPlayerInCar.position;
+        player.rotation = new Quaternion(0f, .7f, 0f, .7f);
+
 
         drivingPlayer.isInCar = true;
 

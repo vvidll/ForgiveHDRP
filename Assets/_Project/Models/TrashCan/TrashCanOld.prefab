@@ -192,7 +192,6 @@ GameObject:
   - component: {fileID: 7861691261585851546}
   - component: {fileID: 276991853733191199}
   - component: {fileID: 2945376472884211481}
-  - component: {fileID: 4540146215523395188}
   m_Layer: 0
   m_Name: metal_trash_can_rust
   m_TagString: Untagged
@@ -295,33 +294,6 @@ CapsuleCollider:
   m_Height: 0.009967324
   m_Direction: 2
   m_Center: {x: -0.000009297728, y: -0.00011290461, z: 0.0047066105}
---- !u!54 &4540146215523395188
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7764682712230410807}
-  serializedVersion: 5
-  m_Mass: 2
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &7869778605744482334
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,8 +340,7 @@ GameObject:
   - component: {fileID: 7082814898831230121}
   - component: {fileID: 1143817255807902176}
   - component: {fileID: 6854562461645635644}
-  - component: {fileID: 7122256798896442640}
-  - component: {fileID: 6136490675350598993}
+  - component: {fileID: 592785134163983606}
   m_Layer: 0
   m_Name: metal_trash_can_rust_lid
   m_TagString: Untagged
@@ -449,8 +420,8 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7122256798896442640
-MeshCollider:
+--- !u!65 &592785134163983606
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -467,34 +438,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5184184844984877265, guid: c21b05d937979e64cb59894ef6ca9298, type: 3}
---- !u!54 &6136490675350598993
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8693675458126491447}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  serializedVersion: 3
+  m_Size: {x: 0.005562856, y: 0.0054395194, z: 0.0011621893}
+  m_Center: {x: 0.000000397092, y: -0.000026564701, z: 0.0002002336}
