@@ -20,6 +20,9 @@ namespace _Project.Scripts
 
         [Header("UI")]
         [SerializeField] Image beginTransitionWindow;
+
+        [SerializeField] Image teleportPlayerTransitionWindow;
+
         [SerializeField] Image sleepTransitionWindow;
 
         [Header("References From Other Classes")]
@@ -93,7 +96,18 @@ namespace _Project.Scripts
             ChangeAlphaValueForBeginWindowToWhite();
         }
 
+        public IEnumerator EndTimerCoroutine() 
+        {
+            ChangeAlphaValueForBeginWindowToBlackPlayerTeleport();
+
+            yield return new WaitForSeconds(.1f);
+            ChangeAlphaValueForBeginWindowToWhitePlayerTeleport();
+        }
+
         public void ChangeAlphaValueForBeginWindowToWhite() => beginTransitionWindow.DOColor(new Color(0, 0, 0, 0), timerForBeginTransition);
         public void ChangeAlphaValueForBeginWindowToBlack() => beginTransitionWindow.DOColor(new Color(0, 0, 0, 255), .5f);
+
+        public void ChangeAlphaValueForBeginWindowToBlackPlayerTeleport() => teleportPlayerTransitionWindow.DOColor(new Color(0, 0, 0, 255), .5f);
+        public void ChangeAlphaValueForBeginWindowToWhitePlayerTeleport() => teleportPlayerTransitionWindow.DOColor(new Color(0, 0, 0, 0), .5f);
     }
 }
