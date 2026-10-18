@@ -13,13 +13,13 @@ public class TerrainLayersController : MonoBehaviour
 
     public void RayCheckLayer() 
     {
-        RaycastHit hit;
+        //RaycastHit hit;
 
-        if (Physics.Raycast(groundCheck.position, Vector3.down, out hit)) 
+        /*if (Physics.Raycast(groundCheck.position, Vector3.down, out hit)) 
         {
 
 
-            /*if (hit.collider != null && terrainLayers[0].name == "Grass_A")
+            if (hit.collider != null && terrainLayers[0].name == "Grass_A")
             {
                 Debug.Log("Луч коснулся земли!");
             }
@@ -29,44 +29,44 @@ public class TerrainLayersController : MonoBehaviour
                 Debug.Log("Луч коснулся гравия!");
             }*/
 
-            for (int i = 0; i < terrainLayers.Length; i++)
+            /*for (int i = 0; i < terrainLayers.Length; i++)
             {
-                //if (hit.collider.la) { }
+
             }
-        }
+        }*/
     }
 
     public void CheckLayerForWalk() 
     {
-        for(int i = 0; i < terrainLayers.Length; i++) 
+        /*for(int i = 0; i < terrainLayers.Length; i++) 
         {
             switch (terrainLayers[i].name)
             {
-                /*case "Grass_A":
+                case "Grass_A":
                     audioManager.PlayAudioForGrassWalk();
                     break;
-                */
-                /*case "Black_Sand_A":
+                
+                case "Black_Sand_A":
                     audioManager.PlayAudioForGravelWalk(); 
-                    break;*/
-            }
-        }
+                    break;
+            }   
+        }*/
     }
 
     public void CheckLayerForRun() 
     {
-        for (int i = 0; i < terrainLayers.Length; i++)
+        /*for (int i = 0; i < terrainLayers.Length; i++)
         {
             switch (terrainLayers[i].name)
             {
-                /*case "Grass_A":
+                case "Grass_A":
                     audioManager.PlayAudioForGrassRun();
                     break;
-                */
-                /*case "Black_Sand_A":
+
+                case "Black_Sand_A":
                     audioManager.PlayAudioForGravelRun();
-                    break;*/
+                    break;
             }
-        }
+        }*/
     }
 }
