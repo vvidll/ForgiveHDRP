@@ -13511,7 +13511,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &432432460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70471,7 +70471,7 @@ Transform:
   m_GameObject: {fileID: 3584803669997272535}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0009820593, y: 1.6016121, z: 0.15384476}
+  m_LocalPosition: {x: -0.0009155276, y: 1.6016121, z: 0.15379336}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -70542,7 +70542,7 @@ Transform:
   m_GameObject: {fileID: 3655956167540923143}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -854, y: 31.85, z: 202}
+  m_LocalPosition: {x: -554.1, y: 30.993, z: 202}
   m_LocalScale: {x: 0.99999976, y: 1, z: 0.99999976}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -70564,7 +70564,7 @@ Transform:
   - {fileID: 1413826765}
   - {fileID: 178340064}
   m_Father: {fileID: 278922707}
-  m_LocalEulerAnglesHint: {x: 0.21, y: 452.913, z: -2.288}
+  m_LocalEulerAnglesHint: {x: 359, y: 0, z: 4}
 --- !u!4 &643101920437107613
 Transform:
   m_ObjectHideFlags: 0
@@ -101281,6 +101281,7 @@ GameObject:
   - component: {fileID: 9073766142481002332}
   - component: {fileID: 9073766142481002330}
   - component: {fileID: 9073766142481002325}
+  - component: {fileID: 9073766142481002333}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -155266,7 +155267,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that are already bound by a Humanoid avatar. These transforms can only be changed by Humanoid clips.\n\tTransform 'mixamorig:LeftFoot'\n\tTransform 'mixamorig:RightArm'\n\tTransform 'mixamorig:LeftLeg'\n\tTransform 'mixamorig:LeftShoulder'\n\tTransform 'mixamorig:RightFoot'\n\tTransform 'mixamorig:Head'\n\tTransform 'mixamorig:LeftUpLeg'\n\tTransform 'mixamorig:LeftArm'\n\tTransform 'mixamorig:RightShoulder'\n\tTransform 'mixamorig:RightLeg'\n\tand more ..."
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -169677,6 +169678,23 @@ MonoBehaviour:
   teleportPointAfterFailedTry: {fileID: 1838996660}
   player: {fileID: 641581672497925792}
   isCanTeleport: 0
+--- !u!320 &9073766142481002333
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3655956167540923143}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 98fe5caac29db654db97d165da2fe446, type: 2}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings: []
+  m_ExposedReferences:
+    m_References: []
 --- !u!4 &9076532713854959631
 Transform:
   m_ObjectHideFlags: 0
