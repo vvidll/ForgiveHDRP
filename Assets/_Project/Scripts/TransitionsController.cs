@@ -98,16 +98,16 @@ namespace _Project.Scripts
 
         public IEnumerator EndTimerCoroutine() 
         {
-            ChangeAlphaValueForBeginWindowToBlackPlayerTeleport();
+            ChangeAlphaValueForTeleportPlayerFromCloseZoneWindowToBlack();
 
             yield return new WaitForSeconds(.1f);
-            ChangeAlphaValueForBeginWindowToWhitePlayerTeleport();
+            ChangeAlphaValueForTeleportPlayerFromCloseZoneToWhite();
         }
 
         public void ChangeAlphaValueForBeginWindowToWhite() => beginTransitionWindow.DOColor(new Color(0, 0, 0, 0), timerForBeginTransition);
         public void ChangeAlphaValueForBeginWindowToBlack() => beginTransitionWindow.DOColor(new Color(0, 0, 0, 255), .5f);
 
-        public void ChangeAlphaValueForBeginWindowToBlackPlayerTeleport() => teleportPlayerTransitionWindow.DOColor(new Color(0, 0, 0, 255), .5f);
-        public void ChangeAlphaValueForBeginWindowToWhitePlayerTeleport() => teleportPlayerTransitionWindow.DOColor(new Color(0, 0, 0, 0), .5f);
+        public void ChangeAlphaValueForTeleportPlayerFromCloseZoneWindowToBlack() => teleportPlayerTransitionWindow.DOColor(new Color(0, 0, 0, 255), .5f);
+        public void ChangeAlphaValueForTeleportPlayerFromCloseZoneToWhite() => teleportPlayerTransitionWindow.DOColor(new Color(0, 0, 0, 0), .5f);
     }
 }

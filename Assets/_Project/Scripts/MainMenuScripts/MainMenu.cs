@@ -56,7 +56,6 @@ namespace _Project.Scripts.MainMenuScripts
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape) && isPressEscInMainMenuForExitGame == true && isPressEscForReturnInMainMenu == false &&
-            /*loadGameWindow.activeSelf == false &&*/ 
                 settingsWindow.activeSelf == false && 
                 authorsWindow.activeSelf == false)
                 ExitGame();

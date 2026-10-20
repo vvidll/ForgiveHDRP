@@ -91,7 +91,7 @@ MonoBehaviour:
     m_Value: 236.7
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 69.7
+    m_Value: 30
   enableVolumetricFog:
     m_OverrideState: 0
     m_Value: 0
@@ -152,10 +152,10 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.06
   contrast:
     m_OverrideState: 1
-    m_Value: 13.2
+    m_Value: -29.1
   colorFilter:
     m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ef2681fa3dc8c4fa031f044e68c63f, type: 3}
   m_Name: GlobalIllumination
   m_EditorClassIdentifier: Unity.RenderPipelines.HighDefinition.Runtime::UnityEngine.Rendering.HighDefinition.GlobalIllumination
-  active: 0
+  active: 1
   quality:
     m_OverrideState: 1
     m_Value: 2
@@ -196,7 +196,7 @@ MonoBehaviour:
       serializedVersion: 0
       m_Bits: 1
   depthBufferThickness:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0.1
   fullResolutionSS:
     m_OverrideState: 0
@@ -874,16 +874,16 @@ MonoBehaviour:
   active: 1
   redOutRedIn:
     m_OverrideState: 1
-    m_Value: 107
+    m_Value: 109
   redOutGreenIn:
     m_OverrideState: 1
     m_Value: -11
   redOutBlueIn:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: -2
   greenOutRedIn:
     m_OverrideState: 1
-    m_Value: 4
+    m_Value: 2
   greenOutGreenIn:
     m_OverrideState: 1
     m_Value: 90
