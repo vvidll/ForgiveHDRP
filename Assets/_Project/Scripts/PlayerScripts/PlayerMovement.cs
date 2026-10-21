@@ -16,7 +16,7 @@ namespace _Project.Scripts.PlayerScripts
         //[SerializeField] float speedWalk = 2f;
         //[SerializeField] float speedRun = 5f;
 
-        public float minSpeed = 2f, maxSpeed = 5f;
+        public float walkSpeed = 2f, runSpeed = 5f, runAdrenalineSpeed = 7f;
         public float currentSpeed = 0;
 
         [HideInInspector]
@@ -56,27 +56,28 @@ namespace _Project.Scripts.PlayerScripts
                 if (Input.GetKey(KeyCode.LeftShift)
                     && IsKeyPressLeftShift == true
                     && crouchController.crouchActive == false
-                    && staminaSliderController.endStamina == true)
+                    && staminaSliderController.endStamina == true
+                    && staminaSliderController.isHasAdrenaline == false)
                 {
-                    maxSpeed = minSpeed;
-                    currentSpeed = maxSpeed;
-
                     IsKeyPressLeftShift = false;
                     Walk();
                 }
 
-                else if (Input.GetKey(KeyCode.LeftShift) 
+                else if (Input.GetKey(KeyCode.LeftShift)
                     && IsKeyPressLeftShift == false
-                    && crouchController.crouchActive == false 
-                    && staminaSliderController.endStamina == false)
+                    && crouchController.crouchActive == false
+                    && staminaSliderController.endStamina == false
+                    && staminaSliderController.isHasAdrenaline == false)
                 {
-                    maxSpeed = 5f;
-                    currentSpeed = maxSpeed;
-
                     IsKeyPressLeftShift = true;
                     Run();
                 }
 
+                else if (Input.GetKey(KeyCode.LeftShift)
+                    && staminaSliderController.isHasAdrenaline == true)
+                {
+                    RunAdrenaline();
+                }
 
             }
 
@@ -95,11 +96,7 @@ namespace _Project.Scripts.PlayerScripts
 
         public void Walk()
         {
-            currentSpeed = minSpeed;
-
-            MovePlayer = transform.TransformDirection(inputKeyboard.x, 0f, inputKeyboard.z);
-
-            characterController.Move(MovePlayer * currentSpeed * Time.deltaTime);
+            Movement(currentSpeed, walkSpeed);
 
             playerAnimation.ChangeAnimationWalk(inputKeyboard.z, inputKeyboard.x);
 
@@ -108,16 +105,29 @@ namespace _Project.Scripts.PlayerScripts
 
         public void Run()
         {
-            currentSpeed = maxSpeed;
-
-            MovePlayer = transform.TransformDirection(inputKeyboard.x, 0f, inputKeyboard.z);
-
-            characterController.Move(MovePlayer * currentSpeed * Time.deltaTime);
+            Movement(currentSpeed, runSpeed);
 
             playerAnimation.ChangeAnimationRun(inputKeyboard.z);
 
             staminaSliderController.DecreasedStamina();
 
+        }
+
+        public void RunAdrenaline() 
+        {
+            Movement(currentSpeed, runAdrenalineSpeed);
+
+            playerAnimation.ChangeAnimationAdrenaline();
+
+        }
+
+        void Movement(float currentSpeed, float speedMovement) 
+        {
+            currentSpeed = speedMovement;
+
+            MovePlayer = transform.TransformDirection(inputKeyboard.x, 0f, inputKeyboard.z);
+
+            characterController.Move(MovePlayer * currentSpeed * Time.deltaTime);
         }
 
     }

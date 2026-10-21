@@ -1,6 +1,6 @@
-using System.Collections;
-using _Project.Scripts.AudioScripts;
+using _Project.Scripts.InterfaceScripts;
 using _Project.Scripts.PlayerScripts;
+using DG.Tweening;
 using UnityEngine;
 
 namespace _Project.Scripts.CameraScripts 
@@ -22,6 +22,8 @@ namespace _Project.Scripts.CameraScripts
         [SerializeField] Transform _headTarget;
         [SerializeField] Camera _mainCamera;
 
+        [SerializeField] StaminaSliderController staminaSliderController;
+
         [HideInInspector]
         public float mouseX;
         [HideInInspector]
@@ -30,6 +32,13 @@ namespace _Project.Scripts.CameraScripts
         public override void OnTick()
         {
             PlayerRotateCamera();
+
+            /*if (staminaSliderController.isHasAdrenaline == true)
+                _mainCamera.DOShakeRotation(1f,
+                    strength: .1f,
+                    vibrato: 0,
+                    randomness: 0f,
+                    fadeOut: false);*/
         }
 
         public void PlayerRotateCamera() 

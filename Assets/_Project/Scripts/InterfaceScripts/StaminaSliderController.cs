@@ -1,4 +1,5 @@
 using _Project.Scripts.PlayerScripts;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,9 +8,14 @@ namespace _Project.Scripts.InterfaceScripts
     // скрипт отвечающий за управлением слайдера для сынсы мыши (в настройках игры регулируется)
     public class StaminaSliderController : MonoCache
     {
+        [SerializeField] RectTransform sliderRectTransform;
+
         [SerializeField] PlayerMovement playerMovement;
 
         [SerializeField] public Slider sliderStamina;
+
+        [SerializeField] Image fillSlider;
+
         [SerializeField] float speedDecreasedStaminaSlider = 1f;
         [SerializeField] float speedIncreasedStaminaSlider = 1f;
 
@@ -20,6 +26,8 @@ namespace _Project.Scripts.InterfaceScripts
 
         int maxValueSlider = 750;
 
+        public bool isHasAdrenaline = false;
+
         private void Awake()
         {
             sliderStamina.value = maxValueSlider;
@@ -29,6 +37,14 @@ namespace _Project.Scripts.InterfaceScripts
         public override void OnTick()
         {
             CheckStaminaSlider();
+
+            // пример как должно быть -------------
+            if (isHasAdrenaline == true)
+                sliderRectTransform.DOShakeScale(1f, 
+                    strength: .1f, 
+                    vibrato: 0, 
+                    randomness: 0f, 
+                    fadeOut: false);
         }
 
         public void CheckStaminaSlider()
@@ -45,6 +61,25 @@ namespace _Project.Scripts.InterfaceScripts
                 sliderStamina.gameObject.SetActive(false);
                 endStamina = false;
             }
+
+            // пример как должно быть -------------
+
+            if (Input.GetKeyDown(KeyCode.UpArrow) /*isHasAdrenaline == true*/) 
+            {
+                fillSlider.DOColor(Color.red, 1f);
+
+                isHasAdrenaline = true;
+            }
+
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                fillSlider.DOColor(Color.white, 1f);
+
+                // он должен работать до определенного момента
+                isHasAdrenaline = false;
+            }
+
+            // -------------------------------------
         }
 
         public void DecreasedStamina()

@@ -80,6 +80,13 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
+    public void ChangeAnimationAdrenaline() 
+    {
+        // реализовать анимацию бега под адреналином y = 2f
+        if (staminaSliderController.isHasAdrenaline == true)
+            animator.SetFloat("y", 2f, smoothTime, Time.deltaTime);
+    }
+
     public void ChangeAnimationCrouch(float verticalDirection, float horizontalDirection, bool crouchActive)
     {
         if (verticalDirection != 0 || horizontalDirection != 0 && Input.GetKeyDown(KeyCode.LeftControl)) // activate crouch, when player walking
