@@ -1,7 +1,7 @@
 using _Project.Scripts.MissionsScripts;
 using UnityEngine;
 
-public class TriggerMonsterController : MonoBehaviour
+public class TriggerCheckCar : MonoBehaviour
 {
     [SerializeField] GameObject treeFall, treeStand;
 

@@ -7,24 +7,18 @@ public class EnemyWatcherController : Enemy
 {
     [SerializeField] internal SleepingBagController sleepingBagController;
 
-    [SerializeField] Transform playerTransform;
     [SerializeField] PlayerMovement playerMovement;
 
     [SerializeField] CameraController cameraController;
 
     public bool isActiveEnemyWatcher = false;
 
-    private void Update()
-    {
-        LookAtPlayer();
-    }
-
-    public void LookAtPlayer()
+    public override void LookAtPlayer()
     {
         if (playerMovement.isHasKeyboardInput == true)
         {
             animatorEnemy.SetBool("isWalking", true);
-            transform.LookAt(playerTransform);
+            transform.LookAt(player);
         }
 
         else
