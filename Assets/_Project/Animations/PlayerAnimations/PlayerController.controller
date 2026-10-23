@@ -234,10 +234,18 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: x
     m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: 4f3a3260ac7c58e419a2a28132f80da6, type: 3}
+    m_Threshold: 3.4500003
+    m_Position: {x: 0, y: 2}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: x
+    m_Mirror: 0
   m_BlendParameter: x
   m_BlendParameterY: y
   m_MinThreshold: 0.75
-  m_MaxThreshold: 3.0000002
+  m_MaxThreshold: 3.4500003
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 2

@@ -7608,7 +7608,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &256439154
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7618,7 +7618,7 @@ RectTransform:
   m_GameObject: {fileID: 256439153}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.301492, y: 2.301492, z: 2.301492}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1034819703}
@@ -7694,10 +7694,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b68c24fdafe15a04cb0c48c57ba6be67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.InterfaceScripts.StaminaSliderController
+  sliderRectTransform: {fileID: 256439154}
   playerMovement: {fileID: 5971955446751597394}
   sliderStamina: {fileID: 256439155}
+  fillSlider: {fileID: 982201209}
   speedDecreasedStaminaSlider: 1
   speedIncreasedStaminaSlider: 0.5
+  isHasAdrenaline: 0
 --- !u!1001 &257427256
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29069,7 +29072,7 @@ RectTransform:
   m_Father: {fileID: 354390770}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -70539,7 +70542,7 @@ Transform:
   m_GameObject: {fileID: 3584803669997272535}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0009155276, y: 1.6016121, z: 0.15379336}
+  m_LocalPosition: {x: -0.0007934572, y: 1.6016121, z: 0.15509036}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -149489,7 +149492,7 @@ Transform:
   m_GameObject: {fileID: 3429532318336832016}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000013871613, y: 4.7293724e-10, z: 2.2104124e-11, w: 1}
-  m_LocalPosition: {x: -0.00113818, y: 0.03499984, z: 0.19569838}
+  m_LocalPosition: {x: -0.001, y: 0.035, z: 0.197}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -169760,6 +169763,7 @@ MonoBehaviour:
   playerAnimation: {fileID: 9073766142481002324}
   _headTarget: {fileID: 4274712324116974829}
   _mainCamera: {fileID: 8843733459168429163}
+  staminaSliderController: {fileID: 256439156}
   mouseX: 0
   mouseY: 0
 --- !u!114 &9001046709722635716
@@ -170759,7 +170763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ec47e8416f31b4bb1c66f948fd9ffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrepareFoodController
-  missionManager: {fileID: 0}
+  missionManager: {fileID: 223652263}
 --- !u!114 &9073766142481002330
 MonoBehaviour:
   m_ObjectHideFlags: 0
