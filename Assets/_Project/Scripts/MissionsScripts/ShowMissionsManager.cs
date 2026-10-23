@@ -111,6 +111,8 @@ namespace _Project.Scripts.MissionsScripts
         [HideInInspector]
         public bool isFindSuitableLocation = false;
 
+        public bool isFindItemsForCarRepair = false;
+
         [Header("Layer Mask Object")]
         [SerializeField] GameObject leftDoorObject;
 
@@ -232,6 +234,8 @@ namespace _Project.Scripts.MissionsScripts
             triggerCarCheck.SetActive(false);
 
             isNeedCarCheck = false;
+
+            isFindItemsForCarRepair = true;
 
             windowMissionFindItemsRepairCar.SetActive(true);
 
