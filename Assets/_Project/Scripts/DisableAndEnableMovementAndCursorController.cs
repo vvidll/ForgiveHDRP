@@ -1,4 +1,5 @@
 using _Project.Scripts.CameraScripts;
+using _Project.Scripts.NotepadScripts;
 using _Project.Scripts.PlayerScripts;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ namespace _Project.Scripts
         [SerializeField] CameraController cameraController;
         [SerializeField] CrouchController crouchController;
         [SerializeField] JumpController jumpController;
+        [SerializeField] NotepadController notepadController;
 
         [HideInInspector]
         public bool isGameMenuActive = false;
@@ -57,6 +59,7 @@ namespace _Project.Scripts
             cameraController.enabled = false;
             crouchController.enabled = false;
             jumpController.enabled = false;
+            notepadController.enabled = false;
         }
 
         public void EnableScripts() 
@@ -65,6 +68,7 @@ namespace _Project.Scripts
             cameraController.enabled = true;
             crouchController.enabled = true;
             jumpController.enabled = true;
+            notepadController.enabled = true;
         }
     }
 }

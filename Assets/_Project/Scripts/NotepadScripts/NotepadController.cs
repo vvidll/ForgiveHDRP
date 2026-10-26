@@ -25,8 +25,7 @@ namespace _Project.Scripts.NotepadScripts
                         keyPress = 1;
                         animator.SetTrigger("isOpenNotepad");
 
-                        DisableScripts();
-                        ShowCursor();
+                        DisableMovementAndShowCursor();
 
                         playerAnimation.CallIdleAnimation();
                         break;
@@ -35,8 +34,7 @@ namespace _Project.Scripts.NotepadScripts
                         keyPress = 0;
                         animator.SetTrigger("isCloseNotepad");
 
-                        EnableScripts();
-                        HideCursor();
+                        EnableMovementAndHideCursor();
 
                         playerAnimation.CallIdleAnimation();
                         break;

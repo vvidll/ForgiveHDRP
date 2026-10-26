@@ -6634,6 +6634,7 @@ MonoBehaviour:
   cameraController: {fileID: 9001046709722635715}
   crouchController: {fileID: 2312135464395040992}
   jumpController: {fileID: 2562490624827731979}
+  notepadController: {fileID: 9073766142481002331}
   isGameMenuActive: 0
   isDialogueWithSalerActive: 0
 --- !u!114 &221523066
@@ -13400,7 +13401,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &432432460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135774,8 +135775,9 @@ MonoBehaviour:
   drivingPlayer: {fileID: 4682043514986208510}
   playerAnimation: {fileID: 9073766142481002324}
   characterController: {fileID: 9073766142481002325}
-  minSpeed: 2
-  maxSpeed: 5
+  walkSpeed: 2
+  runSpeed: 5
+  runAdrenalineSpeed: 7
   currentSpeed: 0
   MovePlayer: {x: 0, y: 0, z: 0}
   inputKeyboard: {x: 0, y: 0, z: 0}
@@ -168946,6 +168948,7 @@ MonoBehaviour:
   cameraController: {fileID: 9001046709722635715}
   crouchController: {fileID: 2312135464395040992}
   jumpController: {fileID: 2562490624827731979}
+  notepadController: {fileID: 9073766142481002331}
   isGameMenuActive: 0
   isDialogueWithSalerActive: 0
   panelMenuButtons: {fileID: 429945853}
@@ -170734,7 +170737,7 @@ MonoBehaviour:
   triggerTeleportCarNextLocation: {fileID: 450444135}
   buildingManagerBonfire: {fileID: 762210732}
   buildingManagerSleepingBag: {fileID: 508832712}
-  showMissionsManager: {fileID: 0}
+  showMissionsManager: {fileID: 223652263}
 --- !u!114 &9073766142481002328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170793,6 +170796,7 @@ MonoBehaviour:
   cameraController: {fileID: 9001046709722635715}
   crouchController: {fileID: 2312135464395040992}
   jumpController: {fileID: 2562490624827731979}
+  notepadController: {fileID: 9073766142481002331}
   isGameMenuActive: 0
   isDialogueWithSalerActive: 0
   playerAnimation: {fileID: 9073766142481002324}
