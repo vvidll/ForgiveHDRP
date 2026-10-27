@@ -11,14 +11,12 @@ GameObject:
   - component: {fileID: 2775011623256993722}
   - component: {fileID: 4404757859391040404}
   - component: {fileID: 4196449661918354873}
-  - component: {fileID: 5430369576140955608}
-  - component: {fileID: 5518578595272800232}
   m_Layer: 0
   m_Name: Shrub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2775011623256993722
 Transform:
@@ -93,39 +91,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5430369576140955608
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1565408744048187519}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.30971807
-  m_Center: {x: 0, y: 0.18383175, z: 0}
---- !u!114 &5518578595272800232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1565408744048187519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c352b19f74a86a42a818b2f930c62b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CheckCollisionGrass
 --- !u!1 &3801896487236521360
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +105,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4247810290098400434
 Transform:
