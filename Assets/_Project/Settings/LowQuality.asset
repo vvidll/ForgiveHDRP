@@ -213,7 +213,7 @@ MonoBehaviour:
     supportShadowMask: 1
     supportSSR: 0
     supportSSRTransparent: 0
-    supportSSAO: 1
+    supportSSAO: 0
     supportSSGI: 0
     supportSubsurfaceScattering: 1
     subsurfaceScatteringAttenuation: 1
@@ -225,20 +225,20 @@ MonoBehaviour:
       m_Values: 000000000000000000000000i
       m_SchemaId:
         m_Id: With3Levels
-    supportVolumetrics: 1
+    supportVolumetrics: 0
     supportVolumetricClouds: 0
     supportLightLayers: 0
     renderingLayerMaskBuffer: 0
-    supportWater: 0
-    waterSimulationResolution: 128
+    supportWater: 1
+    waterSimulationResolution: 64
     supportWaterExclusion: 1
     supportWaterHorizontalDeformation: 0
     supportWaterDecals: 1
-    waterDecalAtlasSize: 1024
+    waterDecalAtlasSize: 256
     maximumWaterDecalCount: 48
     waterScriptInteractionsMode: 0
     waterFullCPUSimulation: 0
-    waterCausticsMeshResolution: 256
+    waterCausticsMeshResolution: 128
     supportComputeThickness: 0
     computeThicknessResolution: 1
     computeThicknessLayerMask:
@@ -246,8 +246,8 @@ MonoBehaviour:
       m_Bits: 0
     supportDistortion: 1
     supportTransparentBackface: 1
-    supportTransparentDepthPrepass: 1
-    supportTransparentDepthPostpass: 1
+    supportTransparentDepthPrepass: 0
+    supportTransparentDepthPostpass: 0
     colorBufferFormat: 74
     depthBufferFormat: 0
     supportCustomPass: 1
@@ -353,9 +353,9 @@ MonoBehaviour:
       maxScreenSpaceShadowSlots: 4
       screenSpaceShadowBufferFormat: 48
     decalSettings:
-      drawDistance: 1000
-      atlasWidth: 4096
-      atlasHeight: 4096
+      drawDistance: 500
+      atlasWidth: 1024
+      atlasHeight: 1024
       transparentTextureResolution:
         m_Values: 000100000002000000040000i
         m_SchemaId:
@@ -371,7 +371,7 @@ MonoBehaviour:
       advancedUpscalersByPriority: 
       advancedUpscalerNames:
       - DLSS
-      DLSSPerfQualitySetting: 0
+      DLSSPerfQualitySetting: 1
       DLSSInjectionPoint: 0
       TAAUInjectionPoint: 0
       STPInjectionPoint: 0
@@ -440,12 +440,12 @@ MonoBehaviour:
         m_SchemaId:
           m_Id: With3Levels
     maximumLODLevel:
-      m_Values: 000000000000000000000000i
+      m_Values: 010000000000000000000000i
       m_SchemaId:
         m_Id: With3Levels
     lodBias:
       m_Values:
-      - 1
+      - 0.5
       - 1
       - 1
       m_SchemaId:

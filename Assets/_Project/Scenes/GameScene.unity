@@ -34283,7 +34283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 439e32ec28c580944a2ad69ddcfc56d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TriggerSuitableLocation
-  showMissions: {fileID: 0}
+  showMissions: {fileID: 223652263}
   buildingPlaceCollisions:
   - {fileID: 1273689536}
   - {fileID: 401036230}
@@ -70695,9 +70695,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3655956167540923143}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.49800846, z: -0, w: 0.8671721}
-  m_LocalPosition: {x: -681.71, y: 30.984, z: 939.87}
-  m_LocalScale: {x: 0.99999976, y: 1, z: 0.99999976}
+  m_LocalRotation: {x: -0, y: -0.078059785, z: -0, w: -0.9969487}
+  m_LocalPosition: {x: -934.8, y: 27.3, z: 409.94}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1543089952}
@@ -70718,7 +70718,7 @@ Transform:
   - {fileID: 1413826765}
   - {fileID: 178340064}
   m_Father: {fileID: 278922707}
-  m_LocalEulerAnglesHint: {x: 360, y: -59.737, z: 0}
+  m_LocalEulerAnglesHint: {x: 360, y: 8.954, z: 0}
 --- !u!4 &643101920437107613
 Transform:
   m_ObjectHideFlags: 0
