@@ -9,6 +9,7 @@ using UnityEngine;
 public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField] Animator animator;
+    [SerializeField] Avatar playerAvatar;
 
     [SerializeField] StaminaSliderController staminaSliderController;
     [SerializeField] CameraController cameraController;
@@ -145,4 +146,14 @@ public class PlayerAnimation : MonoBehaviour
 
         playerMovement.isHasKeyboardInput = false;
     }
+
+    public void DisableAvatarPlayer() => animator.avatar = null;
+
+    public void EnableAvatarPlayer() 
+    {
+        animator.SetBool("isCloseGates", false);
+        animator.avatar = playerAvatar;
+    }
 }
+
+
