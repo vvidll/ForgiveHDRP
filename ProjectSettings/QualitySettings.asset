@@ -4,7 +4,7 @@
 QualitySettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_CurrentQuality: 3
+  m_CurrentQuality: 1
   m_QualitySettings:
   - serializedVersion: 5
     name: LowQuality
@@ -35,7 +35,7 @@ QualitySettings:
     adaptiveVsyncExtraB: 0
     lodBias: 0.5
     meshLodThreshold: 1
-    maximumLODLevel: 1
+    maximumLODLevel: 0
     enableLODCrossFade: 1
     streamingMipmapsActive: 0
     streamingMipmapsAddAllCameras: 1
@@ -141,7 +141,7 @@ QualitySettings:
     adaptiveVsyncExtraB: 0
     lodBias: 2.5
     meshLodThreshold: 1
-    maximumLODLevel: 1
+    maximumLODLevel: 0
     enableLODCrossFade: 1
     streamingMipmapsActive: 0
     streamingMipmapsAddAllCameras: 1
