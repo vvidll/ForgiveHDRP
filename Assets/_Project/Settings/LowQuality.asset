@@ -255,7 +255,7 @@ MonoBehaviour:
     customBufferFormat: 8
     supportedLitShaderMode: 2
     planarReflectionResolution:
-      m_Values: 000100000004000000080000i
+      m_Values: 000100000002000000040000i
       m_SchemaId:
         m_Id: With3Levels
     cubeReflectionResolution:
@@ -288,7 +288,7 @@ MonoBehaviour:
     supportVFXRayTracing: 0
     supportedRayTracingMode: 3
     lightLoopSettings:
-      cookieAtlasSize: 2048
+      cookieAtlasSize: 512
       cookieFormat: 74
       cookieAtlasLastValidMip: 0
       cookieTexArraySize: 1
@@ -298,7 +298,7 @@ MonoBehaviour:
       maxEnvLightsOnScreen: 0
       reflectionCacheCompressed: 0
       reflectionProbeFormat: 74
-      reflectionProbeTexCacheSize: 4096
+      reflectionProbeTexCacheSize: 1024
       reflectionProbeTexLastValidCubeMip: 3
       reflectionProbeTexLastValidPlanarMip: 0
       reflectionProbeDecreaseResToFit: 1
@@ -310,8 +310,8 @@ MonoBehaviour:
       maxDirectionalLightsOnScreen: 16
       maxPunctualLightsOnScreen: 512
       maxAreaLightsOnScreen: 64
-      maxCubeReflectionOnScreen: 32
-      maxPlanarReflectionOnScreen: 8
+      maxCubeReflectionOnScreen: 8
+      maxPlanarReflectionOnScreen: 2
       maxDecalsOnScreen: 512
       maxLightsPerClusterCell: 8
       maxLocalVolumetricFogSize: 0
@@ -319,8 +319,8 @@ MonoBehaviour:
     hdShadowInitParams:
       maxShadowRequests: 128
       directionalShadowsDepthBits: 32
-      punctualShadowFilteringQuality: 1
-      directionalShadowFilteringQuality: 1
+      punctualShadowFilteringQuality: 0
+      directionalShadowFilteringQuality: 0
       areaShadowFilteringQuality: 0
       punctualLightShadowAtlas:
         shadowAtlasResolution: 4096
@@ -436,7 +436,7 @@ MonoBehaviour:
       ChromaticAberrationMaxSamples: 03000000060000000c000000i
     lightSettings:
       useContactShadow:
-        m_Values: 000001y
+        m_Values: 010000y
         m_SchemaId:
           m_Id: With3Levels
     maximumLODLevel:
