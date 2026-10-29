@@ -225,7 +225,7 @@ MonoBehaviour:
       m_Values: 000000000000000000000000i
       m_SchemaId:
         m_Id: With3Levels
-    supportVolumetrics: 1
+    supportVolumetrics: 0
     supportVolumetricClouds: 1
     supportLightLayers: 1
     renderingLayerMaskBuffer: 0
@@ -255,7 +255,7 @@ MonoBehaviour:
     customBufferFormat: 12
     supportedLitShaderMode: 2
     planarReflectionResolution:
-      m_Values: 000100000004000000080000i
+      m_Values: 000400000008000000080000i
       m_SchemaId:
         m_Id: With3Levels
     cubeReflectionResolution:
@@ -298,7 +298,7 @@ MonoBehaviour:
       maxEnvLightsOnScreen: 0
       reflectionCacheCompressed: 1
       reflectionProbeFormat: 74
-      reflectionProbeTexCacheSize: 4096
+      reflectionProbeTexCacheSize: 2048
       reflectionProbeTexLastValidCubeMip: 3
       reflectionProbeTexLastValidPlanarMip: 0
       reflectionProbeDecreaseResToFit: 1
@@ -338,7 +338,7 @@ MonoBehaviour:
         m_SchemaId:
           m_Id: With4Levels
       shadowResolutionPunctual:
-        m_Values: 00020000000400000010000000100000i
+        m_Values: 00020000000400000008000000100000i
         m_SchemaId:
           m_Id: With4Levels
       shadowResolutionArea:
