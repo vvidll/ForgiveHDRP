@@ -213,7 +213,7 @@ MonoBehaviour:
     supportShadowMask: 1
     supportSSR: 0
     supportSSRTransparent: 0
-    supportSSAO: 1
+    supportSSAO: 0
     supportSSGI: 0
     supportSubsurfaceScattering: 1
     subsurfaceScatteringAttenuation: 1
@@ -225,7 +225,7 @@ MonoBehaviour:
       m_Values: 000000000000000000000000i
       m_SchemaId:
         m_Id: With3Levels
-    supportVolumetrics: 1
+    supportVolumetrics: 0
     supportVolumetricClouds: 0
     supportLightLayers: 0
     renderingLayerMaskBuffer: 0
@@ -234,7 +234,7 @@ MonoBehaviour:
     supportWaterExclusion: 1
     supportWaterHorizontalDeformation: 0
     supportWaterDecals: 1
-    waterDecalAtlasSize: 1024
+    waterDecalAtlasSize: 512
     maximumWaterDecalCount: 48
     waterScriptInteractionsMode: 0
     waterFullCPUSimulation: 0
@@ -246,8 +246,8 @@ MonoBehaviour:
       m_Bits: 0
     supportDistortion: 1
     supportTransparentBackface: 1
-    supportTransparentDepthPrepass: 1
-    supportTransparentDepthPostpass: 1
+    supportTransparentDepthPrepass: 0
+    supportTransparentDepthPostpass: 0
     colorBufferFormat: 74
     depthBufferFormat: 0
     supportCustomPass: 1
@@ -255,7 +255,7 @@ MonoBehaviour:
     customBufferFormat: 8
     supportedLitShaderMode: 2
     planarReflectionResolution:
-      m_Values: 000100000004000000080000i
+      m_Values: 000200000004000000080000i
       m_SchemaId:
         m_Id: With3Levels
     cubeReflectionResolution:
@@ -264,7 +264,7 @@ MonoBehaviour:
         m_Id: With3Levels
     supportDecals: 1
     supportDecalLayers: 0
-    supportSurfaceGradient: 0
+    supportSurfaceGradient: 1
     decalNormalBufferHP: 0
     supportHighQualityLineRendering: 0
     highQualityLineRenderingMemoryBudget: 128
@@ -288,7 +288,7 @@ MonoBehaviour:
     supportVFXRayTracing: 0
     supportedRayTracingMode: 3
     lightLoopSettings:
-      cookieAtlasSize: 2048
+      cookieAtlasSize: 1024
       cookieFormat: 74
       cookieAtlasLastValidMip: 0
       cookieTexArraySize: 1
@@ -298,11 +298,11 @@ MonoBehaviour:
       maxEnvLightsOnScreen: 0
       reflectionCacheCompressed: 0
       reflectionProbeFormat: 74
-      reflectionProbeTexCacheSize: 4096
+      reflectionProbeTexCacheSize: 2048
       reflectionProbeTexLastValidCubeMip: 3
       reflectionProbeTexLastValidPlanarMip: 0
       reflectionProbeDecreaseResToFit: 1
-      skyReflectionSize: 256
+      skyReflectionSize: 512
       skyLightingOverrideLayerMask:
         serializedVersion: 2
         m_Bits: 0
@@ -310,9 +310,9 @@ MonoBehaviour:
       maxDirectionalLightsOnScreen: 16
       maxPunctualLightsOnScreen: 512
       maxAreaLightsOnScreen: 64
-      maxCubeReflectionOnScreen: 32
-      maxPlanarReflectionOnScreen: 8
-      maxDecalsOnScreen: 512
+      maxCubeReflectionOnScreen: 16
+      maxPlanarReflectionOnScreen: 2
+      maxDecalsOnScreen: 1024
       maxLightsPerClusterCell: 8
       maxLocalVolumetricFogSize: 0
       maxLocalVolumetricFogOnScreen: 256
@@ -353,14 +353,14 @@ MonoBehaviour:
       maxScreenSpaceShadowSlots: 4
       screenSpaceShadowBufferFormat: 48
     decalSettings:
-      drawDistance: 500
-      atlasWidth: 1024
-      atlasHeight: 4096
+      drawDistance: 800
+      atlasWidth: 2048
+      atlasHeight: 2048
       transparentTextureResolution:
-        m_Values: 000100000002000000020000i
+        m_Values: 000100000002000000040000i
         m_SchemaId:
           m_Id: With3Levels
-      perChannelMask: 1
+      perChannelMask: 0
     postProcessSettings:
       m_LutSize: 32
       lutFormat: 48
@@ -371,7 +371,7 @@ MonoBehaviour:
       advancedUpscalersByPriority: 
       advancedUpscalerNames:
       - DLSS
-      DLSSPerfQualitySetting: 0
+      DLSSPerfQualitySetting: 1
       DLSSInjectionPoint: 0
       TAAUInjectionPoint: 0
       STPInjectionPoint: 0
@@ -436,16 +436,16 @@ MonoBehaviour:
       ChromaticAberrationMaxSamples: 03000000060000000c000000i
     lightSettings:
       useContactShadow:
-        m_Values: 000001y
+        m_Values: 010000y
         m_SchemaId:
           m_Id: With3Levels
     maximumLODLevel:
-      m_Values: 000000000000000000000000i
+      m_Values: 010000000000000000000000i
       m_SchemaId:
         m_Id: With3Levels
     lodBias:
       m_Values:
-      - 1
+      - 1.5
       - 1
       - 1
       m_SchemaId:
