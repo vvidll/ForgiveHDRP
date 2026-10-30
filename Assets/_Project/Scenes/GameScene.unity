@@ -607,6 +607,7 @@ MonoBehaviour:
   m_Script: {fileID: 851182488}
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.HighDefinition.Runtime::UnityEngine.Rendering.HighDefinition.SceneObjectIDMapSceneAsset
+  m_Entries: []
 --- !u!4 &18139148
 Transform:
   m_ObjectHideFlags: 19
@@ -6634,6 +6635,7 @@ MonoBehaviour:
   crouchController: {fileID: 2312135464395040992}
   jumpController: {fileID: 2562490624827731979}
   notepadController: {fileID: 9073766142481002331}
+  staminaSliderController: {fileID: 0}
   isGameMenuActive: 0
   isDialogueWithSalerActive: 0
 --- !u!114 &221523066
@@ -169016,6 +169018,7 @@ MonoBehaviour:
   crouchController: {fileID: 2312135464395040992}
   jumpController: {fileID: 2562490624827731979}
   notepadController: {fileID: 9073766142481002331}
+  staminaSliderController: {fileID: 256439156}
   isGameMenuActive: 0
   isDialogueWithSalerActive: 0
   panelMenuButtons: {fileID: 429945853}
@@ -170865,6 +170868,7 @@ MonoBehaviour:
   crouchController: {fileID: 2312135464395040992}
   jumpController: {fileID: 2562490624827731979}
   notepadController: {fileID: 9073766142481002331}
+  staminaSliderController: {fileID: 256439156}
   isGameMenuActive: 0
   isDialogueWithSalerActive: 0
   playerAnimation: {fileID: 9073766142481002324}
