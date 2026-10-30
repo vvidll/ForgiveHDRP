@@ -13,6 +13,8 @@ namespace _Project.Scripts.PlacedItemsScripts
         [HideInInspector]
         public bool isChangeTimeDay = false; // поменялось время суток (нет/да)
 
+        [SerializeField] GameObject brokenCar, normalCar;
+
         private void Update()
         {
             if (buildingManager.nameItemForBuilding == "SleepingBag" && buildingManager.isHasPlacedItem == true 
@@ -30,6 +32,9 @@ namespace _Project.Scripts.PlacedItemsScripts
             isChangeTimeDay = true;
 
             audioCarController.ActivateAudio();
+
+            brokenCar.SetActive(true);
+            normalCar.SetActive(false);
 
             showMissionsManager.ShowMissionCheckCar();
 
