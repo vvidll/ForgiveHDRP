@@ -44,8 +44,13 @@ public class SettingsAnimationCarAndPlayerPositionStartGame : MonoBehaviour
 
     const string SaveRotationAndPositionKey = "Save_Rotation_And_Position";
 
+    bool isAnimationEnabled = false;
+
     private void Awake()
     {
+        if(isAnimationEnabled == true)
+            playerAnimator.SetTrigger("isDrivingStartGame");
+
         if (isSaveRotationAndPosition == 0)
             Debug.LogError("SAVE THE DATA IN Script: --GAME_MANAGER-- In Hierarchy -> 'SettingsAnimationCarAndPlayerPositionStartGame' -> 'three points ON the script' -> 'SAVE Player position and Rotation' ");
     }
@@ -85,7 +90,8 @@ public class SettingsAnimationCarAndPlayerPositionStartGame : MonoBehaviour
     void OnAnimation() 
     {
         // start the game -> on in play mode for animation work
-        playerAnimator.SetTrigger("isDrivingStartGame");
+
+        isAnimationEnabled = true;
 
         parentCar.gameObject.SetActive(true);
 
@@ -113,6 +119,8 @@ public class SettingsAnimationCarAndPlayerPositionStartGame : MonoBehaviour
     [ContextMenu("OFF Start Animation Car and Player position")]
     void OffAnimtion() 
     {
+        isAnimationEnabled = false;
+
         drivingPlayer.isInCar = false;
 
         player.SetParent(parent);
