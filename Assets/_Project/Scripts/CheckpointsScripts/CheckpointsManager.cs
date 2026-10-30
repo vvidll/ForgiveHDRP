@@ -6,14 +6,15 @@ namespace _Project.Scripts.CheckpointsScripts
     // скрипт отвечающий за общую работу всех чекпоинтов
     public class CheckpointManager : MonoBehaviour
     {
-        [SerializeField] GameObject[] activeCheckpointsArray;
+        public GameObject[] activeCheckpointsArray;
 
         int countTriggerCheckpoint = -1; // т.к массив начинается с 0
 
-        public const string CountTriggerCheckpointKey = "count_trigger_ckecpoint";
+        public const string CountTriggerCheckpointKey = "count_trigger_checkpoint";
 
         private void Awake()
         {
+            // this code worked after load control point
             if (PlayerPrefs.HasKey(CheckpointController.CheckpointActiveKey) && 
                 PlayerPrefs.HasKey(CountTriggerCheckpointKey) && SceneManager.GetActiveScene().name == "GameScene")
             {

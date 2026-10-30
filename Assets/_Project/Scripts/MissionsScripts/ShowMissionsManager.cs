@@ -1,4 +1,5 @@
 using _Project.Scripts.CarScripts;
+using _Project.Scripts.CheckpointsScripts;
 using _Project.Scripts.DialogueSystem.DialogueWithSalerScripts;
 using _Project.Scripts.InventoryScripts;
 using _Project.Scripts.PlayerScripts;
@@ -113,8 +114,12 @@ namespace _Project.Scripts.MissionsScripts
 
         public bool isFindItemsForCarRepair = false;
 
+        [SerializeField] CheckpointManager checkpointManager;
+
         [Header("Layer Mask Object")]
         [SerializeField] GameObject leftDoorObject;
+
+
 
 
         public override void OnTick()
@@ -138,12 +143,16 @@ namespace _Project.Scripts.MissionsScripts
         {
             windowMissionBuyItemsForSurvival.SetActive(true);
 
+            //checkpointManager.activeCheckpointsArray[0].SetActive(true);
+
             itemsForCarRepair.SetActive(false);
             itemsForSurvivalInNight.SetActive(true);
         }
 
         public void ShowMissionSitInCar() 
         {
+            //checkpointManager.activeCheckpointsArray[2].SetActive(true);
+
             if (leftDoorObject.layer == LayerMask.NameToLayer("Default"))
                 leftDoorObject.layer = LayerMask.NameToLayer("Interaction");
 
@@ -157,6 +166,8 @@ namespace _Project.Scripts.MissionsScripts
         {
             isFindSuitableLocation = true;
 
+            //checkpointManager.activeCheckpointsArray[3].SetActive(true);
+
             windowMissionSitInCar.SetActive(false);
             imageHintMissionSitInCar.gameObject.SetActive(false);
 
@@ -168,6 +179,8 @@ namespace _Project.Scripts.MissionsScripts
 
         public void ShowMissionSetUpBonfire() 
         {
+            //checkpointManager.activeCheckpointsArray[4].SetActive(true);
+
             windowMissionFindSuitableLocation.SetActive(false);
             markerSuitableLocationOnCompass.SetActive(false);
 

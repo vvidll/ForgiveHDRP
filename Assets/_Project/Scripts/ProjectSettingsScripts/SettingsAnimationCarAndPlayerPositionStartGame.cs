@@ -44,12 +44,15 @@ public class SettingsAnimationCarAndPlayerPositionStartGame : MonoBehaviour
 
     const string SaveRotationAndPositionKey = "Save_Rotation_And_Position";
 
-    bool isAnimationEnabled = false;
+    public bool isAnimationEnabled = false;
 
     private void Awake()
     {
-        if(isAnimationEnabled == true)
+        if (isAnimationEnabled == true) 
+        {
+            carAnimator.SetTrigger("isStartAnimation");
             playerAnimator.SetTrigger("isDrivingStartGame");
+        }
 
         if (isSaveRotationAndPosition == 0)
             Debug.LogError("SAVE THE DATA IN Script: --GAME_MANAGER-- In Hierarchy -> 'SettingsAnimationCarAndPlayerPositionStartGame' -> 'three points ON the script' -> 'SAVE Player position and Rotation' ");
