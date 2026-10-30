@@ -1,4 +1,5 @@
 using _Project.Scripts.CameraScripts;
+using _Project.Scripts.InterfaceScripts;
 using _Project.Scripts.NotepadScripts;
 using _Project.Scripts.PlayerScripts;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace _Project.Scripts
         [SerializeField] CrouchController crouchController;
         [SerializeField] JumpController jumpController;
         [SerializeField] NotepadController notepadController;
+        [SerializeField] StaminaSliderController staminaSliderController;
 
         [HideInInspector]
         public bool isGameMenuActive = false;
@@ -20,8 +22,11 @@ namespace _Project.Scripts
 
         public void EnableMovementAndHideCursor()
         {
-            if(isGameMenuActive == false)
+            if (isGameMenuActive == false) 
+            {
                 Time.timeScale = 1;
+                EnableScripts();
+            }
 
             if (isDialogueWithSalerActive == false)
                 EnableScripts();
@@ -31,8 +36,11 @@ namespace _Project.Scripts
 
         public void DisableMovementAndShowCursor()
         {
-            if(isGameMenuActive == true)
+            if (isGameMenuActive == true) 
+            {
+                DisableScripts();
                 Time.timeScale = 0;
+            }     
 
             if (isDialogueWithSalerActive == true) 
                 DisableScripts();
@@ -60,6 +68,7 @@ namespace _Project.Scripts
             crouchController.enabled = false;
             jumpController.enabled = false;
             notepadController.enabled = false;
+            staminaSliderController.enabled = false;
         }
 
         public void EnableScripts() 
@@ -69,6 +78,7 @@ namespace _Project.Scripts
             crouchController.enabled = true;
             jumpController.enabled = true;
             notepadController.enabled = true;
+            staminaSliderController.enabled = true;
         }
     }
 }
