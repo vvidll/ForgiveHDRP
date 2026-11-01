@@ -10,7 +10,7 @@ namespace _ProjectScripts.DialogueSystem.DialogueWithSalerScripts
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.tag == "Player")
+            if (other.CompareTag("Player"))
             {
                 dialogue.StopDialogue();
             }

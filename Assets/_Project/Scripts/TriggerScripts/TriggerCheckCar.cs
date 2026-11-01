@@ -13,7 +13,7 @@ public class TriggerCheckCar : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" && showMissionsManager.isNeedCarCheck == true && isActiveTrigger == false) 
+        if (other.CompareTag("Player") && showMissionsManager.isNeedCarCheck == true && isActiveTrigger == false) 
         {
             enemyWatcher.gameObject.SetActive(true);
             enemyWatcher.isActiveEnemyWatcher = true;

@@ -52,7 +52,7 @@ public class TeleportPlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "CloseZone")
+        if (other.CompareTag("CloseZone"))
         {
             warningMessageUI.SetActive(true);
 
@@ -64,7 +64,7 @@ public class TeleportPlayerController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "CloseZone") 
+        if (other.CompareTag("CloseZone")) 
         {
             warningMessageUI.SetActive(false);
 

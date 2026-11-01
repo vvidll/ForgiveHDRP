@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: bb5319fe7b6a8c0418c0fb12bc82f0ca
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 311148
+  packageName: Dependency Inspector
+  packageVersion: 0.1.0
+  assetPath: Assets/LuminaryLabs/DependencyInspector/Editor/DependencyInspector.cs
+  uploadId: 734200
