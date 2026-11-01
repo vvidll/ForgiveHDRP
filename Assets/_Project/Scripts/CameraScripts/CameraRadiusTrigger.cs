@@ -6,7 +6,7 @@ public class CameraRadiusTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "EnemyWatcher")
+        if (other.CompareTag("EnemyWatcher"))
         {
             Debug.Log("has contact!");
             enemyWatcherController.DisableEnemy();
