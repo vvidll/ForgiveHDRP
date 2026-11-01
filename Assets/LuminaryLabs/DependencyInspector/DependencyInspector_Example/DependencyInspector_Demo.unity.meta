@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2a0b7815e8e7e174a9fcff4ee9ac264c
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 311148
+  packageName: Dependency Inspector
+  packageVersion: 0.1.0
+  assetPath: Assets/LuminaryLabs/DependencyInspector/DependencyInspector_Example/DependencyInspector_Demo.unity
+  uploadId: 734200

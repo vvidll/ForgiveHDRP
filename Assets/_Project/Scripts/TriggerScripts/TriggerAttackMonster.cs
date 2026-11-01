@@ -14,7 +14,7 @@ public class TriggerAttackMonster : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" && showMissionsManager.isFindItemsForCarRepair == true) 
+        if (other.CompareTag("Player") && showMissionsManager.isFindItemsForCarRepair == true) 
         {
             attackMonster.gameObject.SetActive(true);
 

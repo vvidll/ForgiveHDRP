@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d4ded59471bb124478632d2a3df3f29e
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 311148
+  packageName: Dependency Inspector
+  packageVersion: 0.1.0
+  assetPath: Assets/LuminaryLabs/DependencyInspector/ReadMe.txt
+  uploadId: 734200

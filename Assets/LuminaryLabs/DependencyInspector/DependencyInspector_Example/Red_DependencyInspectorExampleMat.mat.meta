@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c43e5134dc84fb641a1df1877b606483
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 311148
+  packageName: Dependency Inspector
+  packageVersion: 0.1.0
+  assetPath: Assets/LuminaryLabs/DependencyInspector/DependencyInspector_Example/Red_DependencyInspectorExampleMat.mat
+  uploadId: 734200

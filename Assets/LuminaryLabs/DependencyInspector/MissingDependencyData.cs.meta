@@ -1,0 +1,9 @@
+fileFormatVersion: 2
+guid: d636923b940cb7143b37c54cf70b90e1
+AssetOrigin:
+  serializedVersion: 1
+  productId: 311148
+  packageName: Dependency Inspector
+  packageVersion: 0.1.0
+  assetPath: Assets/LuminaryLabs/DependencyInspector/MissingDependencyData.cs
+  uploadId: 734200
