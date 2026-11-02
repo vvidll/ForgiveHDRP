@@ -95,7 +95,7 @@ public class TeleportPlayerController : MonoBehaviour
 
         if (isCanTeleport == false && currentTime == 0)
         {
-            transitionsController.StartCoroutine(transitionsController.EndTimerCoroutine());
+            transitionsController.StartCoroutine(transitionsController.EndTimerCloseZoneCoroutine());
 
             player.position = teleportPointAfterFailedTry.position;
 
