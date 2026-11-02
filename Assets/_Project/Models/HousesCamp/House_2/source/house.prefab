@@ -958,7 +958,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 783112196005878324}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!33 &8203785629850502547
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1074,8 +1074,8 @@ HingeJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 0}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: -0.19, y: 0, z: 0}
-  m_Axis: {x: 1, y: 0, z: 90}
+  m_Anchor: {x: -0.17, y: 0, z: 0}
+  m_Axis: {x: 0, y: 0, z: 205.2}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
@@ -1092,8 +1092,8 @@ HingeJoint:
   m_ExtendedLimits: 0
   m_UseAcceleration: 0
   m_Limits:
-    min: 90
-    max: 270
+    min: -90
+    max: 90
     bounciness: 0.3
     bounceMinVelocity: 0.4
     contactDistance: 0
@@ -2801,7 +2801,7 @@ PrefabInstance:
       addedObject: {fileID: 1116556725243639404}
     - targetCorrespondingSourceObject: {fileID: 1457346748740604370, guid: 6c9bd98c7d30ded459ce5343e50cfea3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1747163527067669368}
+      addedObject: {fileID: 2718512409633480090}
   m_SourcePrefab: {fileID: 100100000, guid: 6c9bd98c7d30ded459ce5343e50cfea3, type: 3}
 --- !u!1 &79064974761392107 stripped
 GameObject:
@@ -2835,7 +2835,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!59 &1747163527067669368
+--- !u!59 &2718512409633480090
 HingeJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2845,8 +2845,8 @@ HingeJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 0}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: -0.15, y: 0, z: 0}
-  m_Axis: {x: 1, y: 0, z: 90}
+  m_Anchor: {x: -0.17, y: 0, z: 0}
+  m_Axis: {x: 0, y: 0, z: 205.2}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
@@ -2863,8 +2863,8 @@ HingeJoint:
   m_ExtendedLimits: 0
   m_UseAcceleration: 0
   m_Limits:
-    min: 90
-    max: 270
+    min: -90
+    max: 90
     bounciness: 0.3
     bounceMinVelocity: 0.4
     contactDistance: 0
@@ -2940,7 +2940,7 @@ PrefabInstance:
       addedObject: {fileID: 2385792633094139805}
     - targetCorrespondingSourceObject: {fileID: 1457346748740604370, guid: 6c9bd98c7d30ded459ce5343e50cfea3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8453432277222703905}
+      addedObject: {fileID: 1102453946002758239}
   m_SourcePrefab: {fileID: 100100000, guid: 6c9bd98c7d30ded459ce5343e50cfea3, type: 3}
 --- !u!4 &4451455602217687747 stripped
 Transform:
@@ -2979,7 +2979,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 4
   m_CollisionDetection: 0
---- !u!59 &8453432277222703905
+--- !u!59 &1102453946002758239
 HingeJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2989,8 +2989,8 @@ HingeJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 0}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: -0.15, y: 0, z: 0}
-  m_Axis: {x: 0, y: 0, z: 90}
+  m_Anchor: {x: -0.17, y: 0, z: 0}
+  m_Axis: {x: 0, y: 0, z: 205.2}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
@@ -3007,8 +3007,8 @@ HingeJoint:
   m_ExtendedLimits: 0
   m_UseAcceleration: 0
   m_Limits:
-    min: 90
-    max: 270
+    min: -90
+    max: 90
     bounciness: 0.3
     bounceMinVelocity: 0.4
     contactDistance: 0

@@ -78,7 +78,7 @@ namespace _Project.Scripts.InteractScripts.CarInteractScripts
 
                 carDoorAnimator.SetBool("isOpenAndCloseDoor", true);
 
-                transitionsController.TransitionTeleportCar();
+                transitionsController.StartCoroutine(transitionsController.SitCarCoroutine());
             }
 
 

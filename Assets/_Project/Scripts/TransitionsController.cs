@@ -18,12 +18,42 @@ namespace _Project.Scripts
         [Header("RigBuilder")]
         [SerializeField] RigBuilder rigBuilder;
 
-        [Header("UI")]
+        // Begin Start Game Window
+        [Header("Begin Start Game Window - UI")]
         [SerializeField] Image beginTransitionWindow;
+        float timerForChangeToTransparentTransitionWindow = 5f;
+        float timerDisableBeginStartGameWindows = 1f;
 
-        [SerializeField] Image teleportPlayerTransitionWindow;
+        // Sit Car Window
+        [Header("Sit Car Window - UI")]
+        [SerializeField] Image sitCarTransitionWindow;
+        float timerBeforeSitCar = 3f;
+        float timerAfterTeleportToPointFirstLocation = 3f;
+        float timerDisableSitCarWindow = 1f;
 
+        // Driving Car in to Second Location Window
+        [Header("Driving Car in to Second Location Window - UI")]
+        [SerializeField] Image drivingCarSecondLocationTransitionWindow;
+
+        float timerBeforeTeleportToSecondLocation = .1f;
+        float timerAfterTeleportToSecondLocation = 3f;
+
+        // Teleport Player From Cloze Zone
+        [Header("Teleport Player From Cloze Zone - UI")]
+        [SerializeField] Image teleportPlayerTransitionClozeZoneWindow;
+        float timerDisableTeleporCloseZoneWindow = 1f;
+        float timerAfterTeleportCloseZone = 2f;
+
+        // Sleep Window
+        [Header("Sleep Window - UI")]
         [SerializeField] Image sleepTransitionWindow;
+        float timerChangeSleep = .1f;
+        float timerAfterChangeSleep = 1f;
+        float timerDisableSleepWindow = 1f;
+
+
+        float timeDisableBeginTransitionWindow = 7f;
+
 
         [Header("References From Other Classes")]
         [SerializeField] TeleportCar teleportCar;
@@ -32,31 +62,27 @@ namespace _Project.Scripts
         [SerializeField] DrivingPlayer drivingPlayer;
 
 
-        float timeBeforeOnWindowTransition = 3f;
-        float timeBeforeChangeAlphaValueForBeginWindow = 2f;
-
-        float timerForBeginTransition = 5f;
-        float timerRestartWindowValue = .1f;
-
-        float timeDisableWindow = 7f;
 
         private void Awake()
         {
             // on when need transition in start game
-            //ChangeAlphaValueForBeginWindow();
+            StartCoroutine(BeginStartGameCoroutine());
         }
 
-        public void TransitionTeleportCar()
+        IEnumerator BeginStartGameCoroutine() 
         {
-            StartCoroutine(TeleportCarCoroutine());
-
-            Debug.Log("transition active");
-        }
-
-        IEnumerator TeleportCarCoroutine()
-        {
-            yield return new WaitForSeconds(timeBeforeOnWindowTransition);
             beginTransitionWindow.gameObject.SetActive(true);
+            ChangeAlphaValueForBeginStartGameWindow();
+
+            yield return new WaitForSeconds(timerDisableBeginStartGameWindows);
+            beginTransitionWindow.gameObject.SetActive(false);
+        }
+
+        public IEnumerator SitCarCoroutine()
+        {
+            yield return new WaitForSeconds(timerBeforeSitCar);
+            sitCarTransitionWindow.gameObject.SetActive(true);
+            ChangeAlphaValueForSitCarWindowToBlack();
 
             cinemachineCamera.SetActive(true);
             rigBuilder.layers[drivingPlayer.rigHeadIndex].active = true;
@@ -65,49 +91,76 @@ namespace _Project.Scripts
 
             showMissionsManager.ShowMissionFindSuitableLocation();
 
-            yield return new WaitForSeconds(timeBeforeChangeAlphaValueForBeginWindow);
-            ChangeAlphaValueForBeginWindowToWhite();
+            yield return new WaitForSeconds(timerAfterTeleportToPointFirstLocation);
+            ChangeAlphaValueForSitCarWindowToWhite();
+
+            yield return new WaitForSeconds(timerDisableSitCarWindow);
+            sitCarTransitionWindow.gameObject.SetActive(false);
 
         }
 
         public IEnumerator DrivingToNewLocationCoroutine() 
         {
             // restart change alpha value
-            yield return new WaitForSeconds(timerRestartWindowValue);
-            ChangeAlphaValueForBeginWindowToBlack();
+            yield return new WaitForSeconds(timerBeforeTeleportToSecondLocation);
+
+            drivingCarSecondLocationTransitionWindow.gameObject.SetActive(true);
+            ChangeAlphaValueForDrivingCarToSecondLocationWindowToBlack();
 
             teleportCar.TeleportToNewLocation();
 
-            ChangeAlphaValueForBeginWindowToWhite();
+            yield return new WaitForSeconds(timerAfterTeleportToSecondLocation);
+            ChangeAlphaValueForDrivingCarToSecondLocationWindowToWhite();
 
-            yield return new WaitForSeconds(timeDisableWindow);
-            beginTransitionWindow.gameObject.SetActive(false);
+            yield return new WaitForSeconds(timeDisableBeginTransitionWindow);
+            drivingCarSecondLocationTransitionWindow.gameObject.SetActive(false);
 
         }
 
         public IEnumerator ChangeTimeDayToNightCoroutine() 
         {
-            //sleepTransitionWindow.gameObject.SetActive(true);
-            ChangeAlphaValueForBeginWindowToBlack();
+            sleepTransitionWindow.gameObject.SetActive(true);
+            ChangeAlphaValueForSleepWindowToBlack();
 
-            yield return new WaitForSeconds(timerRestartWindowValue);
+            yield return new WaitForSeconds(timerChangeSleep);
             sunController.ChangeRotationSun();
 
-            ChangeAlphaValueForBeginWindowToWhite();
+
+            yield return new WaitForSeconds(timerAfterChangeSleep);
+            ChangeAlphaValueForSleepWindowToWhite();
+
+            yield return new WaitForSeconds(timerDisableSleepWindow);
+            sleepTransitionWindow.gameObject.SetActive(false);
         }
 
-        public IEnumerator EndTimerCoroutine() 
+        public IEnumerator EndTimerCloseZoneCoroutine() 
         {
+            teleportPlayerTransitionClozeZoneWindow.gameObject.SetActive(true);
             ChangeAlphaValueForTeleportPlayerFromCloseZoneWindowToBlack();
 
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(timerAfterTeleportCloseZone);
             ChangeAlphaValueForTeleportPlayerFromCloseZoneToWhite();
+
+            yield return new WaitForSeconds(timerDisableTeleporCloseZoneWindow);
+            teleportPlayerTransitionClozeZoneWindow.gameObject.SetActive(false);
         }
 
-        public void ChangeAlphaValueForBeginWindowToWhite() => beginTransitionWindow.DOColor(new Color(0, 0, 0, 0), timerForBeginTransition);
-        public void ChangeAlphaValueForBeginWindowToBlack() => beginTransitionWindow.DOColor(new Color(0, 0, 0, 255), .5f);
+        public void ChangeAlphaValueForBeginStartGameWindow() 
+        { 
+            beginTransitionWindow.DOColor(new Color(0, 0, 0, 0), timerForChangeToTransparentTransitionWindow);
+        }
 
-        public void ChangeAlphaValueForTeleportPlayerFromCloseZoneWindowToBlack() => teleportPlayerTransitionWindow.DOColor(new Color(0, 0, 0, 255), .5f);
-        public void ChangeAlphaValueForTeleportPlayerFromCloseZoneToWhite() => teleportPlayerTransitionWindow.DOColor(new Color(0, 0, 0, 0), .5f);
+        public void ChangeAlphaValueForSitCarWindowToBlack() => sitCarTransitionWindow.DOColor(new Color(0, 0, 0, 255), .5f);
+        public void ChangeAlphaValueForSitCarWindowToWhite() => sitCarTransitionWindow.DOColor(new Color(0, 0, 0, 0), timerForChangeToTransparentTransitionWindow);
+
+        public void ChangeAlphaValueForDrivingCarToSecondLocationWindowToWhite() => drivingCarSecondLocationTransitionWindow.DOColor(new Color(0, 0, 0, 0), timerForChangeToTransparentTransitionWindow);
+
+        public void ChangeAlphaValueForDrivingCarToSecondLocationWindowToBlack() => drivingCarSecondLocationTransitionWindow.DOColor(new Color(0, 0, 0, 255), .5f);
+
+        public void ChangeAlphaValueForSleepWindowToWhite() => sleepTransitionWindow.DOColor(new Color(0, 0, 0, 0), timerForChangeToTransparentTransitionWindow);
+        public void ChangeAlphaValueForSleepWindowToBlack() => sleepTransitionWindow.DOColor(new Color(0, 0, 0, 255), .5f);
+
+        public void ChangeAlphaValueForTeleportPlayerFromCloseZoneWindowToBlack() => teleportPlayerTransitionClozeZoneWindow.DOColor(new Color(0, 0, 0, 255), .5f);
+        public void ChangeAlphaValueForTeleportPlayerFromCloseZoneToWhite() => teleportPlayerTransitionClozeZoneWindow.DOColor(new Color(0, 0, 0, 0), timerForChangeToTransparentTransitionWindow);
     }
 }
