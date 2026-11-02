@@ -641,9 +641,9 @@ private string NicifyListElementLabel(string groupName, string propertyPath)
                     if (comp == null)
                     {
                         // Missing script
-                        if (!entry.ComponentMissingItems.ContainsKey(null))
-                            entry.ComponentMissingItems[null] = new List<MissingReferenceItem>();
-                        entry.ComponentMissingItems[null].Add(new MissingReferenceItem { PropertyPath = "Missing Script" });
+                        //if (!entry.ComponentMissingItems.ContainsKey(null))
+                          //  entry.ComponentMissingItems[null] = new List<MissingReferenceItem>();
+                        //entry.ComponentMissingItems[null].Add(new MissingReferenceItem { PropertyPath = "Missing Script" });
                         continue;
                     }
 
