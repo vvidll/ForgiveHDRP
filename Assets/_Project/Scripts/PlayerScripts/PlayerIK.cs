@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerIK : MonoBehaviour
 {
-    [SerializeField] Animator playerAnimator;
+    /*[SerializeField] Animator playerAnimator;
 
     [SerializeField] bool isIKActive = true;
 
@@ -32,5 +32,5 @@ public class PlayerIK : MonoBehaviour
             playerAnimator.SetIKPositionWeight(AvatarIKGoal.RightFoot, rightFootWeight);
             playerAnimator.SetIKPosition(AvatarIKGoal.RightFoot, rightFoot.position);
         }
-    }
+    }*/
 }

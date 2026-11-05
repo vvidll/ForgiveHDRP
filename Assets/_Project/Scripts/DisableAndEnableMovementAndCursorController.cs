@@ -8,12 +8,14 @@ namespace _Project.Scripts
 {
     public class DisableAndEnableMovementAndCursorController : MonoCache
     {
+        [SerializeField] PlayerAnimation playerAnimator;
         [SerializeField] PlayerMovement playerMovement;
         [SerializeField] CameraController cameraController;
         [SerializeField] CrouchController crouchController;
         [SerializeField] JumpController jumpController;
         [SerializeField] NotepadController notepadController;
         [SerializeField] StaminaSliderController staminaSliderController;
+
 
         [HideInInspector]
         public bool isGameMenuActive = false;
@@ -69,6 +71,7 @@ namespace _Project.Scripts
             jumpController.enabled = false;
             notepadController.enabled = false;
             staminaSliderController.enabled = false;
+            playerAnimator.CallIdleAnimation();
         }
 
         public void EnableScripts() 

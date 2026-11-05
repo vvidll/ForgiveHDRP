@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using _Project.Scripts.DialogueSystem.DialogueWithSalerScripts;
 using _Project.Scripts.InventoryScripts;
 using _Project.Scripts.MissionsScripts;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,7 +24,7 @@ namespace _Project.Scripts.InteractScripts
         [HideInInspector]
         public bool isShowDescription = false;
 
-        float interval = .01f;
+        int interval = 1; // 0.0001 in seconds
 
         Coroutine checkCoroutine;
 
@@ -35,23 +37,36 @@ namespace _Project.Scripts.InteractScripts
 
         private void Start()
         {
-            if(checkCoroutine == null)
-                checkCoroutine = StartCoroutine(CheckRaycastHitCoroutine());
-        }
-
-        IEnumerator CheckRaycastHitCoroutine()
-        {
-            while (true)
+            try
             {
-                InteractionRay();
-                yield return new WaitForSeconds(interval);
+                CheckRaycastHitCoroutine().Forget();
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError(ex);
             }
         }
 
-        /*private void Update()
+        async UniTaskVoid CheckRaycastHitCoroutine()
         {
-            InteractionRay();
-        }*/
+            while (true)
+            {
+                try
+                {
+                    InteractionRay();
+                    await UniTask.Delay(interval, cancellationToken: this.GetCancellationTokenOnDestroy());
+                }
+
+                catch (OperationCanceledException) { break; } // cancellation exception after exit from game
+
+                catch (Exception ex)
+                {
+                    Debug.LogError(ex);
+                }
+
+
+            }
+        }
 
         public void InteractionRay()
         {
