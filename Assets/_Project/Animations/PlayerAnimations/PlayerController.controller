@@ -73,7 +73,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 1d20aabefe7da284ea0a1193bb2444a3, type: 2}
+  m_Motion: {fileID: -203655887218126122, guid: 3a4471dd73975e34796cf55672f59f90, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -240,7 +240,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 48d1602725edebc47b55a6b2ecf771e5, type: 2}
+    m_Motion: {fileID: -203655887218126122, guid: 2cdec3ec509bcf74abccf3f7a8791223, type: 3}
     m_Threshold: 0.75
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -248,7 +248,7 @@ BlendTree:
     m_DirectBlendParameter: x
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: effa1c9732c591b45912b48d85df9e44, type: 2}
+    m_Motion: {fileID: -203655887218126122, guid: ff1ea5b58eab8a04b97dc4bd8d32fc2d, type: 3}
     m_Threshold: 1.2
     m_Position: {x: 0, y: 1}
     m_TimeScale: 1
@@ -256,7 +256,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 802df6a044a32d444ae1c53162ab2d8b, type: 2}
+    m_Motion: {fileID: -203655887218126122, guid: fb8153801fb444648b758df42ddb9ca2, type: 3}
     m_Threshold: 1.6500001
     m_Position: {x: 0, y: 1.5}
     m_TimeScale: 1
@@ -264,7 +264,7 @@ BlendTree:
     m_DirectBlendParameter: x
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 630d46e1a31fd8f4c8b2aa1532f9ac30, type: 2}
+    m_Motion: {fileID: -203655887218126122, guid: 6bc194465f9f80741be7725de5a57f84, type: 3}
     m_Threshold: 2.1000001
     m_Position: {x: 0, y: -1}
     m_TimeScale: 1
@@ -630,7 +630,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: cb8bffdf58e7ed14bac67914c7a521ba, type: 2}
+  m_Motion: {fileID: 7400000, guid: 7a7d64f376231ce4592af6f44d4dca3c, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using _Project.Scripts.CameraScripts;
 using _Project.Scripts.InteractScripts.CarInteractScripts;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
@@ -152,30 +154,34 @@ namespace _Project.Scripts.PlayerScripts
 
             player.SetParent(parentObject);
 
-            StartCoroutine(EndPlayAnimationExitingCarCoroutine());
+            EndPlayAnimationExitingCarCoroutine().Forget();
 
         }
 
-        IEnumerator EndPlayAnimationExitingCarCoroutine()
+        async UniTaskVoid EndPlayAnimationExitingCarCoroutine()
         {
-            yield return new WaitForSeconds(7);
+            try 
+            { 
+                await UniTask.Delay(7000, cancellationToken: this.GetCancellationTokenOnDestroy());
 
-            this.transform.localEulerAngles = newRotationPlayer; // for right rotate player after the end animation "exit from car"
+                this.transform.localEulerAngles = newRotationPlayer; // for right rotate player after the end animation "exit from car"
 
-            playerAnimator.SetTrigger("isIdle");
+                playerAnimator.SetTrigger("isIdle");
 
-            imageInteractHold.fillAmount = 0;
+                imageInteractHold.fillAmount = 0;
 
-            carDoorAnimator.SetBool("isOpenAndCloseDoor", false);
+                carDoorAnimator.SetBool("isOpenAndCloseDoor", false);
 
-            rigBuilder.layers[rigHeadIndex].active = true;
+                rigBuilder.layers[rigHeadIndex].active = true;
 
-            cinemachineCamera.SetActive(true);
+                cinemachineCamera.SetActive(true);
 
-            panelMissions.SetActive(true);
+                panelMissions.SetActive(true);
 
-            yield return new WaitForSeconds(2);
-            carCollider.isTrigger = false;
+                await UniTask.Delay(2000, cancellationToken: this.GetCancellationTokenOnDestroy());
+                carCollider.isTrigger = false;
+            }
+            catch (Exception ex) { Debug.LogError(ex); }
         }
 
         [ContextMenu("Reset Key Driver (Польз.)")]

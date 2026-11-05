@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using _Project.Scripts.AudioScripts;
 using _Project.Scripts.InterfaceScripts;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace _Project.Scripts.PlayerScripts
@@ -58,22 +60,36 @@ namespace _Project.Scripts.PlayerScripts
 
         public void Jump()
         {
-            Velocity.y += Mathf.Sqrt(jumpForce * -2f * Gravity);
+            try 
+            { 
+                Velocity.y += Mathf.Sqrt(jumpForce * -2f * Gravity);
 
-            staminaSliderController.DecreasedStaminaFromJump();
-            StartCoroutine(StopAnimateJumping());
+                staminaSliderController.DecreasedStaminaFromJump();
+                StopAnimateJumping().Forget();
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError(ex);
+            }
         }
 
-        IEnumerator StopAnimateJumping()
+        async UniTaskVoid StopAnimateJumping()
         {
-            yield return new WaitForSeconds(1f);
+            try 
+            { 
+                await UniTask.Delay(1000, cancellationToken: this.GetCancellationTokenOnDestroy());
 
-            if (_isJumping == 1)
-                animator.SetBool("isJumping", false);
+                if (_isJumping == 1)
+                    animator.SetBool("isJumping", false);
 
-            audioManager.PlayAudioForGrassEndJump();
+                audioManager.PlayAudioForGrassEndJump();
 
-            countPressSpace = 0;
+                countPressSpace = 0;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError(ex);
+            }
         }
     }
 }
