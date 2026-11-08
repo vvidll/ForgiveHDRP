@@ -1,12 +1,14 @@
+using System;
 using System.Collections;
 using _Project.Scripts.MissionsScripts;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class PrepareFoodController : MonoBehaviour
 {
     [SerializeField] ShowMissionsManager missionManager;
 
-    int timerPrepareFood = 2; // two seconds
+    int timerPrepareFood = 2000; // two seconds
 
     private void Update()
     {
@@ -14,13 +16,18 @@ public class PrepareFoodController : MonoBehaviour
         {
             // сделать анимацию готовки еды
 
-            StartCoroutine(ShowMissionAfterPrepareFoodCoroutine());
+            ShowMissionAfterPrepareFoodCoroutine().Forget();
         }
     }
 
-    IEnumerator ShowMissionAfterPrepareFoodCoroutine() 
+    async UniTaskVoid ShowMissionAfterPrepareFoodCoroutine() 
     {
-        yield return new WaitForSeconds(timerPrepareFood);
-        missionManager.ShowMissionPutSleepingBag();
+        try
+        {
+            await UniTask.Delay(timerPrepareFood, cancellationToken: this.GetCancellationTokenOnDestroy());
+            missionManager.ShowMissionPutSleepingBag();
+        }
+        catch (Exception ex) { Debug.LogError(ex); }
+
     }
 }

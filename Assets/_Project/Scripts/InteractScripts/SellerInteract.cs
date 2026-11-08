@@ -1,5 +1,5 @@
 using _Project.Scripts.DialogueSystem.DialogueWithSalerScripts;
-using Scripts.TextScripts;
+using _Project.Scripts.TextScripts;
 using TMPro;
 using UnityEngine;
 

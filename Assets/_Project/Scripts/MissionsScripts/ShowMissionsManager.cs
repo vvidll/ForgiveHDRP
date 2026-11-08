@@ -3,6 +3,7 @@ using _Project.Scripts.CheckpointsScripts;
 using _Project.Scripts.DialogueSystem.DialogueWithSalerScripts;
 using _Project.Scripts.InventoryScripts;
 using _Project.Scripts.PlayerScripts;
+using _Project.Scripts.ProjectSettingsScripts;
 using UnityEngine;
 using UnityEngine.UI;
 

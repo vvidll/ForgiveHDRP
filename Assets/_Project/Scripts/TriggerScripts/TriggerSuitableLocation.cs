@@ -1,24 +1,34 @@
+using _Project.Scripts.CheckpointsScripts;
 using _Project.Scripts.MissionsScripts;
 using UnityEngine;
 
-public class TriggerSuitableLocation : MonoBehaviour
+namespace _Project.Scripts.TriggerScripts
 {
-    [SerializeField] ShowMissionsManager showMissions;
-    [SerializeField] BuildingPlaceCollision[] buildingPlaceCollisions;
-
-    private void OnTriggerEnter(Collider other)
+    public class TriggerSuitableLocation : MonoBehaviour
     {
-        if (other.CompareTag("Player")) 
-            showMissions.ShowMissionSetUpBonfire();
-    }
+        [SerializeField] ShowMissionsManager showMissions;
+        [SerializeField] BuildingPlaceCollision[] buildingPlaceCollisions;
+        [SerializeField] CheckpointManager checkpointManager;
 
-    // почему-то при выходе из подходящей зоны(для постройки) объекты можно разместить
-    private void OnTriggerExit(Collider other) 
-    {
-        for (int i = 0; i < buildingPlaceCollisions.Length; i++)
+        private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("PlacedObjects"))
-                buildingPlaceCollisions[i].isGroundedForPlaceBuildings = false;
+            if (other.CompareTag("Player"))
+            {
+                showMissions.ShowMissionSetUpBonfire();
+
+                checkpointManager.checkpointsArray[3].SetActive(true); // finded suitable location
+            }
+
+        }
+
+        // почему-то при выходе из подходящей зоны(для постройки) объекты можно разместить
+        private void OnTriggerExit(Collider other)
+        {
+            for (int i = 0; i < buildingPlaceCollisions.Length; i++)
+            {
+                if (other.CompareTag("PlacedObjects"))
+                    buildingPlaceCollisions[i].isGroundedForPlaceBuildings = false;
+            }
         }
     }
 }

@@ -26,12 +26,14 @@ namespace _Project.Scripts.PlacedItemsScripts
 
         public void InteractBuildings()
         {
-            transitionsController.StartCoroutine(transitionsController.ChangeTimeDayToNightCoroutine());
+            transitionsController.ChangeTimeDayToNightCoroutine().Forget();
             playerInteraction.isShowDescription = false;
 
             isChangeTimeDay = true;
 
-            audioCarController.ActivateAudio();
+            // on this when need
+            //audioCarController.ActivateAudio();
+            Debug.LogError("Audio is not active!");
 
             brokenCar.SetActive(true);
             normalCar.SetActive(false);

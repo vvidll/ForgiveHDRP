@@ -3,37 +3,40 @@ using _Project.Scripts.PlacedItemsScripts;
 using _Project.Scripts.PlayerScripts;
 using UnityEngine;
 
-public class EnemyWatcherController : Enemy
+namespace _Project.Scripts.AI
 {
-    [SerializeField] internal SleepingBagController sleepingBagController;
-
-    [SerializeField] PlayerMovement playerMovement;
-
-    [SerializeField] CameraController cameraController;
-
-    public bool isActiveEnemyWatcher = false;
-
-    public override void LookAtPlayer()
+    public class EnemyWatcherController : Enemy
     {
-        if (playerMovement.isHasKeyboardInput == true)
+        [SerializeField] internal SleepingBagController sleepingBagController;
+
+        [SerializeField] PlayerMovement playerMovement;
+
+        [SerializeField] CameraController cameraController;
+
+        public bool isActiveEnemyWatcher = false;
+
+        public override void LookAtPlayer()
         {
-            animatorEnemy.SetBool("isWalking", true);
-            transform.LookAt(player);
+            if (playerMovement.isHasKeyboardInput == true)
+            {
+                animatorEnemy.SetBool("isWalking", true);
+                transform.LookAt(player);
+            }
+
+            else
+            {
+                animatorEnemy.SetBool("isWalking", false);
+            }
         }
 
-        else
+        public void DisableEnemy()
         {
-            animatorEnemy.SetBool("isWalking", false);
-        }
-    }
-
-    public void DisableEnemy() 
-    {
-        if (sleepingBagController.isChangeTimeDay == true
-            && isActiveEnemyWatcher == true) 
-        {
-            this.gameObject.SetActive(false);
-            isActiveEnemyWatcher = false;
+            if (sleepingBagController.isChangeTimeDay == true
+                && isActiveEnemyWatcher == true)
+            {
+                this.gameObject.SetActive(false);
+                isActiveEnemyWatcher = false;
+            }
         }
     }
 }
