@@ -3,109 +3,156 @@ using _Project.Scripts;
 using TMPro;
 using UnityEngine;
 
-public class TeleportPlayerController : MonoBehaviour
+namespace _Project.Scripts.PlayerScripts
 {
-    [SerializeField] TransitionsController transitionsController;
-
-    [SerializeField] GameObject warningMessageUI;
-    [SerializeField] TMP_Text timerText;
-
-    [SerializeField] Transform teleportPointAfterFailedTry;
-
-    [SerializeField] Transform player;
-
-    public bool isCanTeleport = false;
-
-    int maxTime = 5;
-
-    int currentTime = 0;
-
-    int interval = 1;
-
-    bool startCoroutine = false;
-
-    private void Start()
+    public class TeleportPlayerController : MonoBehaviour
     {
-        currentTime = maxTime;
-    }
+        [SerializeField] TransitionsController transitionsController;
 
-    private void Update()
-    {
-        if (isCanTeleport == true && startCoroutine == false) 
-        {
-            StartCoroutine(WarningTimerCoroutine());
-        }
+        [SerializeField] GameObject warningMessageUI;
+        [SerializeField] TMP_Text timerText;
 
-        if(isCanTeleport == false && startCoroutine == true && currentTime != 0)
+        [SerializeField] Transform[] teleportPointsAfterFailedTry;
+
+        [SerializeField] CharacterController player;
+
+        public bool isCanTeleport = false;
+
+        int maxTime = 5;
+
+        int currentTime = 0;
+
+        int interval = 1;
+
+        bool startTask = false;
+
+        private void Start()
         {
             currentTime = maxTime;
-            timerText.text = currentTime.ToString();
-
-            player.position = this.transform.position;
-
-            Debug.Log("Not teleporting!");
-
-            startCoroutine = false;
         }
 
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("CloseZone"))
+        private void Update()
         {
-            warningMessageUI.SetActive(true);
-
-            isCanTeleport = true;
-
-        }
-
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("CloseZone")) 
-        {
-            warningMessageUI.SetActive(false);
-
-            isCanTeleport = false;
-        }
-
-        
-    }
-
-    IEnumerator WarningTimerCoroutine() 
-    {
-        startCoroutine = true;
-
-        while (currentTime > 0 && isCanTeleport == true)
-        {
-            yield return new WaitForSeconds(interval);
-
-            currentTime--;
-
-            if (currentTime <= 0) 
+            if (isCanTeleport == true && startTask == false)
             {
-                currentTime = 0;
+                StartCoroutine(WarningTimerCoroutine());
+            }
+
+            if (isCanTeleport == false && startTask == true && currentTime != 0)
+            {
+                currentTime = maxTime;
+                timerText.text = currentTime.ToString();
+
+                player.transform.position = this.transform.position;
+
+                Debug.Log("Not teleporting!");
+
+                startTask = false;
+            }
+
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("CloseZone"))
+            {
+                warningMessageUI.SetActive(true);
+
+                isCanTeleport = true;
+
+            }
+
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("CloseZone"))
+            {
+                warningMessageUI.SetActive(false);
+
                 isCanTeleport = false;
             }
 
-            timerText.text = currentTime.ToString();
+
         }
 
-        if (isCanTeleport == false && currentTime == 0)
+        // !!! dont change to UniTask,
+        // else when exit from play mode in pause (Esc), happens memory overflow !!!
+        IEnumerator WarningTimerCoroutine()
         {
-            transitionsController.StartCoroutine(transitionsController.EndTimerCloseZoneCoroutine());
+            startTask = true;
 
-            player.position = teleportPointAfterFailedTry.position;
+            while (currentTime > 0 && isCanTeleport == true)
+            {
+                yield return new WaitForSeconds(interval);
 
-            Debug.Log("We teleporting!");
+                currentTime--;
 
-            startCoroutine = false;
+                if (currentTime <= 0)
+                {
+                    currentTime = 0;
+                    isCanTeleport = false;
+                }
 
-            currentTime = maxTime;
-            timerText.text = currentTime.ToString();
+                timerText.text = currentTime.ToString();
+            }
+
+            if (isCanTeleport == false && currentTime == 0)
+            {
+                transitionsController.EndTimerCloseZoneCoroutine().Forget();
+
+                player.enabled = false;
+                player.transform.position = FindNearDistanceToPointTeleport().position;
+                player.enabled = true;
+
+                Debug.Log("We teleporting!");
+
+                startTask = false;
+
+                currentTime = maxTime;
+                timerText.text = currentTime.ToString();
+
+                warningMessageUI.SetActive(false);
+            }
         }
-    }
 
+        Transform FindNearDistanceToPointTeleport()
+        {
+            float currentDistance = 0f;
+
+            float minDistance = float.MaxValue;
+
+            Transform nearPoint = null;
+
+            foreach (Transform point in teleportPointsAfterFailedTry)
+            {
+                currentDistance = Vector3.Distance(point.position, player.transform.position);
+
+                Debug.Log("point distance to player:" + currentDistance);
+
+                if (currentDistance < minDistance)
+                {
+                    minDistance = currentDistance;
+                    nearPoint = point;
+                }
+            }
+
+
+            Debug.Log("min distance to player:" + minDistance);
+
+            Debug.Log(nearPoint);
+
+            return nearPoint;
+
+
+
+
+
+
+
+
+
+        }
+
+    }
 }

@@ -1,3 +1,4 @@
+using _Project.Scripts.AI;
 using UnityEngine;
 
 public class CameraRadiusTrigger : MonoBehaviour

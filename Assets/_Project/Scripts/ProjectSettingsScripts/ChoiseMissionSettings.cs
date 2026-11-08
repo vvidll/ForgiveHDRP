@@ -1,121 +1,124 @@
 using System.Collections.Generic;
 using _Project.Scripts;
+using _Project.Scripts.AI;
 using _Project.Scripts.MissionsScripts;
 using _Project.Scripts.PlacedItemsScripts;
 using UnityEngine;
 
-public class ChoiseMissionSettings : MonoBehaviour
+namespace _Project.Scripts.ProjectSettingsScripts
 {
-
-    [Header("Work In Play Mode!\n" +
-        "This Script Need For Quickly Change Missions\n" +
-        "Key < PageUp > for skip mission")]
-
-    [Header("References From Other Classes")]
-    [SerializeField] TransitionsController transitionsController;
-    [SerializeField] EnemyWatcherController enemyWatcherController;
-    [SerializeField] SleepingBagController sleepingBagController;
-
-    [SerializeField] List<GameObject> windowsMissions;
-
-    [SerializeField] ShowMissionsManager showMissionsManager;
-
-    [Header("Main Window Missions")]
-    [SerializeField] GameObject panelMissions;
-
-    public int currentMission = 0;
-
-    public bool isCurrentFirstMissionActive = false;
-
-    private void Awake()
+    public class ChoiseMissionSettings : MonoBehaviour
     {
-        panelMissions.SetActive(true);
-    }
 
-    void Update()
-    {
-        ChoiseMission();
-    }
+        [Header("Work In Play Mode!\n" +
+            "This Script Need For Quickly Change Missions\n" +
+            "Key < PageUp > for skip mission")]
 
-    public void ChoiseMission() 
-    {
-        if (Input.GetKeyDown(KeyCode.PageUp))
+        [Header("References From Other Classes")]
+        [SerializeField] TransitionsController transitionsController;
+        [SerializeField] EnemyWatcherController enemyWatcherController;
+        [SerializeField] SleepingBagController sleepingBagController;
+
+        [SerializeField] List<GameObject> windowsMissions;
+
+        [SerializeField] ShowMissionsManager showMissionsManager;
+
+        [Header("Main Window Missions")]
+        [SerializeField] GameObject panelMissions;
+
+        public int currentMission = 0;
+
+        public bool isCurrentFirstMissionActive = false;
+
+        [SerializeField] GameObject brokenCar, normalCar;
+
+        private void Awake()
         {
-            isCurrentFirstMissionActive = true;
-
-            currentMission++;
-
-            if (currentMission >= windowsMissions.Count)
-                currentMission = 8;
-
-            ShowCurrentMission();
+            panelMissions.SetActive(true);
         }
 
-        /*if (Input.GetKeyDown(KeyCode.DownArrow))
+        void Update()
         {
-            currentMission--;
+            ChoiseMission();
+        }
 
-            if (currentMission <= 0)
-                currentMission = 0;
-
-            ShowCurrentMission();
-        }*/
-    }
-
-    public void ShowCurrentMission() 
-    {
-
-        switch (currentMission)
+        public void ChoiseMission()
         {
-            case 0:
-                showMissionsManager.ShowMissionBuyItemsShopForSurvival();
-                Debug.Log("Show Mission Buy Items Shop For Survival active!");
-                break;
+            if (Input.GetKeyDown(KeyCode.PageUp))
+            {
+                isCurrentFirstMissionActive = true;
 
-            case 1:
-                showMissionsManager.ShowMissionSitInCar();
-                Debug.Log("Show Mission Sit In Car active!");
-                break;
+                currentMission++;
 
-            case 2:
-                showMissionsManager.ShowMissionFindSuitableLocation();
-                break;
+                if (currentMission >= windowsMissions.Count)
+                    currentMission = 8;
 
-            case 3:
-                showMissionsManager.ShowMissionSetUpBonfire();
-                break;
+                ShowCurrentMission();
+            }
 
-            case 4:
-                showMissionsManager.ShowMissionPlaceTent();
-                break;
+            /*if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                currentMission--;
 
-            case 5:
-                showMissionsManager.ShowMissionPrepareFood();
-                break;
+                if (currentMission <= 0)
+                    currentMission = 0;
 
-            case 6:
-                showMissionsManager.ShowMissionPutSleepingBag();
-                break;
+                ShowCurrentMission();
+            }*/
+        }
 
-            case 7:
-                showMissionsManager.ShowMissionGoSleep();
-                break;
+        public void ShowCurrentMission()
+        {
 
-            case 8:
-                sleepingBagController.isChangeTimeDay = true;
-                enemyWatcherController.isActiveEnemyWatcher = true;
-                transitionsController.StartCoroutine(transitionsController.ChangeTimeDayToNightCoroutine());
-                showMissionsManager.ShowMissionCheckCar();
-                break;
+            switch (currentMission)
+            {
+                case 0:
+                    showMissionsManager.ShowMissionBuyItemsShopForSurvival();
+                    Debug.Log("Show Mission Buy Items Shop For Survival active!");
+                    break;
 
-            case 9:
-                showMissionsManager.ShowMissionFindItemsForCarRepair();
-                break;
+                case 1:
+                    showMissionsManager.ShowMissionSitInCar();
+                    Debug.Log("Show Mission Sit In Car active!");
+                    break;
+
+                case 2:
+                    showMissionsManager.ShowMissionFindSuitableLocation();
+                    break;
+
+                case 3:
+                    showMissionsManager.ShowMissionSetUpBonfire();
+                    break;
+
+                case 4:
+                    showMissionsManager.ShowMissionPlaceTent();
+                    break;
+
+                case 5:
+                    showMissionsManager.ShowMissionPrepareFood();
+                    break;
+
+                case 6:
+                    showMissionsManager.ShowMissionPutSleepingBag();
+                    break;
+
+                case 7:
+                    showMissionsManager.ShowMissionGoSleep();
+                    break;
+
+                case 8:
+                    sleepingBagController.isChangeTimeDay = true;
+                    enemyWatcherController.isActiveEnemyWatcher = true;
+                    transitionsController.ChangeTimeDayToNightCoroutine().Forget();
+                    brokenCar.SetActive(true);
+                    normalCar.SetActive(false);
+                    showMissionsManager.ShowMissionCheckCar();
+                    break;
+
+                case 9:
+                    showMissionsManager.ShowMissionFindItemsForCarRepair();
+                    break;
+            }
         }
     }
-
-    
-
-
-    
 }

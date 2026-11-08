@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using _Project.Scripts.MissionsScripts;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,19 +30,19 @@ namespace _Project.Scripts.InteractScripts.CarInteractScripts
                 isHideSlider = true;
                 isStartProgressAnalysis = false;
 
-                StartCoroutine(ShowTextForAnalysisSuccessful());
+                ShowTextForAnalysisSuccessful().Forget();
 
                 Debug.Log("Анализ закончился");
             }
 
             if (isStartProgressAnalysis == true && countStep == 0)
-                StartCoroutine(IncreasedProgressAnalysisCororutineStepFirst());
+                IncreasedProgressAnalysisCororutineStepFirst().Forget();
 
             if (countStep == 1)
-                StartCoroutine(IncreasedProgressAnalysisCororutineStepSecond());
+                IncreasedProgressAnalysisCororutineStepSecond().Forget();
 
             if (countStep == 2)
-                StartCoroutine(IncreasedProgressAnalysisCororutineStepThird());
+                IncreasedProgressAnalysisCororutineStepThird().Forget();
 
         }
 
@@ -78,42 +80,58 @@ namespace _Project.Scripts.InteractScripts.CarInteractScripts
             }
         }
 
-        IEnumerator ShowTextForAnalysisSuccessful()
+        async UniTaskVoid ShowTextForAnalysisSuccessful()
         {
-            textForSuccessfulAnalysis.gameObject.SetActive(true);
-            textForSuccessfulAnalysis.text = "Analysis successful!";
+            try 
+            { 
+                textForSuccessfulAnalysis.gameObject.SetActive(true);
+                textForSuccessfulAnalysis.text = "Analysis successful!";
 
-            isStartProgressAnalysis = false;
-            showMissionsManager.isNeedCarCheck = false;
+                isStartProgressAnalysis = false;
+                showMissionsManager.isNeedCarCheck = false;
 
-            yield return new WaitForSeconds(2);
-            textForSuccessfulAnalysis.gameObject.SetActive(false);
+                await UniTask.Delay(2000, cancellationToken: this.GetCancellationTokenOnDestroy());
+                textForSuccessfulAnalysis.gameObject.SetActive(false);
 
-            showMissionsManager.ShowMissionFindItemsForCarRepair();
+                showMissionsManager.ShowMissionFindItemsForCarRepair();
+            }
+            catch (Exception ex) { Debug.LogError(ex); }
         }
 
-        IEnumerator IncreasedProgressAnalysisCororutineStepFirst()
+        async UniTaskVoid IncreasedProgressAnalysisCororutineStepFirst()
         {
-            yield return new WaitForSeconds(2);
-            barProgressionForWriteInNotepad.value = 10;
+            try 
+            { 
+                await UniTask.Delay(2000, cancellationToken: this.GetCancellationTokenOnDestroy());
+                barProgressionForWriteInNotepad.value = 10;
 
-            countStep = 1;
+                countStep = 1;
+            }
+            catch (Exception ex) { Debug.LogError(ex); }
         }
 
-        IEnumerator IncreasedProgressAnalysisCororutineStepSecond()
+        async UniTaskVoid IncreasedProgressAnalysisCororutineStepSecond()
         {
-            yield return new WaitForSeconds(2);
-            barProgressionForWriteInNotepad.value = 30;
+            try 
+            { 
+                await UniTask.Delay(2000, cancellationToken: this.GetCancellationTokenOnDestroy());
+                barProgressionForWriteInNotepad.value = 30;
 
-            countStep = 2;
+                countStep = 2;
+            }
+            catch (Exception ex) { Debug.LogError(ex); }
         }
 
-        IEnumerator IncreasedProgressAnalysisCororutineStepThird()
+        async UniTaskVoid IncreasedProgressAnalysisCororutineStepThird()
         {
-            yield return new WaitForSeconds(3);
-            barProgressionForWriteInNotepad.value = 50;
+            try 
+            { 
+                await UniTask.Delay(3000, cancellationToken: this.GetCancellationTokenOnDestroy());
+                barProgressionForWriteInNotepad.value = 50;
 
-            countStep = 3;
+                countStep = 3;
+            }
+            catch (Exception ex) { Debug.LogError(ex); }
         }
     }
 }

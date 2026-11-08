@@ -1,25 +1,28 @@
 using _Project.Scripts.MissionsScripts;
 using UnityEngine;
 
-public class TriggerAttackMonster : MonoBehaviour
+namespace _Project.Scripts.TriggerScripts
 {
-    [SerializeField] ShowMissionsManager showMissionsManager;
-
-    [SerializeField] Transform attackMonster;
-
-    [SerializeField] Animator attackMonsterAnimator;
-
-    //[HideInInspector]
-    public bool isHasFollowing = false;
-
-    private void OnTriggerEnter(Collider other)
+    public class TriggerAttackMonster : MonoBehaviour
     {
-        if (other.CompareTag("Player") && showMissionsManager.isFindItemsForCarRepair == true) 
+        [SerializeField] ShowMissionsManager showMissionsManager;
+
+        [SerializeField] Transform attackMonster;
+
+        [SerializeField] Animator attackMonsterAnimator;
+
+        //[HideInInspector]
+        public bool isHasFollowing = false;
+
+        private void OnTriggerEnter(Collider other)
         {
-            attackMonster.gameObject.SetActive(true);
+            if (other.CompareTag("Player") && showMissionsManager.isFindItemsForCarRepair == true)
+            {
+                attackMonster.gameObject.SetActive(true);
 
-            isHasFollowing = true;
+                isHasFollowing = true;
 
+            }
         }
     }
 }

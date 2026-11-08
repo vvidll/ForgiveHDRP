@@ -10,7 +10,7 @@ public class TriggerTeleportCarNextLocation : MonoBehaviour
     {
         if (other.CompareTag("Car")) 
         {
-            transitionsController.StartCoroutine(transitionsController.DrivingToNewLocationCoroutine());
+            transitionsController.DrivingToNewLocationCoroutine().Forget();
         }
 
         

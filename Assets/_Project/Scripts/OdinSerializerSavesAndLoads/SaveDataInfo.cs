@@ -1,27 +1,32 @@
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
-using System.Collections;
+using Cysharp.Threading.Tasks;
+using System;
 
 public class SaveDataInfo : MonoBehaviour
 {
     [SerializeField] TMP_Text saveDataInfoText;
 
-    float timeCoroutineEnd = .1f;
+    int timeCoroutineEnd = 100;
     float timeChangeColorText = 3f;
 
     public void InfoActive() 
     { 
         saveDataInfoText.DOColor(new Color(255, 255, 255, 255), timeChangeColorText);
-        StartCoroutine(DisableInfoCoroutine());
+        DisableInfoCoroutine().Forget();
     }
     
     void InfoNonActive() => saveDataInfoText.DOColor(new Color(255, 255, 255, 0), timeChangeColorText);
 
-    IEnumerator DisableInfoCoroutine() 
+    async UniTaskVoid DisableInfoCoroutine() 
     {
-        yield return new WaitForSeconds(timeCoroutineEnd);
-        InfoNonActive();
+        try 
+        { 
+            await UniTask.Delay(timeCoroutineEnd, cancellationToken: this.GetCancellationTokenOnDestroy());
+            InfoNonActive();
+        }
+        catch (Exception ex) { Debug.LogError(ex); }
     }
 
 }

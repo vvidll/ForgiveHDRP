@@ -1,13 +1,16 @@
 using UnityEngine;
 
-public class TriggerGates : MonoBehaviour
+namespace _Project.Scripts.TriggerScripts
 {
-    [SerializeField] Animator playerAnimator;
-    private void OnTriggerEnter(Collider other)
+    public class TriggerGates : MonoBehaviour
     {
-        if (other.CompareTag("Player")) 
+        [SerializeField] Animator playerAnimator;
+        private void OnTriggerEnter(Collider other)
         {
-            playerAnimator.SetBool("isCloseGates", true);
+            if (other.CompareTag("Player"))
+            {
+                playerAnimator.SetBool("isCloseGates", true);
+            }
         }
     }
 }

@@ -1,12 +1,18 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace _Project.Scripts.CheckpointsScripts
 {
+    /*public static class Checkpoints
+    {
+        public static Dictionary<int, string> CkeckpointsInfo;
+    }*/
+
     // скрипт отвечающий за общую работу всех чекпоинтов
     public class CheckpointManager : MonoBehaviour
     {
-        public GameObject[] activeCheckpointsArray;
+        public GameObject[] checkpointsArray;
 
         int countTriggerCheckpoint = -1; // т.к массив начинается с 0
 
@@ -14,6 +20,16 @@ namespace _Project.Scripts.CheckpointsScripts
 
         private void Awake()
         {
+            // checks number and name checkpoint before launch the game
+            /*Checkpoints.CkeckpointsInfo = new Dictionary<int, string>()
+            {
+                { 0, "Checkpoint (ExitFromCar)" },
+                { 1, "Checkpoint (EnterInShop)" },
+                { 2, "Checkpoint (SitInTheCar)" },
+                { 3, "Checkpoint (FindedSuitableLocation)" }
+            };*/
+            Debug.LogError("checks number and name checkpoint before launch the game!");
+
             // this code worked after load control point
             if (PlayerPrefs.HasKey(CheckpointController.CheckpointActiveKey) && 
                 PlayerPrefs.HasKey(CountTriggerCheckpointKey) && SceneManager.GetActiveScene().name == "GameScene")
@@ -23,9 +39,9 @@ namespace _Project.Scripts.CheckpointsScripts
 
                 if (CheckpointController.checkpointActive == 0 && countTriggerCheckpoint != -1) 
                 {
-                    for (int i = 0; i <= countTriggerCheckpoint && i < activeCheckpointsArray.Length; i++) 
+                    for (int i = 0; i <= countTriggerCheckpoint && i < checkpointsArray.Length; i++) 
                     {
-                        activeCheckpointsArray[i].gameObject.SetActive(false);
+                        checkpointsArray[i].gameObject.SetActive(false);
                     }
                 }
             }

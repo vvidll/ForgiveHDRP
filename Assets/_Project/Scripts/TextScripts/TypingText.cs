@@ -1,10 +1,9 @@
 using System;
-using System.Collections;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
-namespace Scripts.TextScripts
+namespace _Project.Scripts.TextScripts
 {
     public class TypingText : MonoBehaviour
     {
