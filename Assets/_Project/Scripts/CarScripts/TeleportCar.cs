@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using _Project.Scripts.InteractScripts.CarInteractScripts;
 using _Project.Scripts.PlayerScripts;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
@@ -70,7 +72,7 @@ namespace _Project.Scripts.CarScripts
                 rigBuilder.layers[i].active = true;
             }
 
-            StartCoroutine(EnableOldLocationCarAnimationDrivingCoroutine());
+            EnableOldLocationCarAnimationDrivingCoroutine().Forget();
 
             Debug.Log("teleport complete");
 
@@ -88,26 +90,33 @@ namespace _Project.Scripts.CarScripts
 
             childPlayerObject.SetParent(parentCarObject);
 
-            StartCoroutine(EnableNewLocationCarAnimationDrivingCoroutine());
+            EnableNewLocationCarAnimationDrivingCoroutine().Forget();
         }
 
         // в первой локе
-        IEnumerator EnableOldLocationCarAnimationDrivingCoroutine() 
+        async UniTaskVoid EnableOldLocationCarAnimationDrivingCoroutine() 
         {
-            yield return new WaitForSeconds(1f);
+            try 
+            { 
+                await UniTask.Delay(1000, cancellationToken: this.GetCancellationTokenOnDestroy());
 
-            carAnimator.enabled = true;
-            carAnimator.SetTrigger("isDrivingToNewLocation");
+                carAnimator.enabled = true;
+                carAnimator.SetTrigger("isDrivingToNewLocation");
+            }
+            catch (Exception ex) { Debug.LogError(ex); }
         }
 
         // во второй локе
-        IEnumerator EnableNewLocationCarAnimationDrivingCoroutine()
+        async UniTaskVoid EnableNewLocationCarAnimationDrivingCoroutine()
         {
-            yield return new WaitForSeconds(1f);
+            try 
+            { 
+                await UniTask.Delay(1000, cancellationToken: this.GetCancellationTokenOnDestroy());
 
-            carAnimator.enabled = true;
-            carAnimator.SetTrigger("isDrivingToDirtRoad");
-
+                carAnimator.enabled = true;
+                carAnimator.SetTrigger("isDrivingToDirtRoad");
+            }
+            catch (Exception ex) { Debug.LogError(ex); }
         }
     }
 }

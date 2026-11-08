@@ -25,6 +25,9 @@ namespace LuminaryLabs.Tools
     {
         #region Fields
 
+        // all need namespace add here
+        private static readonly string[] AllowedNamespaces = { "_Project" };
+
         private Vector2 _scrollPos;
         private List<DependencyEntry> _dependencyEntries = new List<DependencyEntry>();
 
@@ -32,7 +35,7 @@ namespace LuminaryLabs.Tools
         // Key = (component, propertyPath), Value = new reference
         private readonly Dictionary<(Component comp, string propertyPath), Object> _pendingAssignments = new();
 
-        // Dictionary to preserve foldout states (keyed by GameObject instanceID)
+        // Dictionary to preserve foldout states (keyed by GameObject EntityId)
         private static Dictionary<EntityId, bool> _foldoutStates = new Dictionary<EntityId, bool>();
 
         #endregion
@@ -66,7 +69,7 @@ namespace LuminaryLabs.Tools
         private void OnGUI()
         {
             DrawHeader();
-            // Optional: DrawButtons();
+            DrawButtons();
             DrawDependencyList();
         }
 
@@ -109,7 +112,7 @@ namespace LuminaryLabs.Tools
             EditorGUILayout.EndHorizontal();
         }
 
-        /*
+        
         private void DrawButtons()
         {
             if (GUILayout.Button("Scan Scene"))
@@ -117,12 +120,12 @@ namespace LuminaryLabs.Tools
                 _dependencyEntries = ScanScene();
                 _pendingAssignments.Clear();
             }
-            if (GUILayout.Button("Fill Dependencies"))
+            /*if (GUILayout.Button("Fill Dependencies"))
             {
                 ApplyPendingAssignments();
-            }
+            }*/
         }
-        */
+        
 
         /// <summary>
         /// Draws the list of dependency entries in a scrollable view.
@@ -360,83 +363,83 @@ namespace LuminaryLabs.Tools
             EditorGUILayout.EndVertical();
         }
 
-private string NicifyListElementLabel(string groupName, string propertyPath)
-{
-    // Example: "options[2].icon" => "Element 2 - Icon"
-    // You can customize this logic further if needed
-    int startBracket = propertyPath.IndexOf('[');
-    int endBracket = propertyPath.IndexOf(']');
-    if (startBracket >= 0 && endBracket > startBracket)
-    {
-        string indexStr = propertyPath.Substring(startBracket + 1, endBracket - startBracket - 1);
-        string remainder = propertyPath.Substring(endBracket + 1).TrimStart('.');
-        string nicifiedRemainder = string.IsNullOrEmpty(remainder)
-            ? ""
-            : " - " + ObjectNames.NicifyVariableName(remainder);
-        return $"Element {indexStr}{nicifiedRemainder}";
-    }
-    return ObjectNames.NicifyVariableName(propertyPath);
-}
+        private string NicifyListElementLabel(string groupName, string propertyPath)
+        {
+            // Example: "options[2].icon" => "Element 2 - Icon"
+            // You can customize this logic further if needed
+            int startBracket = propertyPath.IndexOf('[');
+            int endBracket = propertyPath.IndexOf(']');
+            if (startBracket >= 0 && endBracket > startBracket)
+            {
+                string indexStr = propertyPath.Substring(startBracket + 1, endBracket - startBracket - 1);
+                string remainder = propertyPath.Substring(endBracket + 1).TrimStart('.');
+                string nicifiedRemainder = string.IsNullOrEmpty(remainder)
+                    ? ""
+                    : " - " + ObjectNames.NicifyVariableName(remainder);
+                return $"Element {indexStr}{nicifiedRemainder}";
+            }
+            return ObjectNames.NicifyVariableName(propertyPath);
+        }
 
         private void DrawMissingReferenceItem(Component comp, MissingReferenceItem item)
-{
-    // Use the stored type if available; otherwise fall back to reflection
-    System.Type fieldType = item.FieldType 
-        ?? GetFieldType(comp, item.PropertyPath) 
-        ?? typeof(Object);
-
-    (Component, string) key = (comp, item.PropertyPath);
-    Object currentPendingValue = _pendingAssignments.ContainsKey(key)
-        ? _pendingAssignments[key]
-        : GetFieldValue(comp, item.PropertyPath) as Object;
-
-    // Build a more readable display name
-    string displayName = NicifyPropertyPath(item.PropertyPath);
-
-    EditorGUILayout.BeginHorizontal();
-    EditorGUILayout.LabelField(displayName, GUILayout.Width(200));
-
-    EditorGUI.BeginChangeCheck();
-    Object newValue = EditorGUILayout.ObjectField(
-        currentPendingValue,
-        fieldType,
-        allowSceneObjects: true,
-        GUILayout.MinWidth(100)
-    );
-    if (EditorGUI.EndChangeCheck())
-    {
-        _pendingAssignments[key] = newValue;
-        SetFieldValue(comp, item.PropertyPath, newValue);
-        EditorUtility.SetDirty(comp);
-    }
-
-    EditorGUILayout.EndHorizontal();
-}
-
-
-        
-
-    private string NicifyPropertyPath(string path)
-    {
-        // Example: "options[2].icon" => "Options[2] > Icon"
-        string[] parts = path.Split('.');
-        for (int i = 0; i < parts.Length; i++)
         {
-            int bracketPos = parts[i].IndexOf('[');
-            if (bracketPos >= 0)
+            // Use the stored type if available; otherwise fall back to reflection
+            System.Type fieldType = item.FieldType
+                ?? GetFieldType(comp, item.PropertyPath)
+                ?? typeof(Object);
+
+            (Component, string) key = (comp, item.PropertyPath);
+            Object currentPendingValue = _pendingAssignments.ContainsKey(key)
+                ? _pendingAssignments[key]
+                : GetFieldValue(comp, item.PropertyPath) as Object;
+
+            // Build a more readable display name
+            string displayName = NicifyPropertyPath(item.PropertyPath);
+
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField(displayName, GUILayout.Width(200));
+
+            EditorGUI.BeginChangeCheck();
+            Object newValue = EditorGUILayout.ObjectField(
+                currentPendingValue,
+                fieldType,
+                allowSceneObjects: true,
+                GUILayout.MinWidth(100)
+            );
+            if (EditorGUI.EndChangeCheck())
             {
-                // Split out the bracketed portion
-                string baseName = parts[i].Substring(0, bracketPos);
-                string bracketPart = parts[i].Substring(bracketPos);
-                parts[i] = ObjectNames.NicifyVariableName(baseName) + bracketPart;
+                _pendingAssignments[key] = newValue;
+                SetFieldValue(comp, item.PropertyPath, newValue);
+                EditorUtility.SetDirty(comp);
             }
-            else
-            {
-                parts[i] = ObjectNames.NicifyVariableName(parts[i]);
-            }
+
+            EditorGUILayout.EndHorizontal();
         }
-        return string.Join(" > ", parts);
-    }
+
+
+
+
+        private string NicifyPropertyPath(string path)
+        {
+            // Example: "options[2].icon" => "Options[2] > Icon"
+            string[] parts = path.Split('.');
+            for (int i = 0; i < parts.Length; i++)
+            {
+                int bracketPos = parts[i].IndexOf('[');
+                if (bracketPos >= 0)
+                {
+                    // Split out the bracketed portion
+                    string baseName = parts[i].Substring(0, bracketPos);
+                    string bracketPart = parts[i].Substring(bracketPos);
+                    parts[i] = ObjectNames.NicifyVariableName(baseName) + bracketPart;
+                }
+                else
+                {
+                    parts[i] = ObjectNames.NicifyVariableName(parts[i]);
+                }
+            }
+            return string.Join(" > ", parts);
+        }
 
 
         /// <summary>
@@ -594,7 +597,7 @@ private string NicifyListElementLabel(string groupName, string propertyPath)
 
                 // If this is the last token, we stop. We'll let the caller
                 // do the final get/set with the field info + index.
-                if (i == tokens.Length - 1) 
+                if (i == tokens.Length - 1)
                     return (currentObject, currentField, listIndex);
 
                 // Otherwise, we step deeper:
@@ -616,7 +619,7 @@ private string NicifyListElementLabel(string groupName, string propertyPath)
         }
 
 
-        
+
 
         /// <summary>
         /// Scans the current scene for GameObjects with missing object references and UnityEvent fields.
@@ -629,10 +632,11 @@ private string NicifyListElementLabel(string groupName, string propertyPath)
             var report = new List<DependencyEntry>();
 
             // Find all active GameObjects in the scene
-            foreach (var go in Object.FindObjectsOfType<GameObject>())
+            foreach (var go in FindObjectsByType<GameObject>())
             {
                 // If you only want to scan scene objects (not prefabs in the project),
                 // you might check "go.scene.IsValid()" etc.
+                go.scene.IsValid();
 
                 var entry = new DependencyEntry { GameObject = go };
 
@@ -640,10 +644,13 @@ private string NicifyListElementLabel(string groupName, string propertyPath)
                 {
                     if (comp == null)
                     {
-                        // Missing script
-                        //if (!entry.ComponentMissingItems.ContainsKey(null))
-                          //  entry.ComponentMissingItems[null] = new List<MissingReferenceItem>();
-                        //entry.ComponentMissingItems[null].Add(new MissingReferenceItem { PropertyPath = "Missing Script" });
+                        // Для отсутствующего скрипта используем "заглушку", 
+                        // так как Dictionary не принимает null
+                        Transform missingScriptKey = entry.GameObject.transform; // Используем Transform как ключ-заглушку
+                        if (!entry.ComponentMissingItems.ContainsKey(missingScriptKey))
+                            entry.ComponentMissingItems[missingScriptKey] = new List<MissingReferenceItem>();
+
+                        entry.ComponentMissingItems[missingScriptKey].Add(new MissingReferenceItem { PropertyPath = "Missing Script" });
                         continue;
                     }
 
@@ -654,14 +661,17 @@ private string NicifyListElementLabel(string groupName, string propertyPath)
                     if (comp is MonoBehaviour)
                     {
                         // Recursively check the fields in this component
+
                         ScanFields(comp, comp, comp.GetType(), "", missingItems, unityEventItems);
+                        
                     }
 
-                            // Check native (non-MonoBehaviour) components explicitly
+                    // Check native (non-MonoBehaviour) components explicitly
+                    /*
                     var nativeMissingItems = new List<MissingReferenceItem>();
                     CheckNativeComponentDependencies(comp, nativeMissingItems);
                     missingItems.AddRange(nativeMissingItems);
-
+                    */
                     if (missingItems.Count > 0)
                     {
                         entry.ComponentMissingItems[comp] = missingItems;
@@ -682,135 +692,135 @@ private string NicifyListElementLabel(string groupName, string propertyPath)
         }
 
         // Explicit check for native Unity components (e.g. joints) that don't expose fields via reflection.
-/// <summary>
-/// Explicit check for native Unity components (e.g. joints) that don't expose fields via reflection.
-/// </summary>
-private static void CheckNativeComponentDependencies(Component comp, List<MissingReferenceItem> missingItems)
-{
-    // 3D Joints
-    if (comp is FixedJoint fixedJoint)
-    {
-        if (fixedJoint.connectedBody == null)
+        /// <summary>
+        /// Explicit check for native Unity components (e.g. joints) that don't expose fields via reflection.
+        /// </summary>
+        private static void CheckNativeComponentDependencies(Component comp, List<MissingReferenceItem> missingItems)
         {
-            missingItems.Add(new MissingReferenceItem
+            // 3D Joints
+            if (comp is FixedJoint fixedJoint)
             {
-                PropertyPath = "connectedBody",
-                FieldType = typeof(Rigidbody)
-            });
-        }
-    }
-    else if (comp is HingeJoint hingeJoint)
-    {
-        if (hingeJoint.connectedBody == null)
-        {
-            missingItems.Add(new MissingReferenceItem
+                if (fixedJoint.connectedBody == null)
+                {
+                    missingItems.Add(new MissingReferenceItem
+                    {
+                        PropertyPath = "connectedBody",
+                        FieldType = typeof(Rigidbody)
+                    });
+                }
+            }
+            else if (comp is HingeJoint hingeJoint)
             {
-                PropertyPath = "connectedBody",
-                FieldType = typeof(Rigidbody)
-            });
-        }
-    }
-    else if (comp is SpringJoint springJoint)
-    {
-        if (springJoint.connectedBody == null)
-        {
-            missingItems.Add(new MissingReferenceItem
+                if (hingeJoint.connectedBody == null)
+                {
+                    missingItems.Add(new MissingReferenceItem
+                    {
+                        PropertyPath = "connectedBody",
+                        FieldType = typeof(Rigidbody)
+                    });
+                }
+            }
+            else if (comp is SpringJoint springJoint)
             {
-                PropertyPath = "connectedBody",
-                FieldType = typeof(Rigidbody)
-            });
-        }
-    }
-    else if (comp is CharacterJoint characterJoint)
-    {
-        if (characterJoint.connectedBody == null)
-        {
-            missingItems.Add(new MissingReferenceItem
+                if (springJoint.connectedBody == null)
+                {
+                    missingItems.Add(new MissingReferenceItem
+                    {
+                        PropertyPath = "connectedBody",
+                        FieldType = typeof(Rigidbody)
+                    });
+                }
+            }
+            else if (comp is CharacterJoint characterJoint)
             {
-                PropertyPath = "connectedBody",
-                FieldType = typeof(Rigidbody)
-            });
-        }
-    }
-    else if (comp is ConfigurableJoint configurableJoint)
-    {
-        if (configurableJoint.connectedBody == null)
-        {
-            missingItems.Add(new MissingReferenceItem
+                if (characterJoint.connectedBody == null)
+                {
+                    missingItems.Add(new MissingReferenceItem
+                    {
+                        PropertyPath = "connectedBody",
+                        FieldType = typeof(Rigidbody)
+                    });
+                }
+            }
+            else if (comp is ConfigurableJoint configurableJoint)
             {
-                PropertyPath = "connectedBody",
-                FieldType = typeof(Rigidbody)
-            });
-        }
-    }
-    // 2D Joints
-    else if (comp is FixedJoint2D fixedJoint2D)
-    {
-        if (fixedJoint2D.connectedBody == null)
-        {
-            missingItems.Add(new MissingReferenceItem
+                if (configurableJoint.connectedBody == null)
+                {
+                    missingItems.Add(new MissingReferenceItem
+                    {
+                        PropertyPath = "connectedBody",
+                        FieldType = typeof(Rigidbody)
+                    });
+                }
+            }
+            // 2D Joints
+            else if (comp is FixedJoint2D fixedJoint2D)
             {
-                PropertyPath = "connectedBody",
-                FieldType = typeof(Rigidbody2D)
-            });
-        }
-    }
-    else if (comp is HingeJoint2D hingeJoint2D)
-    {
-        if (hingeJoint2D.connectedBody == null)
-        {
-            missingItems.Add(new MissingReferenceItem
+                if (fixedJoint2D.connectedBody == null)
+                {
+                    missingItems.Add(new MissingReferenceItem
+                    {
+                        PropertyPath = "connectedBody",
+                        FieldType = typeof(Rigidbody2D)
+                    });
+                }
+            }
+            else if (comp is HingeJoint2D hingeJoint2D)
             {
-                PropertyPath = "connectedBody",
-                FieldType = typeof(Rigidbody2D)
-            });
-        }
-    }
-    else if (comp is SpringJoint2D springJoint2D)
-    {
-        if (springJoint2D.connectedBody == null)
-        {
-            missingItems.Add(new MissingReferenceItem
+                if (hingeJoint2D.connectedBody == null)
+                {
+                    missingItems.Add(new MissingReferenceItem
+                    {
+                        PropertyPath = "connectedBody",
+                        FieldType = typeof(Rigidbody2D)
+                    });
+                }
+            }
+            else if (comp is SpringJoint2D springJoint2D)
             {
-                PropertyPath = "connectedBody",
-                FieldType = typeof(Rigidbody2D)
-            });
-        }
-    }
-    else if (comp is DistanceJoint2D distanceJoint2D)
-    {
-        if (distanceJoint2D.connectedBody == null)
-        {
-            missingItems.Add(new MissingReferenceItem
+                if (springJoint2D.connectedBody == null)
+                {
+                    missingItems.Add(new MissingReferenceItem
+                    {
+                        PropertyPath = "connectedBody",
+                        FieldType = typeof(Rigidbody2D)
+                    });
+                }
+            }
+            else if (comp is DistanceJoint2D distanceJoint2D)
             {
-                PropertyPath = "connectedBody",
-                FieldType = typeof(Rigidbody2D)
-            });
-        }
-    }
-    else if (comp is SliderJoint2D sliderJoint2D)
-    {
-        if (sliderJoint2D.connectedBody == null)
-        {
-            missingItems.Add(new MissingReferenceItem
+                if (distanceJoint2D.connectedBody == null)
+                {
+                    missingItems.Add(new MissingReferenceItem
+                    {
+                        PropertyPath = "connectedBody",
+                        FieldType = typeof(Rigidbody2D)
+                    });
+                }
+            }
+            else if (comp is SliderJoint2D sliderJoint2D)
             {
-                PropertyPath = "connectedBody",
-                FieldType = typeof(Rigidbody2D)
-            });
-        }
-    }
-    else if (comp is RelativeJoint2D relativeJoint2D)
-    {
-        if (relativeJoint2D.connectedBody == null)
-        {
-            missingItems.Add(new MissingReferenceItem
+                if (sliderJoint2D.connectedBody == null)
+                {
+                    missingItems.Add(new MissingReferenceItem
+                    {
+                        PropertyPath = "connectedBody",
+                        FieldType = typeof(Rigidbody2D)
+                    });
+                }
+            }
+            else if (comp is RelativeJoint2D relativeJoint2D)
             {
-                PropertyPath = "connectedBody",
-                FieldType = typeof(Rigidbody2D)
-            });
+                if (relativeJoint2D.connectedBody == null)
+                {
+                    missingItems.Add(new MissingReferenceItem
+                    {
+                        PropertyPath = "connectedBody",
+                        FieldType = typeof(Rigidbody2D)
+                    });
+                }
+            }
         }
-    }
-}
 
         /// <summary>
         /// Recursively scans a given object’s fields to find:
@@ -818,118 +828,154 @@ private static void CheckNativeComponentDependencies(Component comp, List<Missin
         ///  - UnityEvent fields
         ///  - nested serializable objects that might have more references
         /// </summary>
-private static void ScanFields(Component rootComp,
+        /// 
+
+        private static bool IsAllowedType(Type t)
+        {
+            var ns = t.Namespace;
+            if (string.IsNullOrEmpty(ns)) return false;
+            foreach (var allowed in AllowedNamespaces)
+                if (ns == allowed || ns.StartsWith(allowed + ".")) return true;
+            return false;
+        }
+        private static void ScanFields(Component rootComp,
                                object currentObject,
                                Type currentType,
                                string pathPrefix,
                                List<MissingReferenceItem> missingItems,
                                List<MissingReferenceItem> unityEventItems)
-{
-    if (currentObject == null || currentType == null)
-        return;
-
-    // If this type is a UnityEngine.Object, we don't drill deeper (avoid infinite loops).
-    if (typeof(UnityEngine.Object).IsAssignableFrom(currentType) && !(currentObject is MonoBehaviour))
-        return;
-
-    // If it's a string or primitive, ignore
-    if (currentType.IsPrimitive || currentType == typeof(string))
-        return;
-
-    // Get all fields
-    BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
-    foreach (var field in currentType.GetFields(flags))
-    {
-        bool isPublic = field.IsPublic;
-        bool isSerialized = field.GetCustomAttribute<SerializeField>() != null;
-        bool isHidden = field.GetCustomAttribute<HideInInspector>() != null;
-        if (!(isPublic || isSerialized) || isHidden)
-            continue;
-
-        Type fieldType = field.FieldType;
-        object fieldValue = field.GetValue(currentObject);
-
-        // Build a path: if pathPrefix is empty, it’s just the field name; otherwise "prefix.fieldName"
-        string thisPath = string.IsNullOrEmpty(pathPrefix)
-            ? field.Name
-            : (pathPrefix + "." + field.Name);
-
-        // 1) Direct UnityEngine.Object?
-        if (typeof(UnityEngine.Object).IsAssignableFrom(fieldType))
         {
-            // Check if null
-            if (fieldValue == null || fieldValue.Equals(null))
+            if (currentObject == null || currentType == null)
+                return;
+
+            // Если это UnityEngine.Object, не углубляемся (кроме MonoBehaviour)
+            /*
+            if (typeof(UnityEngine.Object).IsAssignableFrom(currentType) && !(currentObject is MonoBehaviour))
+                return;
+            */
+            // Корневой/рекурсивный MonoBehaviour — проверяем namespace
+            if (currentObject is MonoBehaviour mb)
             {
-                missingItems.Add(new MissingReferenceItem
+                if (!IsAllowedType(mb.GetType()))
+                    return;
+            }
+            else
+            {
+                // Вложенный объект (сериализуемый класс или UnityEngine.Object)
+                if (typeof(UnityEngine.Object).IsAssignableFrom(currentType))
+                    return;   // Transform, Rigidbody и т.п. — не сканируем
+
+                if (!IsAllowedType(currentType))
+                    return;   // Вложенный [Serializable] класс не из наших namespace — не сканируем
+            }
+
+            // Пропускаем примитивы и строки
+            if (currentType.IsPrimitive || currentType == typeof(string))
+                return;
+
+            BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly;
+
+            // Идем по цепочке наследования вверх, пока не дойдем до MonoBehaviour или System.Object
+            Type typeToScan = currentType;
+            while (typeToScan != null && typeToScan != typeof(MonoBehaviour) && typeToScan != typeof(object))
+            {
+                // Пропускаем типы из UnityEngine / UnityEditor
+                var ns = typeToScan.Namespace;
+                if (!string.IsNullOrEmpty(ns) && (ns.StartsWith("UnityEngine") || ns.StartsWith("UnityEditor")))
+                    break;
+
+                // Берем поля только объявленные непосредственно в текущем классе (DeclaredOnly)
+                foreach (var field in typeToScan.GetFields(flags))
                 {
-                    PropertyPath = thisPath,
-                    FieldType = fieldType // <-- store the exact field type
-                });
-            }
-        }
-        // 2) UnityEvent?
-        else if (typeof(UnityEventBase).IsAssignableFrom(fieldType))
-        {
-            unityEventItems.Add(new MissingReferenceItem
-            {
-                PropertyPath = thisPath
-            });
-        }
-        // 3) Collection? (array or generic list)
-        else if (typeof(IEnumerable).IsAssignableFrom(fieldType) && fieldType != typeof(string))
-        {
-            // Check if it’s an array or List<T> of something
-            Type elementType = null;
-            if (fieldType.IsArray)
-            {
-                elementType = fieldType.GetElementType();
-            }
-            else if (fieldType.IsGenericType)
-            {
-                elementType = fieldType.GetGenericArguments()[0];
-            }
+                    bool isPublic = field.IsPublic;
+                    bool isSerialized = field.GetCustomAttribute<SerializeField>() != null;
+                    bool isHidden = field.GetCustomAttribute<HideInInspector>() != null;
+                    if (!(isPublic || isSerialized) || isHidden)
+                        continue;
 
-            if (elementType != null && fieldValue != null)
-            {
-                IList list = fieldValue as IList;
-                if (list != null)
-                {
-                    for (int i = 0; i < list.Count; i++)
+                    Type fieldType = field.FieldType;
+                    object fieldValue = field.GetValue(currentObject);
+
+                    string thisPath = string.IsNullOrEmpty(pathPrefix)
+                        ? field.Name
+                        : (pathPrefix + "." + field.Name);
+
+                    // 1) Прямая ссылка на UnityEngine.Object
+                    if (typeof(UnityEngine.Object).IsAssignableFrom(fieldType))
                     {
-                        object element = list[i];
-                        string elementPath = $"{thisPath}[{i}]";
-
-                        // If element type is a UnityEngine.Object, check if null
-                        if (typeof(UnityEngine.Object).IsAssignableFrom(elementType))
+                        if (fieldValue == null || fieldValue.Equals(null))
                         {
-                            if (element == null || element.Equals(null))
+                            missingItems.Add(new MissingReferenceItem
                             {
-                                missingItems.Add(new MissingReferenceItem
+                                PropertyPath = thisPath,
+                                FieldType = fieldType
+                            });
+                        }
+                    }
+                    // 2) UnityEvent
+                    else if (typeof(UnityEventBase).IsAssignableFrom(fieldType))
+                    {
+                        unityEventItems.Add(new MissingReferenceItem
+                        {
+                            PropertyPath = thisPath
+                        });
+                    }
+                    // 3) Коллекции (массивы и списки)
+                    else if (typeof(IEnumerable).IsAssignableFrom(fieldType) && fieldType != typeof(string))
+                    {
+                        Type elementType = null;
+                        if (fieldType.IsArray)
+                        {
+                            elementType = fieldType.GetElementType();
+                        }
+                        else if (fieldType.IsGenericType)
+                        {
+                            elementType = fieldType.GetGenericArguments()[0];
+                        }
+
+                        if (elementType != null && fieldValue != null)
+                        {
+                            IList list = fieldValue as IList;
+                            if (list != null)
+                            {
+                                for (int i = 0; i < list.Count; i++)
                                 {
-                                    PropertyPath = elementPath,
-                                    FieldType = elementType // <-- store the element type
-                                });
+                                    object element = list[i];
+                                    string elementPath = $"{thisPath}[{i}]";
+
+                                    if (typeof(UnityEngine.Object).IsAssignableFrom(elementType))
+                                    {
+                                        if (element == null || element.Equals(null))
+                                        {
+                                            missingItems.Add(new MissingReferenceItem
+                                            {
+                                                PropertyPath = elementPath,
+                                                FieldType = elementType
+                                            });
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ScanFields(rootComp, element, element?.GetType(), elementPath, missingItems, unityEventItems);
+                                    }
+                                }
                             }
                         }
-                        // Otherwise, if the element is a serializable sub-class, recurse
-                        else
+                    }
+                    // 4) Вложенные сериализуемые классы/структуры
+                    else if (fieldType.IsClass || fieldType.IsValueType)
+                    {
+                        if (fieldType.IsSerializable && fieldValue != null)
                         {
-                            ScanFields(rootComp, element, element?.GetType(), elementPath, missingItems, unityEventItems);
+                            ScanFields(rootComp, fieldValue, fieldValue.GetType(), thisPath, missingItems, unityEventItems);
                         }
                     }
                 }
+
+                // Переходим к базовому классу
+                typeToScan = typeToScan.BaseType;
             }
         }
-        // 4) Otherwise, if this field is a serializable class/struct, we can recursively scan it
-        else if (fieldType.IsClass || fieldType.IsValueType)
-        {
-            if (fieldType.IsSerializable && fieldValue != null)
-            {
-                ScanFields(rootComp, fieldValue, fieldValue.GetType(), thisPath, missingItems, unityEventItems);
-            }
-        }
-    }
-}
         /// <summary>
         /// Refreshes dependency entries by rescanning the scene.
         /// </summary>
@@ -965,5 +1011,5 @@ private static void ScanFields(Component rootComp,
 
 
         #endregion
-    } 
+    }
 }

@@ -1,6 +1,6 @@
 using System.Collections;
-using Scripts;
-using Scripts.TextScripts;
+using _Project.Scripts.CheckpointsScripts;
+using _Project.Scripts.TextScripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +17,7 @@ namespace _Project.Scripts.DialogueSystem.DialogueWithSalerScripts
         [SerializeField] DisableAndEnableMovementAndCursorController disableAndEnableMovementAndCursorController;
         [SerializeField] TypingText typingText;
         [SerializeField] Image imageInteract;
+        [SerializeField] CheckpointManager checkpointManager;
 
         [Header("Dialogue Window")]
         [SerializeField] GameObject dialogueWindow;
@@ -203,6 +204,8 @@ namespace _Project.Scripts.DialogueSystem.DialogueWithSalerScripts
             hasBoughtItemsInShop = true;
 
             currentDialogueIndex = 7;
+
+            checkpointManager.checkpointsArray[2].SetActive(true); // sit in the car
 
             CurrentDialogue(choiseAnswers, currentDialogueIndex, typingText, "SELLER: ",
                             namePerson, "Благодарю",

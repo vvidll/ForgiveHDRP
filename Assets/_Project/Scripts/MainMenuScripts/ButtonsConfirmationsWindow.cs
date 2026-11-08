@@ -24,6 +24,7 @@ public class ButtonsConfirmationsWindow : MonoBehaviour
                 SceneManager.LoadScene("GameScene"); 
                 mainMenu.isPressEscInMainMenuForExitGame = false;
                 mainMenu.isPressEscForReturnInMainMenu = false;
+
                 break;
 
             case "Text (TMP) NO_NEW_GAME":

@@ -1,20 +1,24 @@
+using _Project.Scripts.TriggerScripts;
 using UnityEngine;
 
-public class EnemyAttackController : Enemy
+namespace _Project.Scripts.AI
 {
-    [SerializeField] TriggerAttackMonster triggerAttackMonster;
-
-    float speedFollowing = .5f;
-
-    public override void LookAtPlayer() 
+    public class EnemyAttackController : Enemy
     {
-        if (triggerAttackMonster.isHasFollowing == true)
+        [SerializeField] TriggerAttackMonster triggerAttackMonster;
+
+        float speedFollowing = .5f;
+
+        public override void LookAtPlayer()
         {
-            transform.LookAt(player);
+            if (triggerAttackMonster.isHasFollowing == true)
+            {
+                transform.LookAt(player);
 
-            animatorEnemy.SetTrigger("TriggerWalking");
+                animatorEnemy.SetTrigger("TriggerWalking");
 
-            transform.position = Vector3.Lerp(transform.position, player.position, speedFollowing * Time.deltaTime);
+                transform.position = Vector3.Lerp(transform.position, player.position, speedFollowing * Time.deltaTime);
+            }
         }
     }
 }

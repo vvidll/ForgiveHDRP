@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using _Project.Scripts.CameraScripts;
+using _Project.Scripts.CarScripts;
+using _Project.Scripts.CheckpointsScripts;
 using _Project.Scripts.InteractScripts.CarInteractScripts;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -14,6 +16,8 @@ namespace _Project.Scripts.PlayerScripts
     {
         public const string HoldKeyF = "hold_key_f";
         public const string RigBuilderListCountKey = "rig_builder_list_count";
+
+        [SerializeField] Transform pointForExit;
 
         [Header("Camera")]
         [SerializeField] Camera mainCamera;
@@ -66,11 +70,12 @@ namespace _Project.Scripts.PlayerScripts
         [Header("References From Other Classes")]
         [SerializeField] InteractionDoorCar interactionDoorCar;
         [SerializeField] CameraController cameraController;
+        [SerializeField] CheckpointManager checkpointManager;
 
         [Header("Main Window Missions")]
         [SerializeField] GameObject panelMissions;
 
-        Vector3 newRotationPlayer = new Vector3(0f, 90f, 0f);
+        Vector3 newRotationPlayer = new Vector3(0f, 180f, 0f);
 
         Quaternion rotationZero = new Quaternion(0f, 0f, 0f, 0f);
 
@@ -89,7 +94,11 @@ namespace _Project.Scripts.PlayerScripts
             {
                 // проблема во второй локации в том что игрок начинает движение по глобальным координатам,
                 // А должен по локальным!!!
-                characterController.Move(Vector3.right * .3f * Time.deltaTime);
+
+                //characterController.Move(Vector3.right * .3f * Time.deltaTime);
+
+
+                characterController.Move(new Vector3(pointForExit.localPosition.x, 0f, 0f) * .5f * Time.deltaTime);
 
             }
 
@@ -155,7 +164,6 @@ namespace _Project.Scripts.PlayerScripts
             player.SetParent(parentObject);
 
             EndPlayAnimationExitingCarCoroutine().Forget();
-
         }
 
         async UniTaskVoid EndPlayAnimationExitingCarCoroutine()
@@ -178,8 +186,11 @@ namespace _Project.Scripts.PlayerScripts
 
                 panelMissions.SetActive(true);
 
+                checkpointManager.checkpointsArray[0].SetActive(true); // exit from car
+
                 await UniTask.Delay(2000, cancellationToken: this.GetCancellationTokenOnDestroy());
                 carCollider.isTrigger = false;
+
             }
             catch (Exception ex) { Debug.LogError(ex); }
         }

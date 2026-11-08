@@ -1,5 +1,5 @@
 using System.Collections;
-using Scripts.TextScripts;
+using _Project.Scripts.TextScripts;
 using UnityEngine;
 using UnityEngine.UI;
 

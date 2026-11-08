@@ -72,6 +72,7 @@ namespace _Project.Scripts
             notepadController.enabled = false;
             staminaSliderController.enabled = false;
             playerAnimator.CallIdleAnimation();
+
         }
 
         public void EnableScripts() 
@@ -82,6 +83,7 @@ namespace _Project.Scripts
             jumpController.enabled = true;
             notepadController.enabled = true;
             staminaSliderController.enabled = true;
+
         }
     }
 }
