@@ -203,6 +203,8 @@ namespace _Project.Scripts.DialogueSystem.DialogueWithSalerScripts
         {
             hasBoughtItemsInShop = true;
 
+            checkpointManager.checkpointsArray[2].SetActive(true);
+
             currentDialogueIndex = 7;
 
             checkpointManager.checkpointsArray[2].SetActive(true); // sit in the car

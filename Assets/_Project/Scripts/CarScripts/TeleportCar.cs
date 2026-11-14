@@ -11,8 +11,6 @@ namespace _Project.Scripts.CarScripts
     // скрипт отвечающий за телепорт машины в нужные локации и места
     public class TeleportCar : MonoBehaviour
     {
-        [SerializeField] DrivingPlayer drivingPlayer;
-
         [Header("Transform Point For Teleport (Old First Location)")]
         [SerializeField] Transform pointTeleportCarForDriveToNextLocation;
         [SerializeField] Transform pointTeleportPlayerInCar;
@@ -50,6 +48,9 @@ namespace _Project.Scripts.CarScripts
         [Header("New(Second) Location")]
         [SerializeField] GameObject secondLocation;
 
+        [HideInInspector]
+        public bool isSecondLocation = false;
+
         Quaternion playerRotationInCar = new Quaternion(0f, 180f, 0f, 0f);
 
         public void TeleportToPointOldLocation()
@@ -85,6 +86,8 @@ namespace _Project.Scripts.CarScripts
             carAnimator.enabled = false; // для работы телепорта, т.к из-за аниматора машины она не телепортируется
 
             secondLocation.SetActive(true);
+
+            isSecondLocation = true;
 
             carTransform.position = pointTeleportCarInNextLocation.position;
 

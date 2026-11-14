@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: RainMistMaterial
-  m_Shader: {fileID: 4800000, guid: 36de5f3f364314127bce48eea23438c3, type: 3}
+  m_Shader: {fileID: 4800000, guid: 0b828cb759e39534cab22fd7fa5d2982, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -62,7 +62,6 @@ Material:
     m_Ints: []
     m_Floats:
     - PixelSnap: 0
-    - _AmbientLightMultiplier: 0.25
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -86,6 +85,6 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColorUI: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 0}
-    - _TintColor: {r: 0.36124957, g: 0.4673756, b: 0.6226415, a: 0.09803922}
+    - _TintColor: {r: 1, g: 1, b: 1, a: 0.09803922}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

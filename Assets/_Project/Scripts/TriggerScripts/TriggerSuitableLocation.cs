@@ -16,7 +16,7 @@ namespace _Project.Scripts.TriggerScripts
             {
                 showMissions.ShowMissionSetUpBonfire();
 
-                checkpointManager.checkpointsArray[3].SetActive(true); // finded suitable location
+                checkpointManager.checkpointsArray[4].SetActive(true); // finded suitable location
             }
 
         }

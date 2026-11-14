@@ -1,5 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using _Project.Scripts.CarScripts;
+using _Project.Scripts.DialogueSystem.DialogueWithSalerScripts;
+using _Project.Scripts.InteractScripts;
+using _Project.Scripts.InteractScripts.CarInteractScripts;
+using _Project.Scripts.InventoryScripts;
 using _Project.Scripts.PlayerScripts;
 using _Project.Scripts.ProjectSettingsScripts;
 using OdinSerializer;
@@ -12,6 +18,12 @@ namespace _Project.Scripts.OdinSerializerSavesAndLoads
 {
     public class OdinSerializerControllerSaveAndLoad : MonoBehaviour
     {
+        public const string parentNameFirst = "--DINAMIC_OBJECTS--";
+        public const string parentNameSecond = "Fairheaven_LT80 (Car)";
+
+        public const string childName = "Player";
+
+
         public const string CountFileKey = "count_file";
 
         readonly string filePath = "C:/Users/Impossible/AppData/LocalLow/Noise Wind/NewForgive/_Autosave.log";
@@ -25,7 +37,13 @@ namespace _Project.Scripts.OdinSerializerSavesAndLoads
         [Header("RigBuilder")]
         [SerializeField] RigBuilder rigBuilder;
 
+        [Header("References From Other Classes")]
         [SerializeField] DrivingPlayer drivingPlayer;
+        [SerializeField] InteractionDoorCar interactionDoorCar;
+        [SerializeField] DialogueWithSaler dialogueWithSaler;
+        [SerializeField] TeleportCar teleportCar;
+        [SerializeField] CheckCompleteTasksNotepad checkCompleteTasksNotepad;
+        [SerializeField] CommonInteractionItems[] commonEnabledInteractionItems; // array enabled items
 
         /*public GameObject[] itemInteraction
         {
@@ -109,12 +127,32 @@ namespace _Project.Scripts.OdinSerializerSavesAndLoads
 
         public void CommonLoadData(SaveDataPlayer saveDataPlayer)
         {
-            settingsInitialAnimation.isParking = saveDataPlayer.isParkingAnimationControl;
+            settingsInitialAnimation.isParking = saveDataPlayer.isParking;
 
-            settingsInitialAnimation.carAnimator.enabled = saveDataPlayer.isAnimatorCarActivationControl;
+            settingsInitialAnimation.carAnimator.enabled = saveDataPlayer.isAnimatorCar;
 
-            this.transform.position = saveDataPlayer.playerPosition; // не загружает игрока на нужную сохраненную позицию
+            settingsInitialAnimation.isFirstLaunchGame = saveDataPlayer.isFirtsLaunchGame;
+            drivingPlayer.isInCar = saveDataPlayer.isInCar;
+            settingsInitialAnimation.isEnoughPlayInitialAnimation = saveDataPlayer.isEnoughPlayInitialAnimation;
+
+            LoadParent(saveDataPlayer);
+
+            this.transform.position = saveDataPlayer.playerPosition;
             this.transform.rotation = saveDataPlayer.playerRotation;
+
+            dialogueWithSaler.hasBoughtItemsInShop = saveDataPlayer.hasBoughtItemsInShop;
+
+            checkCompleteTasksNotepad.completeMissionItemsForSurvival = saveDataPlayer.completeMissionItemsForSurvival;
+
+            if (dialogueWithSaler.hasBoughtItemsInShop == true && checkCompleteTasksNotepad.completeMissionItemsForSurvival == true)
+            {
+                foreach (CommonInteractionItems interactionItems in commonEnabledInteractionItems)
+                    interactionItems.gameObject.SetActive(false);
+            }    
+
+            teleportCar.isSecondLocation = saveDataPlayer.isSecondLocation;
+
+            Debug.Log($"Position: {this.transform.position}\nRotation: {this.transform.rotation}");
 
             if (settingsInitialAnimation.isParking == true)
             {
@@ -126,13 +164,9 @@ namespace _Project.Scripts.OdinSerializerSavesAndLoads
             carTransform.position = saveDataPlayer.carPosition;
             carTransform.rotation = saveDataPlayer.carRotation;
 
-            settingsInitialAnimation.isFirstLaunchGame = saveDataPlayer.isFirtsLaunchGameAnimationControl;
-            drivingPlayer.isInCar = saveDataPlayer.isInCarControl;
-            settingsInitialAnimation.isEnoughPlayInitialAnimation = saveDataPlayer.isEnoughPlayInitialAnimation;
-
             for (int i = 1; i < rigBuilder.layers.Count; i++)
             {
-                rigBuilder.layers[i].active = saveDataPlayer.isLayersRigBuilderPlayerActive;
+                rigBuilder.layers[i].active = saveDataPlayer.isLayersRigBuilderPlayer;
             }
 
             //this.itemInteraction = this.saveDataPlayer.itemInteract;
@@ -144,13 +178,33 @@ namespace _Project.Scripts.OdinSerializerSavesAndLoads
         {
             settingsInitialAnimation.OffInitialAnimation();
 
-            saveDataPlayer.isParkingAnimationControl = settingsInitialAnimation.isParking;
+            saveDataPlayer.isParking = settingsInitialAnimation.isParking;
 
             // for positionCarAfterParking and rotationCarAfterParking
-            saveDataPlayer.isAnimatorCarActivationControl = settingsInitialAnimation.carAnimator.enabled;
+            saveDataPlayer.isAnimatorCar = settingsInitialAnimation.carAnimator.enabled;
 
             saveDataPlayer.playerPosition = this.transform.position;
             saveDataPlayer.playerRotation = this.transform.rotation;
+
+            // for player(child object) set under Empty Object(parent) 
+            if (drivingPlayer.isParentDinamicObjects == true)
+                SaveParent(drivingPlayer.isParentDinamicObjects, saveDataPlayer);
+
+            saveDataPlayer.hasBoughtItemsInShop = dialogueWithSaler.hasBoughtItemsInShop;
+
+            saveDataPlayer.completeMissionItemsForSurvival = checkCompleteTasksNotepad.completeMissionItemsForSurvival;
+
+            saveDataPlayer.isSecondLocation = teleportCar.isSecondLocation;
+
+            // !!! впринципе можно не сохранять, то что игрок находится под машиной как дочерний объект, т.к это только все ломает,
+            // лучше автоматически сохранять покупки (в первой локе) и сохранять выход из машины (во второй локе)
+            // надо проверять в какой локе находится игрок !!!
+
+            // for player(child object) set under Car(parent)
+            //if (interactionDoorCar.isParentCar == false)
+              //  SaveParent(interactionDoorCar.isParentCar, saveDataPlayer);
+
+            Debug.Log($"Position: {saveDataPlayer.playerPosition}\nRotation: {saveDataPlayer.playerRotation}");
 
             // after parking
             if (settingsInitialAnimation.isParking == true)
@@ -164,19 +218,47 @@ namespace _Project.Scripts.OdinSerializerSavesAndLoads
             saveDataPlayer.carRotation = carTransform.rotation;
 
             // need save current animation clip for car
-            saveDataPlayer.isFirtsLaunchGameAnimationControl = settingsInitialAnimation.isFirstLaunchGame;
-            saveDataPlayer.isInCarControl = drivingPlayer.isInCar;
+            saveDataPlayer.isFirtsLaunchGame = settingsInitialAnimation.isFirstLaunchGame;
+            saveDataPlayer.isInCar = drivingPlayer.isInCar;
             saveDataPlayer.isEnoughPlayInitialAnimation = settingsInitialAnimation.isEnoughPlayInitialAnimation;
 
             // need save current animation clip for player
             for (int i = 1; i < rigBuilder.layers.Count; i++)
             {
-                saveDataPlayer.isLayersRigBuilderPlayerActive = rigBuilder.layers[i].active;
+                saveDataPlayer.isLayersRigBuilderPlayer = rigBuilder.layers[i].active;
             }
 
             //this.saveDataPlayer.itemInteract = this.itemInteraction;
 
             //this.saveDataPlayer.toggleIsOnInNotepad = this.toggleIsOnInNotepad;
+        }
+
+        /// <summary>
+        /// true = "DrivingPlayer" and false = "InteractionDoorCar"
+        /// </summary>
+        public void SaveParent(bool parent, SaveDataPlayer saveDataPlayer) 
+        {
+            Transform target = parent ? drivingPlayer.parentObject : interactionDoorCar.carParentObject;
+
+            this.transform.SetParent(target);
+
+            saveDataPlayer.childId = childName;
+
+            saveDataPlayer.parentId = parent ? parentNameFirst : parentNameSecond;
+
+            Debug.Log(target);
+        }
+
+        /// <summary>
+        /// true = "DrivingPlayer" and false = "InteractionDoorCar"
+        /// </summary>
+        public void LoadParent(SaveDataPlayer saveDataPlayer) 
+        {
+            Transform targetParent = saveDataPlayer.parentId == parentNameFirst ? drivingPlayer.parentObject : interactionDoorCar.carParentObject;
+
+            this.transform.SetParent(targetParent);
+
+            Debug.Log(targetParent);
         }
     }
 
@@ -185,6 +267,9 @@ namespace _Project.Scripts.OdinSerializerSavesAndLoads
 [Serializable]
 public class SaveDataPlayer
 {
+    public string childId;
+    public string parentId;
+
     [Header("Position and Rotation Player")]
     public Vector3 playerPosition;
     public Quaternion playerRotation;
@@ -193,16 +278,22 @@ public class SaveDataPlayer
     public Vector3 carPosition;
     public Quaternion carRotation;
 
-    public bool isFirtsLaunchGameAnimationControl;
-    public bool isParkingAnimationControl;
+    public bool isFirtsLaunchGame;
+    public bool isParking;
 
-    public bool isAnimatorCarActivationControl;
+    public bool isAnimatorCar;
 
-    public bool isLayersRigBuilderPlayerActive;
+    public bool isLayersRigBuilderPlayer;
 
     public bool isEnoughPlayInitialAnimation;
 
-    public bool isInCarControl;
+    public bool isInCar;
+
+    public bool hasBoughtItemsInShop;
+
+    public bool isSecondLocation;
+
+    public bool completeMissionItemsForSurvival;
 
     //public GameObject[] itemInteract;
     //public GameObject[] toggleIsOnInNotepad;

@@ -14,7 +14,7 @@ namespace _Project.Scripts.CheckpointsScripts
     {
         public GameObject[] checkpointsArray;
 
-        int countTriggerCheckpoint = -1; // т.к массив начинается с 0
+        public int countTriggerCheckpointDisabled = -1; // т.к массив начинается с 0
 
         public const string CountTriggerCheckpointKey = "count_trigger_checkpoint";
 
@@ -31,17 +31,30 @@ namespace _Project.Scripts.CheckpointsScripts
             Debug.LogError("checks number and name checkpoint before launch the game!");
 
             // this code worked after load control point
-            if (PlayerPrefs.HasKey(CheckpointController.CheckpointActiveKey) && 
-                PlayerPrefs.HasKey(CountTriggerCheckpointKey) && SceneManager.GetActiveScene().name == "GameScene")
+            if (PlayerPrefs.HasKey(CheckpointController.CheckpointEnabledKey) && 
+                PlayerPrefs.HasKey(CheckpointController.CheckpointDisabledKey) &&
+                PlayerPrefs.HasKey(CountTriggerCheckpointKey) && 
+                SceneManager.GetActiveScene().name == "GameScene")
             {
-                CheckpointController.checkpointActive = PlayerPrefs.GetInt(CheckpointController.CheckpointActiveKey);
-                countTriggerCheckpoint = PlayerPrefs.GetInt(CountTriggerCheckpointKey);
+                CheckpointController.checkpointEnabled = PlayerPrefs.GetInt(CheckpointController.CheckpointEnabledKey);
+                CheckpointController.checkpointDisabled = PlayerPrefs.GetInt(CheckpointController.CheckpointDisabledKey);
+                countTriggerCheckpointDisabled = PlayerPrefs.GetInt(CountTriggerCheckpointKey);
 
-                if (CheckpointController.checkpointActive == 0 && countTriggerCheckpoint != -1) 
+                if (CheckpointController.checkpointEnabled == 1) 
                 {
-                    for (int i = 0; i <= countTriggerCheckpoint && i < checkpointsArray.Length; i++) 
+                    for (int i = 0; i < checkpointsArray.Length; i++) 
+                    {
+                        checkpointsArray[i].gameObject.SetActive(true);
+                    }
+                }
+
+                if (CheckpointController.checkpointDisabled == 0 && countTriggerCheckpointDisabled != -1)
+                {
+                    for (int i = 0; i <= countTriggerCheckpointDisabled && i < checkpointsArray.Length; i++)
                     {
                         checkpointsArray[i].gameObject.SetActive(false);
+
+                        Debug.Log("counts disabled checkpoints: " + countTriggerCheckpointDisabled);
                     }
                 }
             }
@@ -51,8 +64,8 @@ namespace _Project.Scripts.CheckpointsScripts
         {
             if (other.CompareTag("Checkpoint")) 
             {
-                countTriggerCheckpoint++;
-                PlayerPrefs.SetInt(CountTriggerCheckpointKey, countTriggerCheckpoint);
+                countTriggerCheckpointDisabled++;
+                PlayerPrefs.SetInt(CountTriggerCheckpointKey, countTriggerCheckpointDisabled);
             }
 
         }

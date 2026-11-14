@@ -1,6 +1,7 @@
 using _Project.Scripts.DialogueSystem.DialogueWithSalerScripts;
 using _Project.Scripts.InventoryScripts;
 using _Project.Scripts.MissionsScripts;
+using _Project.Scripts.OdinSerializerSavesAndLoads;
 using _Project.Scripts.PlayerScripts;
 using TMPro;
 using UnityEngine;
@@ -11,6 +12,8 @@ namespace _Project.Scripts.InteractScripts.CarInteractScripts
     // скрипт отвечающий за взаимодействие с дверью машины
     public class InteractionDoorCar : MonoBehaviour, IInteractable
     {
+        [SerializeField] OdinSerializerControllerSaveAndLoad odinSerializerControllerSaveAndLoad;
+
         [SerializeField] TMP_Text textInteractionDoorCar;
 
         [Header("Layer Mask Object")]
@@ -34,13 +37,16 @@ namespace _Project.Scripts.InteractScripts.CarInteractScripts
         [SerializeField] ShowMissionsManager showMissionsManager;
 
         [Header("Parent Object")]
-        [SerializeField] Transform carParentObject; 
+        public Transform carParentObject; 
 
         [Header("Child Object")]
         [SerializeField] Transform player;
 
         int RigDoorHandleTriggerForExitingCar = 5;
         int RigDoorHandleTriggerForEnteringCar = 6;
+
+        //[HideInInspector]
+        //public bool isParentCar = true;
 
         private void Update()
         {
@@ -57,6 +63,8 @@ namespace _Project.Scripts.InteractScripts.CarInteractScripts
                 && dialogueWithSaler.hasBoughtItemsInShop == true 
                 && drivingPlayer.isHoldKeyF == 1) 
             {
+                Debug.Log("Interact with door the car");
+
                 drivingPlayer.isHoldKeyF = 0;
 
                 drivingPlayer.isInCar = true;
@@ -74,11 +82,15 @@ namespace _Project.Scripts.InteractScripts.CarInteractScripts
 
                 //--------------
 
-                player.SetParent(carParentObject); // set car how parent object
-
                 carDoorAnimator.SetBool("isOpenAndCloseDoor", true);
 
                 transitionsController.SitCarCoroutine().Forget();
+
+                // set car how parent object
+                drivingPlayer.isParentDinamicObjects = false;
+                //isParentCar = false; // set false(for odin serializer) for choise him how parent object
+
+                //Debug.Log("isParentCar: " + isParentCar);
             }
 
 
