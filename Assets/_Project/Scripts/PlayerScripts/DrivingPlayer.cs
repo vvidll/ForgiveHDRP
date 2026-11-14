@@ -9,6 +9,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.UI;
+using _Project.Scripts.OdinSerializerSavesAndLoads;
 
 namespace _Project.Scripts.PlayerScripts
 {
@@ -16,6 +17,8 @@ namespace _Project.Scripts.PlayerScripts
     {
         public const string HoldKeyF = "hold_key_f";
         public const string RigBuilderListCountKey = "rig_builder_list_count";
+
+        [SerializeField] OdinSerializerControllerSaveAndLoad odinSerializerControllerSaveAndLoad;
 
         [SerializeField] Transform pointForExit;
 
@@ -52,7 +55,7 @@ namespace _Project.Scripts.PlayerScripts
 
 
         [Header("Parent Object")]
-        [SerializeField] Transform parentObject;
+        public Transform parentObject;
 
         [Header("Child Object")]
         [SerializeField] Transform player;
@@ -71,6 +74,8 @@ namespace _Project.Scripts.PlayerScripts
         [SerializeField] InteractionDoorCar interactionDoorCar;
         [SerializeField] CameraController cameraController;
         [SerializeField] CheckpointManager checkpointManager;
+        [SerializeField] TeleportCar teleportCar;
+
 
         [Header("Main Window Missions")]
         [SerializeField] GameObject panelMissions;
@@ -81,6 +86,9 @@ namespace _Project.Scripts.PlayerScripts
 
         bool isMovePlayerForEventAnimation = false;
         bool isStopPlayerForEventAnimation = false;
+
+        [HideInInspector] // number empty object "--DINAMIC_OBJECTS--" (parent) in hierarchy for player (child)
+        public bool isParentDinamicObjects = false;
 
         private void Start()
         {
@@ -95,10 +103,9 @@ namespace _Project.Scripts.PlayerScripts
                 // проблема во второй локации в том что игрок начинает движение по глобальным координатам,
                 // А должен по локальным!!!
 
-                //characterController.Move(Vector3.right * .3f * Time.deltaTime);
+                characterController.Move(Vector3.right * .2f * Time.deltaTime);
 
-
-                characterController.Move(new Vector3(pointForExit.localPosition.x, 0f, 0f) * .5f * Time.deltaTime);
+                //characterController.Move(new Vector3(pointForExit.localPosition.x, 0f, 0f) * .5f * Time.deltaTime);
 
             }
 
@@ -161,7 +168,10 @@ namespace _Project.Scripts.PlayerScripts
 
             playerAnimator.SetTrigger("isExitingCar");
 
-            player.SetParent(parentObject);
+            //interactionDoorCar.isParentCar = true;
+            isParentDinamicObjects = true; // set true (for odin serializer) choise him how parent object
+
+            Debug.Log("isParentDinamicObjects: " + isParentDinamicObjects);
 
             EndPlayAnimationExitingCarCoroutine().Forget();
         }
@@ -186,7 +196,12 @@ namespace _Project.Scripts.PlayerScripts
 
                 panelMissions.SetActive(true);
 
-                checkpointManager.checkpointsArray[0].SetActive(true); // exit from car
+                checkpointManager.checkpointsArray[0].SetActive(true); // exit from car in first location
+
+                if(teleportCar.isSecondLocation == true)
+                    checkpointManager.checkpointsArray[3].SetActive(true); // exit from car in second location
+
+                checkpointManager.checkpointsArray[1].SetActive(true); // enter in shop
 
                 await UniTask.Delay(2000, cancellationToken: this.GetCancellationTokenOnDestroy());
                 carCollider.isTrigger = false;

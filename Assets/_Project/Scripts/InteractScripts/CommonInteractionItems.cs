@@ -8,10 +8,15 @@ namespace _Project.Scripts.InteractScripts
     // и (метод описания предметов выведен в отдельный метод для удобства)
     public class CommonInteractionItems : MonoBehaviour
     {
+        public bool isCurrentEnabledItem = true;
+
         protected void CommonInteractItem(Toggle toggle)
         {
             toggle.isOn = true;
-            this.gameObject.SetActive(false);
+
+            isCurrentEnabledItem = false;
+
+            this.gameObject.SetActive(isCurrentEnabledItem);
         }
 
         protected void CommonDescriptionItem(TMP_Text tmpText, string text) => tmpText.text = text;

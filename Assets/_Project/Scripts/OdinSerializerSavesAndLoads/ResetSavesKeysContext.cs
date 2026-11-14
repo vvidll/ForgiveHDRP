@@ -13,7 +13,7 @@ namespace _Project.Scripts.OdinSerializerSavesAndLoads
         [ContextMenu("Reset Saves Keys (Польз.)")]
         public void DeleteKeys()
         {
-            PlayerPrefs.DeleteKey(CheckpointController.CheckpointActiveKey);
+            PlayerPrefs.DeleteKey(CheckpointController.CheckpointEnabledKey);
             PlayerPrefs.DeleteKey(CheckpointManager.CountTriggerCheckpointKey);
 
             Debug.Log("Ключи СОХРАНЕНИЯ чекпоинтов УДАЛЕНЫ");

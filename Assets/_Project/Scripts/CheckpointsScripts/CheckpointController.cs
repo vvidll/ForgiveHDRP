@@ -12,23 +12,34 @@ namespace _Project.Scripts.CheckpointsScripts
 
         [SerializeField] SaveDataInfo saveDataInfo;
 
-        public const string CheckpointActiveKey = "active_checkpoint";
+        public const string CheckpointEnabledKey = "enabled_checkpoint";
+        public const string CheckpointDisabledKey = "disabled_checkpoint";
 
-        public static int checkpointActive = 1;
+        public static int checkpointEnabled = 1, checkpointDisabled = 0; // 1 - enabled, 0 - disabled
+
+        bool isEnterCheckpoint = false;
+
+        private void Start()
+        {
+            if(checkpointEnabled == 1 && isEnterCheckpoint == false)
+                PlayerPrefs.SetInt(CheckpointEnabledKey, checkpointEnabled);
+        }
 
         private void OnTriggerEnter(Collider other)
         {
             // this code off current checkpoint and save data
             if (other.TryGetComponent(out OdinSerializerControllerSaveAndLoad odinSerializerControllerSaveAndLoad))
             {
+                isEnterCheckpoint = true;
+
                 odinSerializerControllerSaveAndLoad.SaveData(saveDataPlayer);
 
                 saveDataInfo.InfoActive();
 
                 gameObject.SetActive(false);
-                checkpointActive = 0;
+                checkpointDisabled = 0;
 
-                PlayerPrefs.SetInt(CheckpointActiveKey, checkpointActive);
+                PlayerPrefs.SetInt(CheckpointDisabledKey, checkpointDisabled);
             }
         }
     }

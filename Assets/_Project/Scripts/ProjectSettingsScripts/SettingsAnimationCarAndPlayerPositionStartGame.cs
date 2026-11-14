@@ -20,8 +20,8 @@ namespace _Project.Scripts.ProjectSettingsScripts
         public Animator carAnimator;
 
         [Header("Set Parent For Player")]
-        [SerializeField] Transform player;
-        [SerializeField] Transform parent;
+        public Transform player;
+        public Transform parent;
         [SerializeField] Transform parentCar;
 
         [Header("Start Point")]
