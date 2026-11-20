@@ -32,7 +32,7 @@ namespace _Project.Scripts.InteractScripts.CarInteractScripts
         [Header("References From Other Classes")]
         [SerializeField] TransitionsController transitionsController;
         [SerializeField] CheckCompleteTasksNotepad checkCompleteTasksNotepad;
-        [SerializeField] DialogueWithSaler dialogueWithSaler;
+        [SerializeField] DialogueWithSeller dialogueWithSaler;
         [SerializeField] DrivingPlayer drivingPlayer;
         [SerializeField] ShowMissionsManager showMissionsManager;
 

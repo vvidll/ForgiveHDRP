@@ -91,7 +91,7 @@ PlayerSettings:
   androidApplicationEntry: 2
   defaultIsNativeResolution: 1
   macRetinaSupport: 1
-  runInBackground: 0
+  runInBackground: 1
   callOnDisableOnAssetBundleUnload: 1
   muteOtherAudioSources: 0
   Prepare IOS For Recording: 0
@@ -791,7 +791,7 @@ PlayerSettings:
   webEnableSubmoduleStrippingCompatibility: 0
   webProgressiveAssetLoading: 0
   scriptingDefineSymbols:
-    Android: DOTWEEN;SORTIFY;APP_UI_EDITOR_ONLY;SENTIS_ANALYTICS_ENABLED
+    Android: DOTWEEN;SORTIFY;APP_UI_EDITOR_ONLY;SENTIS_ANALYTICS_ENABLED;USE_INPUT_SYSTEM_POSE_CONTROL;USE_STICK_CONTROL_THUMBSTICKS
     EmbeddedLinux: DOTWEEN;SORTIFY
     GameCoreScarlett: DOTWEEN;SORTIFY
     GameCoreXboxOne: DOTWEEN;SORTIFY
@@ -802,7 +802,7 @@ PlayerSettings:
     PS4: DOTWEEN;SORTIFY
     PS5: DOTWEEN;SORTIFY
     QNX: DOTWEEN;SORTIFY
-    Standalone: INK_RUNTIME;INK_EDITOR;DOTWEEN;SORTIFY;SENTIS_ANALYTICS_ENABLED;APP_UI_EDITOR_ONLY
+    Standalone: INK_RUNTIME;INK_EDITOR;DOTWEEN;SORTIFY;SENTIS_ANALYTICS_ENABLED;APP_UI_EDITOR_ONLY;USE_INPUT_SYSTEM_POSE_CONTROL;USE_STICK_CONTROL_THUMBSTICKS
     VisionOS: DOTWEEN;SORTIFY
     WebGL: DOTWEEN;SORTIFY
     Windows Store Apps: DOTWEEN
@@ -920,7 +920,7 @@ PlayerSettings:
   qnxGraphicConfPath: 
   apiCompatibilityLevel: 3
   captureStartupLogs: {}
-  activeInputHandler: 0
+  activeInputHandler: 2
   windowsGamepadBackendHint: 0
   enableDirectStorage: 0
   cloudProjectId: dba11178-ab65-4b67-bee3-e5de0de6ed47

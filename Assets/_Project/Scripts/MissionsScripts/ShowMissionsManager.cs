@@ -17,7 +17,7 @@ namespace _Project.Scripts.MissionsScripts
         [Header("References From Other Classes")]
         [SerializeField] DrivingPlayer drivingPlayer;
         [SerializeField] CheckCompleteTasksNotepad checkCompleteTasksNotepad;
-        [SerializeField] DialogueWithSaler dialogueWithSaler;
+        [SerializeField] DialogueWithSeller dialogueWithSaler;
         [SerializeField] TeleportCar teleportCar;
         [SerializeField] BuildingManager buildingManagerTent;
 

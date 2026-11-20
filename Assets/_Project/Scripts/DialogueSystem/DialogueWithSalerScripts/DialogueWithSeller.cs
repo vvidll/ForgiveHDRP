@@ -1,5 +1,6 @@
 using System.Collections;
 using _Project.Scripts.CheckpointsScripts;
+using _Project.Scripts.InventoryScripts;
 using _Project.Scripts.TextScripts;
 using TMPro;
 using UnityEngine;
@@ -8,7 +9,7 @@ using UnityEngine.UI;
 namespace _Project.Scripts.DialogueSystem.DialogueWithSalerScripts
 {
     // скрипт отвечающий за диалог с продавцом
-    public class DialogueWithSaler : CommonDialogueWithSaler
+    public class DialogueWithSeller : CommonDialogueWithSeller
     {
         [SerializeField] AudioSource[] audiosDialogueSource;
         [SerializeField] AudioSource audioLeaveFromDialogue;
@@ -18,6 +19,7 @@ namespace _Project.Scripts.DialogueSystem.DialogueWithSalerScripts
         [SerializeField] TypingText typingText;
         [SerializeField] Image imageInteract;
         [SerializeField] CheckpointManager checkpointManager;
+        [SerializeField] CheckCompleteTasksNotepad checkCompleteTasksNotepad;
 
         [Header("Dialogue Window")]
         [SerializeField] GameObject dialogueWindow;
@@ -29,10 +31,23 @@ namespace _Project.Scripts.DialogueSystem.DialogueWithSalerScripts
         [HideInInspector]
         public bool isStartDialogue = false;
         public static int currentDialogueIndex = 1;
+        public static int defaultLayer = 0; // Layer Default
 
         [HideInInspector]
         public bool hasBoughtItemsInShop = false;
 
+        [HideInInspector]
+        public bool isChangeLayerSeller = false;
+
+        public override void OnTick()
+        {
+            if (checkCompleteTasksNotepad.completeMissionItemsForSurvival == true && isChangeLayerSeller == false) 
+            {
+                this.gameObject.layer = defaultLayer;
+                isChangeLayerSeller = true;
+            }
+
+        }
 
         public void StartDialogue()
         {
@@ -202,8 +217,6 @@ namespace _Project.Scripts.DialogueSystem.DialogueWithSalerScripts
         public void SeventhDialogue()
         {
             hasBoughtItemsInShop = true;
-
-            checkpointManager.checkpointsArray[2].SetActive(true);
 
             currentDialogueIndex = 7;
 
