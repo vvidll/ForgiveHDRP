@@ -24,8 +24,10 @@ namespace _Project.Scripts.InventoryScripts
         public void CheckTogglesItemsForSurvival()
         {
             if (CounterAddItemsController.countAddSurvivalItems == maxAddItemsSurvival)
+            {
                 completeMissionItemsForSurvival = true;
-
+                Debug.Log("completeMissionItemsForSurvival: " + completeMissionItemsForSurvival);
+            }
             if (CounterAddItemsController.countAddRepairCarItems == maxAddItemsRepairCar)
                 completeMissionItemsForRepairCar = true;
             

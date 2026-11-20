@@ -30,7 +30,7 @@ namespace _Project.Scripts.InteractScripts
         Coroutine checkCoroutine;
 
         [Header("References From Other Classes")]
-        [SerializeField] DialogueWithSaler dialogueWithSaler;
+        [SerializeField] DialogueWithSeller dialogueWithSaler;
         [SerializeField] TriggerTeleportCarNextLocation triggerTeleportCarNextLocation;
         [SerializeField] BuildingManager buildingManagerBonfire;
         [SerializeField] BuildingManager buildingManagerSleepingBag;

@@ -1,4 +1,5 @@
 using System.Collections;
+using _Project.Scripts.InventoryScripts;
 using _Project.Scripts.TextScripts;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,15 +9,18 @@ namespace _Project.Scripts.DialogueSystem.DialogueWithSalerScripts
     // скрипт отвечающий за общую работу всех выборов ответов
     public class ChoiseAnswersController : ChoiseAnswerContollerCommon
     {
+        [Header("AUDIO")]
         [SerializeField] AudioSource[] audiosAnswerSource;
         [SerializeField] AudioSource audioLeaveFromDialogueAnswer;
 
-        [SerializeField] DialogueWithSaler dialogue;
+        [Header("REFERENCES")]
+        [SerializeField] CheckCompleteTasksNotepad checkCompleteTasksNotepad;
+        [SerializeField] DialogueWithSeller dialogue;
         [SerializeField] DisableAndEnableMovementAndCursorController disableAndEnableMovementAndCursorController;
         [SerializeField] TypingText typingText;
         [SerializeField] public GameObject windowChoiseAnswer;
         
-        [Header("Buttons for answers")]
+        [Header("BUTTONS FOR ANSWERS")]
         [SerializeField] public Button[] answersButtons;
         [SerializeField] public Button answerForExitDialogueBtn;
 
@@ -85,8 +89,17 @@ namespace _Project.Scripts.DialogueSystem.DialogueWithSalerScripts
 
         public void SixthAnswerClickButton()
         {
-            audiosAnswerSource[5].Play();
-            StartCoroutine(WaitSixthTalkPlayerCoroutine());
+            if (checkCompleteTasksNotepad.completeMissionItemsForSurvival == false)
+            {
+                Debug.Log("Вы не взяли вещи!");
+            }
+
+            else 
+            {
+                audiosAnswerSource[5].Play();
+                StartCoroutine(WaitSixthTalkPlayerCoroutine());
+            }
+
         }
 
         IEnumerator WaitSixthTalkPlayerCoroutine()

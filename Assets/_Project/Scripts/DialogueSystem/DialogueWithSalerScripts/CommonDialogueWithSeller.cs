@@ -5,7 +5,7 @@ using UnityEngine;
 namespace _Project.Scripts.DialogueSystem.DialogueWithSalerScripts
 {
     // скрипт отвечающий за диалог с продавцом(выведен как отдельный скрипт для одинаковых методов, сделано для удобства)
-    public class CommonDialogueWithSaler : MonoBehaviour
+    public class CommonDialogueWithSeller : MonoCache
     {
         public const string CurrentDialogueIndexKey = "current_dialogue_index";
 

@@ -40,7 +40,7 @@ namespace _Project.Scripts.OdinSerializerSavesAndLoads
         [Header("References From Other Classes")]
         [SerializeField] DrivingPlayer drivingPlayer;
         [SerializeField] InteractionDoorCar interactionDoorCar;
-        [SerializeField] DialogueWithSaler dialogueWithSaler;
+        [SerializeField] DialogueWithSeller dialogueWithSaler;
         [SerializeField] TeleportCar teleportCar;
         [SerializeField] CheckCompleteTasksNotepad checkCompleteTasksNotepad;
         [SerializeField] CommonInteractionItems[] commonEnabledInteractionItems; // array enabled items
@@ -143,6 +143,7 @@ namespace _Project.Scripts.OdinSerializerSavesAndLoads
             dialogueWithSaler.hasBoughtItemsInShop = saveDataPlayer.hasBoughtItemsInShop;
 
             checkCompleteTasksNotepad.completeMissionItemsForSurvival = saveDataPlayer.completeMissionItemsForSurvival;
+            dialogueWithSaler.isChangeLayerSeller = saveDataPlayer.isChangeLayerSeller;
 
             if (dialogueWithSaler.hasBoughtItemsInShop == true && checkCompleteTasksNotepad.completeMissionItemsForSurvival == true)
             {
@@ -193,6 +194,7 @@ namespace _Project.Scripts.OdinSerializerSavesAndLoads
             saveDataPlayer.hasBoughtItemsInShop = dialogueWithSaler.hasBoughtItemsInShop;
 
             saveDataPlayer.completeMissionItemsForSurvival = checkCompleteTasksNotepad.completeMissionItemsForSurvival;
+            saveDataPlayer.isChangeLayerSeller = dialogueWithSaler.isChangeLayerSeller;
 
             saveDataPlayer.isSecondLocation = teleportCar.isSecondLocation;
 
@@ -294,6 +296,8 @@ public class SaveDataPlayer
     public bool isSecondLocation;
 
     public bool completeMissionItemsForSurvival;
+
+    public bool isChangeLayerSeller;
 
     //public GameObject[] itemInteract;
     //public GameObject[] toggleIsOnInNotepad;

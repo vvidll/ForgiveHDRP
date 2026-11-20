@@ -1,5 +1,6 @@
 using _Project.Scripts.DialogueSystem.DialogueWithSalerScripts;
 using _Project.Scripts.TextScripts;
+using DialogueEditor;
 using TMPro;
 using UnityEngine;
 
@@ -10,21 +11,29 @@ namespace _Project.Scripts.InteractScripts
     {
         [Header("Dialogue")]
 
-        [SerializeField] DialogueWithSaler dialogue;
+        [SerializeField] NPCConversation npcConversation;
+
+        [SerializeField] DialogueWithSeller dialogue;
         [SerializeField] TypingText typingText;
         
         [SerializeField] TMP_Text tmpTextTalkWithSaler;
 
+        //[SerializeField] DisableAndEnableMovementAndCursorController disableAndEnableMovementAndCursorController;
+
+        public int countStartDialogue = 0;
+
         private void Awake()
         {
-            if (PlayerPrefs.HasKey(CommonDialogueWithSaler.CurrentDialogueIndexKey))
-                DialogueWithSaler.currentDialogueIndex = CommonDialogueWithSaler.LoadCurrentDialogue(DialogueWithSaler.currentDialogueIndex);
+            //if (PlayerPrefs.HasKey(CommonDialogueWithSeller.CurrentDialogueIndexKey))
+              //  DialogueWithSeller.currentDialogueIndex = CommonDialogueWithSeller.LoadCurrentDialogue(DialogueWithSeller.currentDialogueIndex);
         }
-
         public void Interact()
         {
             // Dialogue system
             dialogue.StartDialogue();
+
+            //ConversationManager.Instance.StartConversation(npcConversation);
+            //disableAndEnableMovementAndCursorController.DisableMovementAndShowCursor();
 
             Debug.Log("Interact with seller");
         }
@@ -33,7 +42,13 @@ namespace _Project.Scripts.InteractScripts
         {
             tmpTextTalkWithSaler.text = "Talk with seller";
             //return tmpTextTalkWithSaler.text;
-        } 
+        }
+
+        /*public void ChangeLayerInteractionToDefault() 
+        {
+            if (this.gameObject.layer == LayerMask.NameToLayer("Interaction"))
+                this.gameObject.layer = LayerMask.NameToLayer("Default");
+        }*/
     }
 }
 

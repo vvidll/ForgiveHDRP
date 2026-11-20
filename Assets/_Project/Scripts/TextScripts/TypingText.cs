@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -7,13 +8,11 @@ namespace _Project.Scripts.TextScripts
 {
     public class TypingText : MonoBehaviour
     {
-        [SerializeField] private TMP_Text dialogueText;
-        [SerializeField] private int speedTyping = 50; // 0.005 in seconds
+        [SerializeField] TMP_Text dialogueText;
+        [SerializeField] int speedTyping = 50; // 0.005 in seconds
 
         internal string isFullText;
         public bool isTyping = false;
-        bool isCoroutineStopping = false;
-
         public void UpdateText()
         {
             try
@@ -22,7 +21,9 @@ namespace _Project.Scripts.TextScripts
                 dialogueText.text = "";
 
                 isTyping = true;
+
                 TypingTextCoroutine().Forget();
+
             }
             catch (Exception ex) { Debug.LogError(ex); }
 
@@ -31,11 +32,12 @@ namespace _Project.Scripts.TextScripts
         public async UniTaskVoid TypingTextCoroutine()
         {
 
-            for (int i = 0; i < isFullText.Length && isCoroutineStopping == false; i++)
+            for (int i = 0; i < isFullText.Length; i++)
             {
                 try
                 {
                     dialogueText.text += isFullText[i];
+
                     await UniTask.Delay(speedTyping, cancellationToken: this.GetCancellationTokenOnDestroy());
                 }
 
@@ -47,8 +49,6 @@ namespace _Project.Scripts.TextScripts
             Debug.Log("Печать закончилась");
 
         }
-        
-
 
     }
 }

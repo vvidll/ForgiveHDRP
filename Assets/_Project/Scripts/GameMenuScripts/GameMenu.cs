@@ -15,7 +15,7 @@ namespace _Project.Scripts.GameMenuScripts
         [SerializeField] GameObject panelConfirmationWindowForSaves;
 
         [Header("References")]
-        [SerializeField] DialogueWithSaler dialogue;
+        [SerializeField] DialogueWithSeller dialogue;
         [SerializeField] SettingsGraphics settingsGraphics;
         [SerializeField] SettingsVolumeAmbientOcclusion postProcess;
         [SerializeField] SettingsVolumeFogQuality postProcessFogQuality;
